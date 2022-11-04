@@ -9,7 +9,9 @@
 <style></style>
 </head>
 <body>
-짜잔 메인화면
+	<div>
+		안녕하세요 ${sessionScope.loginId} 님 <a href="logout">로그아웃</a>
+	</div>
 </body>
 <script></script>
 </html>

@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>PW</th>
-				<td><input type="password" name="pw"></td>
+				<td><input type="password" name="password"></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -35,5 +35,10 @@
 		</table>
 	</form>
 </body>
-<script></script>
+<script>
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+</script>
 </html>
