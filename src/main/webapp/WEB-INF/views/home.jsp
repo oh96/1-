@@ -43,7 +43,7 @@
 									src="<%=request.getContextPath()%>/resources/img/mypage.png"
 									width="30">
 							</span></a> 
-							<a href="#"
+							<a href="map"
 								class="d-flex align-items-center justify-content-center"><span>
 									<img src="<%=request.getContextPath()%>/resources/img/map.png"
 									width="30">
