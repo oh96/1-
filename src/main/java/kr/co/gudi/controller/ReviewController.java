@@ -1,12 +1,16 @@
 package kr.co.gudi.controller;
 
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import kr.co.gudi.dto.ReviewDTO;
 import kr.co.gudi.service.ReviewService;
@@ -53,11 +58,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/reviewWrite")
-	public String reviewWrite(Model model, HttpServletRequest req, @RequestParam HashMap<String, String> params, 
-			MultipartHttpServletRequest mreq) {
+	public String reviewWrite(Model model, HttpServletRequest req, @RequestParam HashMap<String, String> params) {
 		logger.info("후기 쓰기 요청");
 		HttpSession session = req.getSession();
-		//logger.info(""+session.getAttribute("loginId"));
 		String id = (String) session.getAttribute("loginId");
 		reviewService.reviewWrite(id, params);
 		
@@ -65,3 +68,4 @@ public class ReviewController {
 	}
 	
 }
+
