@@ -31,8 +31,16 @@
 				<div class="col d-flex justify-content-end">
 					<div class="login">
 						<p class="mb-0 d-flex">
+							<c:if test ="${sessionScope.loginId == null}">
 							<a href="loginForm" class="login"><span>로그인</span></a>
-							&nbsp;&nbsp;/&nbsp;&nbsp; <a href="joinForm" class="login"><span>회원가입</span></a>
+							<a href="joinForm" class="login"><span>회원가입</span></a>
+							</c:if>
+							<c:if test ="${sessionScope.loginId != null}">
+							안녕하세요 ${sessionScope.loginId} 님
+							<a href="logout">로그아웃</a>
+							&nbsp;&nbsp;/&nbsp;&nbsp; 
+							</c:if>
+							
 						</p>
 					</div>
 					<div class="social-media">
