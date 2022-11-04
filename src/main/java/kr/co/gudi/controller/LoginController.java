@@ -30,7 +30,7 @@ public class LoginController {
 	@RequestMapping(value="/login")
 	public String login(Model model, HttpServletRequest req,@RequestParam HashMap<String, String> params) {
 		logger.info("로그인 요청");
-		String page = "main";
+		String page = "home";
 		String msg = "아이디 혹은 비밀번호를 확인해주세요.";
 		//logger.info(params+"");
 		String loginId = loginService.login(params);

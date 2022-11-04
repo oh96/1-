@@ -6,7 +6,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8"/>
-		<property name="maxUploadSize" value="10000000"/> <!-- 전체 upload 사이즈 -->
+		<property name="maxUploadSize" value="52428800"/> <!-- 전체 upload 사이즈 -->
 		<property name="maxInMemorySize" value="10000000"/><!-- buffer 사이즈  -->
 	</bean>
 		

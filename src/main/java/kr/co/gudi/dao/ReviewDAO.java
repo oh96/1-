@@ -8,4 +8,6 @@ public interface ReviewDAO {
 
 	ArrayList<ReviewDTO> list();
 
+	void reviewWrite(String id, String subject, String content);
+
 }
