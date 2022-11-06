@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+<!-- 이 xml을 어떤 interface를 통해서 연결할 것인가? -->
+<mapper namespace="kr.co.gudi.dao.MapDAO">
+	<select id="map" resultType="kr.co.gudi.dto.MapDTO">
+		select loc_idx, loc_lat, loc_lon, loc_name from location
+	</select>
+</mapper>

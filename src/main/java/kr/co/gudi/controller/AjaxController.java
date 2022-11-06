@@ -41,8 +41,8 @@ public class AjaxController {
 		
 		logger.info("params:{}",params);
 		String id = params.get("id");
-		String pw = params.get("password");
-		String name = params.get("user_name");
+		String pw = params.get("pw");
+		String name = params.get("name");
 		String age = params.get("age");
 		String gender = params.get("gender");
 		String email = params.get("email");

@@ -17,46 +17,60 @@
 	*{
 		text-align: center;
 	}
+	.valid, .invalid { 
+	font-size: 11px;
+	font-weight: bold; 
+	}
+
+	.valid { color: green; }
+	
 </style>
 </head>
 <body>
-	<form action="join" method="post">
+	
 		<table>
 			<tr>
-				<td>ID</td>
-				<td><input type="text" name="id"></td>
-				<td >		
-				<input type="button" id="overlay" value="아이디 중복체크"/>
+				<th>ID</th>
+				<td >
+				<input type="text" id="id" maxlength="20">
+				<div class='valid'>아이디를 입력하세요.</div>
+				<input type="button" id="overlay"  value="아이디 중복체크" />
 				</td>
 			</tr>
 			<tr>
-				<td>PW</td>
-				<td><input type="text" name="password"></td>
+				<th>PW</th>
+				<td><input type="text" id="password">
+				<div class="valid">비밀번호를 입력하세요.</div>
+				</td>
 			</tr>
 			<tr>
-				<td>NAME</td>
-				<td><input type="text" name="user_name"></td>
+				<th>NAME</th>
+				<td><input type="text" id="user_name">
+				</td>
 			</tr>
 			<tr>
-				<td>성별</td>
+				<th>성별</th>
 				<td>
 					남자:<input type="radio" name="gender" value="남자">&nbsp;&nbsp;&nbsp;
 					여자:<input type="radio" name="gender" value="여자">
 				</td>
 			</tr>
 			<tr>
-				<td>나이</td>
-				<td><input type="text" name="age"></td>
+				<th>나이</th>
+				<td><input type="text" id="age">
+				</td>
 			</tr>
 			<tr>
-				<td>EMAIL</td>
-				<td><input type="text" name="email"></td>
+				<th>EMAIL</th>
+				<td><input type="text" id="email">
+				<div class="valid">이메일을 입력하세요.</div>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="회원가입"></td>
+				<th colspan="2"><input id="join" type="button" value="회원가입"></th>
 			</tr>
 		</table>
-	</form>
+	
 </body>
 <script>
 var overlayChk = false;
@@ -77,6 +91,9 @@ $('#join').click(function(){
 		$id.focus();
 	}else if ($pw.val()=='') {
 		alert('패스워드를 입력해 주세요');
+		$pw.focus();
+	}else if($pw.val().length < 7 || $pw.val().length > 21){
+		alert('비밀번호는 8~20자 사이여야 합니다')
 		$pw.focus();
 	}else if ($name.val()=='') {
 		alert('이름을 입력해 주세요');
@@ -110,7 +127,7 @@ $('#join').click(function(){
 				console.log(data);
 				if (data.success>0) {
 					alert("회원가입에 성공 했습니다");
-					location.href="/";
+					location.href="./";
 				}else{
 					alert("회원 가입에 실패 했습니다");
 				}
@@ -152,6 +169,7 @@ $("#overlay").click(function(){
 		}
 	});
 });
+
 
 </script>
 </html>

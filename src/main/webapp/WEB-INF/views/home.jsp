@@ -30,19 +30,19 @@
 				</div>
 				<div class="col d-flex justify-content-end">
 					<div class="login">
-						<p class="mb-0 d-flex">
-							<c:if test ="${sessionScope.loginId == null}">
-							<a href="loginForm" class="login"><span>로그인</span></a>
-							<a href="joinForm" class="login"><span>회원가입</span></a>
-							</c:if>
-							<c:if test ="${sessionScope.loginId != null}">
-							안녕하세요 ${sessionScope.loginId} 님
-							<a href="logout">로그아웃</a>
-							&nbsp;&nbsp;/&nbsp;&nbsp; 
-							</c:if>
-							
-						</p>
-					</div>
+                  <p class="mb-0 d-flex">
+                     <c:if test ="${sessionScope.loginId == null}">
+                     <a href="loginForm" class="login"><span>로그인</span></a>
+                     <a href="joinForm" class="login"><span>회원가입</span></a>
+                     </c:if>
+                     <c:if test ="${sessionScope.loginId != null}">
+                     안녕하세요 ${sessionScope.loginId} 님
+                     <a href="logout">로그아웃</a>
+                     &nbsp;&nbsp;/&nbsp;&nbsp; 
+                     </c:if>
+                     
+                  </p>
+               </div>
 					<div class="social-media">
 						<p class="mb-0 d-flex">
 							<a href="#"
@@ -51,7 +51,7 @@
 									src="<%=request.getContextPath()%>/resources/img/mypage.png"
 									width="30">
 							</span></a> 
-							<a href="#"
+							<a href="map"
 								class="d-flex align-items-center justify-content-center"><span>
 									<img src="<%=request.getContextPath()%>/resources/img/map.png"
 									width="30">
