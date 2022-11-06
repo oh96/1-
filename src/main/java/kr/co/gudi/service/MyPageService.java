@@ -36,6 +36,12 @@ public class MyPageService {
 		
 	}
 
+	public void myreview(String id) {
+		
+		dao.myreview(id);
+		
+	}
+
 
 	
 	

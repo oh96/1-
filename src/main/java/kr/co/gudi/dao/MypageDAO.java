@@ -12,6 +12,8 @@ public interface MypageDAO {
 
 	void withdraw(String id);
 
+	void myreview(String id);
+
 
 
 }

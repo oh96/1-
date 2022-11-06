@@ -30,6 +30,7 @@ public class MyPageController {
 	@RequestMapping(value="/MypageDetail")
 	public String MypageDetail(Model model,HttpSession session, @RequestParam String id) {
 		logger.info("마이페이지 호출:" +id);
+		String page = "mypage_detail";
 		
 		if(session.getAttribute("loginId") != null) {
 		
@@ -45,9 +46,10 @@ public class MyPageController {
 		}
 		else {
 			model.addAttribute("msg","로그인 하세요");
+			page="loginForm";
 		}
 
-		return "mypage_detail";
+		return page;
 	}
 	
 	@RequestMapping(value="/MypageUpdateForm")
@@ -79,7 +81,7 @@ public class MyPageController {
 		
 		service.withdraw(id);
 		
-		
+		session.removeAttribute("loginId");
 		/*if(session.getAttribute("loginId")!=null) {
 			service.withdraw(params);
 			page="redirect:/list";
@@ -90,5 +92,16 @@ public class MyPageController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/myreview")
+	public String myreview(Model model,@RequestParam String id) {
+		
+		logger.info(id);
+		
+		service.myreview(id);
+		
+		
+		
+		return "review";
+	}
 
 }

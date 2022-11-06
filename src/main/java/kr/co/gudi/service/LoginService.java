@@ -23,5 +23,12 @@ public class LoginService {
 		
 		return loginDAO.login(id,password);
 	}
+
+	public String loginchk(HashMap<String, String> params) {
+		logger.info("아이디 체크");
+		String id = params.get("id");
+		
+		return loginDAO.loginchk(id);
+	}
 	
 }

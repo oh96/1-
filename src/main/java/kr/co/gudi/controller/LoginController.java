@@ -34,8 +34,13 @@ public class LoginController {
 		String msg = "아이디 혹은 비밀번호를 확인해주세요.";
 		//logger.info(params+"");
 		String loginId = loginService.login(params);
+		String loginchk = loginService.loginchk(params);
 		
-		if(loginId!=null && !loginId.equals("")) {
+		if(loginchk!=null) {
+			page="loginForm";
+			msg = "탈퇴된 아이디입니다";
+			model.addAttribute("msg", msg);
+		}else if(loginId!=null && !loginId.equals("")) {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginId", loginId);
 		}else {

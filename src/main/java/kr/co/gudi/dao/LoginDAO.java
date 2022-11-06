@@ -4,4 +4,6 @@ public interface LoginDAO {
 
 	String login(String id, String password);
 
+	String loginchk(String id);
+
 }

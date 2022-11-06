@@ -15,6 +15,7 @@ table, th, td {
 </head>
 <body>
 <table>
+		<a href="myreview?id=${detail.id}">나의 후기글 리스트</a>
 		<tr>
 			<th>아이디</th>
 			<td>${detail.id}</td>

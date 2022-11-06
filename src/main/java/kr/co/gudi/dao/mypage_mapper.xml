@@ -25,4 +25,8 @@
 		WHERE id=#{id}
 	</update>
 	
+	<select id="myreview" resultType="kr.co.gudi.dto.ReviewDTO">
+		SELECT board_subject from board WHERE id=#{param1}
+	</select>
+	
 </mapper>
