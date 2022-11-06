@@ -19,9 +19,9 @@
 		WHERE id=#{id}
 	</update>
 	
-	<update id="withdraw" parameterType="hashmap">
+	<update id="withdraw" parameterType="String">
 		UPDATE user SET 
-			user_state = #{user_state}
+			user_state = '탈퇴'
 		WHERE id=#{id}
 	</update>
 	

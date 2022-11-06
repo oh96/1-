@@ -39,7 +39,7 @@ table, th, td {
 			<th colspan="2"><a href="MypageUpdateForm?id=${detail.id}">회원정보 수정</a></th>
 		</tr>
 		<tr>
-			<th colspan="2"><a href="withdraw?id"=${detail.id}>회원 탈퇴</th>
+			<th colspan="2"><a href="withdraw?id=${detail.id}">회원 탈퇴</th>
 		</tr>
 
 	</table>

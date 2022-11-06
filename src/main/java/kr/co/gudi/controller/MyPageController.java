@@ -73,18 +73,21 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/withdraw")
-	public String withdraw(Model model,HttpSession session,@RequestParam HashMap<String, String> params) {
-		logger.info("params:{}",params);
-		String page="main";
+	public String withdraw(Model model,HttpSession session,@RequestParam String id) {
 		
-		if(session.getAttribute("loginId")!=null) {
+		logger.info(id);
+		
+		service.withdraw(id);
+		
+		
+		/*if(session.getAttribute("loginId")!=null) {
 			service.withdraw(params);
 			page="redirect:/list";
 		}else {
 			model.addAttribute("msg","로그인이 필요합니다");
-		}
+		}*/
 		
-		return page;
+		return "redirect:/";
 	}
 	
 

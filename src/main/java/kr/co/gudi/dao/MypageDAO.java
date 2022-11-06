@@ -10,7 +10,8 @@ public interface MypageDAO {
 
 	int MypageUpdate(HashMap<String, String> params);
 
-	int withdraw(HashMap<String, String> params);
+	void withdraw(String id);
+
 
 
 }

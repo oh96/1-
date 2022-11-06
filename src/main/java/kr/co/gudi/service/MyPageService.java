@@ -30,9 +30,10 @@ public class MyPageService {
 		
 	}
 
-	public void withdraw(HashMap<String, String> params) {
-		int row=dao.withdraw(params);
-		logger.info("변경된 값:"+row);
+	public void withdraw(String id) {
+		
+		dao.withdraw(id);
+		
 	}
 
 
