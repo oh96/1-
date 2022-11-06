@@ -36,8 +36,8 @@
 						</p>
 					</div>
 					<div class="social-media">
-						<p class="mb-0 d-flex">
-							<a href="#"
+						<p class="mb-0 d-flex"><!-- MypageDetail -->
+							<a href="MypageDetail?id=${sessionScope.loginId}"
 								class="d-flex align-items-center justify-content-center"><span>
 									<img
 									src="<%=request.getContextPath()%>/resources/img/mypage.png"
