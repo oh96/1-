@@ -48,6 +48,9 @@ public class MyPageController {
 			}else {
 				model.addAttribute("msg","데이터를 가져오는데 실패");
 			}
+			if (Integer.parseInt(dto.getUser_grade()) >= 1) {
+				page="manager_page";
+			}
 		}
 		else {
 			model.addAttribute("msg","로그인 하세요");

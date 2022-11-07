@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.gudi.service.JoinService;
 
 @Controller
-public class AjaxController {
+public class AjaxJoinController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	

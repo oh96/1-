@@ -32,4 +32,10 @@ public class ReviewService {
 		reviewDAO.reviewWrite(id, subject, content);
 		
 	}
+
+	public ReviewDTO reviewdetail(String idx) {
+		logger.info("상세보기 요청");
+		ReviewDTO dto = reviewDAO.reviewdetail(idx);
+		return dto;
+	}
 }
