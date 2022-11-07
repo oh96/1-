@@ -12,13 +12,17 @@ table, th, td {
 	border-collapse: collapse;
 	padding: 5px 10px;
 }
+
+th {
+	width:150px;
+}
 	
 button {
 	margin: 5px;
 }
 	
 table {
-	width: 100%;
+	width: 800px;
 }
 
 .btn_area {
@@ -51,7 +55,9 @@ textarea {
 			</tr>
 			<tr>
 				<th>사진</th>
-				<td><input type="file" name="photo"></td>
+				<td  id="file_loc">
+					<input type="button" value="파일 추가" onClick="addFile()"><br>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="btn_area">
@@ -62,5 +68,11 @@ textarea {
 		</table>
 	</form>
 </body>
-<script></script>
+<script>
+	var cnt = 1;
+	function addFile(){
+	    $("#file_loc").append("<br>" + "<input type='file' name='file" + cnt + "' />");
+	    cnt++;
+	}
+</script>
 </html>

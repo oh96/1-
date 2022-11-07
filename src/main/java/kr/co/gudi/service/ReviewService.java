@@ -1,6 +1,7 @@
 package kr.co.gudi.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,5 +22,20 @@ public class ReviewService {
 		logger.info("후기 리스트 호출");
 		
 		return reviewDAO.list();
+	}
+
+	public void reviewWrite(String id, HashMap<String, String> params) {
+		logger.info("후기 쓰기 서비스");
+		String subject = params.get("subject");
+		String content = params.get("content");
+		
+		reviewDAO.reviewWrite(id, subject, content);
+		
+	}
+
+	public ReviewDTO reviewdetail(String idx) {
+		logger.info("상세보기 요청");
+		ReviewDTO dto = reviewDAO.reviewdetail(idx);
+		return dto;
 	}
 }

@@ -104,7 +104,8 @@
 		    <artifactId>jackson-core</artifactId>
 		    <version>2.9.9</version>
 		</dependency>
-				
+		
+		
 				
 		<!-- AspectJ -->
 		<dependency>

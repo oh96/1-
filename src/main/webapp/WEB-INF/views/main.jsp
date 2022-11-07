@@ -6,14 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<<<<<<< HEAD
 <style>
 
 </style>
+=======
+
+<style></style>
+>>>>>>> origin/master
 </head>
 <body>
+	
 	<div>
 		안녕하세요 ${sessionScope.loginId} 님 <a href="logout">로그아웃</a>
 	</div>
+<<<<<<< HEAD
 	
 	<!--소진-->
 	<form action="register.jsp" method="post">
@@ -41,6 +48,9 @@
 		</c:forEach>
 	</table>
 	
+=======
+	<a href="review">후기리스트</a>
+>>>>>>> origin/master
 </body>
 <script></script>
 </html>

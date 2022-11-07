@@ -3,6 +3,9 @@ package kr.co.gudi.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dto.ReviewDTO;
 import kr.co.gudi.service.ReviewService;
@@ -46,11 +48,27 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/reviewWrite")
-	public String reviewWrite(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
-		logger.info("params : {}", params);
-		logger.info("photo : {}", photo.getOriginalFilename());
+	public String reviewWrite(Model model, HttpServletRequest req, @RequestParam HashMap<String, String> params) {
+		logger.info("후기 쓰기 요청");
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginId");
+		reviewService.reviewWrite(id, params);
 		
 		return "review";
 	}
 	
+	@RequestMapping(value = "/reviewDetail")
+	public String detail(Model model,
+			@RequestParam String idx) {
+		logger.info("board_idx:{}",idx);
+		String page = "redirect:/";
+		ReviewDTO dto = reviewService.reviewdetail(idx);
+		
+		if (dto != null) {
+			page = "reviewDetail";
+			model.addAttribute("board",dto);
+		}
+		return page;
+	}
 }
+

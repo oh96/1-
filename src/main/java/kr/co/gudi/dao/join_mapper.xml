@@ -8,4 +8,8 @@
 		insert into user(id,password,user_name,age,gender,email) 
 		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6});
 	</insert>
+	
+	<select id="overlay" resultType="String">
+		SELECT id FROM user WHERE id = #{param1}
+	</select>
 </mapper>

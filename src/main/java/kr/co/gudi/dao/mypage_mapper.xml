@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.MypageDAO">
+
+	<select id="detail" resultType="kr.co.gudi.dto.MypageDTO">
+		SELECT *from user WHERE id=#{param1}
+		<!-- id,user_name,age,gender,email -->
+	</select>
+	
+	<update id="MypageUpdate"  parameterType="hashmap">
+		UPDATE user SET
+			user_name=#{user_name}
+			,age=#{age}
+			,gender=#{gender}
+			,email=#{email}
+		WHERE id=#{id}
+	</update>
+	
+	<update id="withdraw" parameterType="String">
+		UPDATE user SET 
+			user_state = '탈퇴'
+		WHERE id=#{id}
+	</update>
+	
+	<select id="myreview" resultType="kr.co.gudi.dto.ReviewDTO">
+		SELECT board_subject from board WHERE id=#{param1}
+	</select>
+	
+</mapper>

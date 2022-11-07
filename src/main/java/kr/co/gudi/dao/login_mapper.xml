@@ -7,4 +7,9 @@
 	<select id="login" resultType="String">
 		select id from user where id = #{param1} and password = #{param2}
 	</select>
+	
+	<select id="loginchk" resultType="String">
+		select id from user where id=#{param1} and user_state='탈퇴'
+	</select>
+	
 </mapper>

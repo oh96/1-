@@ -7,4 +7,12 @@
 	<select id="list" resultType="kr.co.gudi.dto.ReviewDTO">
 		select board_subject, id, reg_date, hit from board where cls_code=2
 	</select>
+	<insert id="reviewWrite">
+		insert into board(cls_code, id, board_subject, board_content)
+		values (2,#{param1},#{param2},#{param3})
+	</insert>
+	<select id="reviewdetail" resultType="kr.co.gudi.dto.ReviewDTO"
+		parameterType="String">
+		SELECT*FROM board WHERE idx = #{idx}
+	</select>
 </mapper>
