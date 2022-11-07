@@ -1,16 +1,9 @@
 package kr.co.gudi.controller;
 
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,9 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import kr.co.gudi.dto.ReviewDTO;
 import kr.co.gudi.service.ReviewService;
@@ -67,5 +57,18 @@ public class ReviewController {
 		return "review";
 	}
 	
+	@RequestMapping(value = "/reviewDetail")
+	public String detail(Model model,
+			@RequestParam String idx) {
+		logger.info("board_idx:{}",idx);
+		String page = "redirect:/";
+		ReviewDTO dto = reviewService.reviewdetail(idx);
+		
+		if (dto != null) {
+			page = "reviewDetail";
+			model.addAttribute("board",dto);
+		}
+		return page;
+	}
 }
 

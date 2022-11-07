@@ -11,4 +11,8 @@
 		insert into board(cls_code, id, board_subject, board_content)
 		values (2,#{param1},#{param2},#{param3})
 	</insert>
+	<select id="reviewdetail" resultType="kr.co.gudi.dto.ReviewDTO"
+		parameterType="String">
+		SELECT*FROM board WHERE idx = #{idx}
+	</select>
 </mapper>

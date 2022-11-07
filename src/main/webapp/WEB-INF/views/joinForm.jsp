@@ -22,12 +22,11 @@
 	font-weight: bold; 
 	}
 
-	.valid { color: green; }
-	
+	.valid { color: green; 
+	}
 </style>
 </head>
 <body>
-	
 		<table>
 			<tr>
 				<th>ID</th>
@@ -70,7 +69,6 @@
 				<th colspan="2"><input id="join" type="button" value="회원가입"></th>
 			</tr>
 		</table>
-	
 </body>
 <script>
 var overlayChk = false;
@@ -136,14 +134,8 @@ $('#join').click(function(){
 				console.log(e);
 			}
 		});
-		
+		}
 	}
-	
-	
-	}
-	
-	
-	
 });
 
 $("#overlay").click(function(){
@@ -169,7 +161,5 @@ $("#overlay").click(function(){
 		}
 	});
 });
-
-
 </script>
 </html>

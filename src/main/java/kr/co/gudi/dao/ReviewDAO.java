@@ -10,4 +10,6 @@ public interface ReviewDAO {
 
 	void reviewWrite(String id, String subject, String content);
 
+	ReviewDTO reviewdetail(String idx);
+
 }
