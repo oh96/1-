@@ -10,6 +10,7 @@
 </head>
 <body>
 	<a href="review">후기리스트</a>
+	<a href="notice">공지사항</a>
 	<a href="loginForm">로그인</a>
 	<a href="joinForm">회원가입</a>
 </body>

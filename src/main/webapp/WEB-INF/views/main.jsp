@@ -19,8 +19,8 @@
 	<form action="register.jsp" method="post">
 			<button onclick="location.href='register'">공지등록</button>
 	</form>
-
-	<button onclick="location.href='writeForm'" style="float: right">글쓰기</button>
+	
+	<button onclick="location.href='notice_writeForm'" style="float: right">글쓰기</button>
 	<table>
 		<tr>
 			<th></th>
