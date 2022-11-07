@@ -55,7 +55,7 @@ textarea {
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col">
-					<a class="navbar-brand" href="index.html"><img
+					<a class="navbar-brand" href="./"><img
 						src="<%=request.getContextPath()%>/resources/img/logo1.png"
 						width="200"></a>
 				</div>
