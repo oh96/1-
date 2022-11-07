@@ -1,6 +1,9 @@
 package kr.co.gudi.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.gudi.dao.MypageDAO;
 import kr.co.gudi.dto.MypageDTO;
+import kr.co.gudi.dto.ReviewDTO;
 
 @Service
 public class MyPageService {
@@ -36,9 +40,9 @@ public class MyPageService {
 		
 	}
 
-	public void myreview(String id) {
-		
-		dao.myreview(id);
+	public ArrayList<HashMap<String, Object>> myreview(String id) {
+		logger.info("list 호출");
+		return dao.myreview(id);
 		
 	}
 

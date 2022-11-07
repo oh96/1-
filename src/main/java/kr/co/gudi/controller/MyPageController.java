@@ -1,6 +1,9 @@
 package kr.co.gudi.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import kr.co.gudi.dto.MypageDTO;
+import kr.co.gudi.dto.ReviewDTO;
 import kr.co.gudi.service.MyPageService;
 
 @Controller
@@ -92,16 +97,21 @@ public class MyPageController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/mypage_review")
+	public String myreviewlist() {
+		logger.info("mypage_review");
+		return "redirect:/myreview";
+	}
+	
 	@RequestMapping(value="/myreview")
-	public String myreview(Model model,@RequestParam String id) {
-		
-		logger.info(id);
-		
-		service.myreview(id);
-		
-		
-		
-		return "review";
+	@ResponseBody
+	public HashMap<String, Object> myreview(Model model) {
+		logger.info("테스트");
+//		logger.info(id);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+//		ArrayList<HashMap<String, Object>> list = service.myreview();
+//		map.put("list", list);
+		return map;
 	}
 
 }

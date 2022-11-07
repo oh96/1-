@@ -26,7 +26,7 @@
 	</update>
 	
 	<select id="myreview" resultType="kr.co.gudi.dto.ReviewDTO">
-		SELECT board_subject from board WHERE id=#{param1}
+		SELECT board_subject,reg_date,hit FROM board WHERE id=#{param1} AND cls_code='2'
 	</select>
 	
 </mapper>
