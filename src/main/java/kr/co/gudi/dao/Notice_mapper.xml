@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+<!--이 XML을 어떤 interface를 통해서 연결할 건가?-->
+<mapper namespace="kr.co.gudi.dao.NoticeDAO">
+
+	
+	<select id="list" resultType="kr.co.gudi.dto.NoticeDTO"> 
+		SELECT board_idx,board_subject,id,reg_date,hit
+			FROM board ORDER BY board_idx DESC limit 10 offset #{param1}
+	</select>
+
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(board_idx) FROM board
+	</select>
+	
+	
+</mapper>
+
+
