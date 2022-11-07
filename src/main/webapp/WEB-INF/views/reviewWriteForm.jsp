@@ -48,6 +48,10 @@ textarea {
 				<td><input type="text" name="subject"></td>
 			</tr>
 			<tr>
+				<th>여행지 위치</th>
+				<td><input type="button" name="subject" value="여행지찾기"></td>
+			</tr>
+			<tr>
 				<th>내용</th>
 				<td>
 					<textarea name="content"></textarea>
