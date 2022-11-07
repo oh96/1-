@@ -7,14 +7,15 @@
 
 	
 	<select id="list" resultType="kr.co.gudi.dto.NoticeDTO"> 
-		SELECT board_idx,board_subject,id,reg_date,hit
-			FROM board ORDER BY board_idx DESC limit 10 offset #{param1}
+		SELECT board_subject,id,reg_date,hit
+			FROM board
+			WHERE cls_code=4
 	</select>
-
+	
+	
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(board_idx) FROM board
 	</select>
-	
 	
 </mapper>
 

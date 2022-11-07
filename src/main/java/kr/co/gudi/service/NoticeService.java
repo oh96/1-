@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.gudi.dao.NoticeDAO;
+import kr.co.gudi.dto.NoticeDTO;
 
 @Service
 public class NoticeService {
@@ -16,6 +17,12 @@ public class NoticeService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired NoticeDAO dao;
+	
+	public HashMap<String, Object> list(int page){
+		logger.info("공지 리스트 호출");
+		return dao.list();
+	}
+	
 	
 	public HashMap<String, Object> list(int page) {
 		

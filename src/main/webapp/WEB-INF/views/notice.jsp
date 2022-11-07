@@ -9,18 +9,16 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script src="resources/js/jquery.twbsPagination.js"></script>
-<!-- <link rel="stylesheet" href="resources/common.css" type="text/css">  -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
 <style>
-	table,th,td{
+table,th,td{
 	border : 1px solid black;
 	border-collapse: collapse;
 	padding: 5px 10px;
 	}
 </style>
 </head>
-
 <body>
-	<button onclick="location.href='notice_writeForm'">글쓰기</button>
 	<table>
 		<thead>
 			<tr>
@@ -28,7 +26,7 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
-				<th>조회</th>
+				<th>조회수</th>
 			</tr>
 		</thead>
 		<tbody id="list">
@@ -46,9 +44,9 @@
 </body>
 <script>
 var showPage = 1;
-listCall(showPage);
+noticelistCall(showPage);
 
-function listCall(page){
+function noticelistCall(page){
 	$.ajax({
 		type:'GET',
 		url:'list',
@@ -95,5 +93,5 @@ function drawList(list){
 	$("#list").append(content);
 }
 
-<script></script>
+</script>
 </html>

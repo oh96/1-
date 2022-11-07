@@ -65,12 +65,13 @@
 			class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 			id="ftco-navbar">
 			<div class="container">
-
+			
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#ftco-nav" aria-controls="ftco-nav"
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
+				
 				<form action="#" class="searchform order-lg-last">
 					<div class="form-group d-flex">
 						<input type="text" class="form-control pl-3" placeholder="Search">
@@ -79,13 +80,14 @@
 						</button>
 					</div>
 				</form>
+				
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
 						</li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
 						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">공지</a></li>
+						<li class="nav-item"><a href="notice" class="nav-link">공지</a></li>
 					</ul>
 				</div>
 			</div>
