@@ -12,16 +12,17 @@
 <body>
 	<table>
 		<tr>
-			<th>제목</th>
-			<td>${board2.board_subject}</td>
+			<th>작성자</th>
+			<td>${board.id}</td>
 		</tr>
 		<tr>
-			<th>작성자</th>
-			<td>${board2.user_name}</td>
+			<th>제목</th>
+			<td>${board.board_subject}</td>
 		</tr>
+		
 		<tr>
 			<th>내용</th>
-			<td>${board2.board_content}</td>
+			<td>${board.board_content}</td>
 		</tr>
 		<c:if test="${fileList.size()>0}">
 		<tr>
@@ -35,8 +36,8 @@
 		</c:if>
 		<tr>
 			<td colspan="2" class="btn_area">
-				<button type="button" onclick="location.href='./'">리스트</button>
-				<button type="button" onclick="location.href='./updateForm?idx=${board2.board_idx}'">수정하기</button>
+				<button type="button" onclick="location.href='./admin_notice'">리스트</button>
+				<button type="button" onclick="location.href='./updateForm?idx=${board.board_idx}'">수정하기</button>
 			</td>
 		</tr>
 	</table>

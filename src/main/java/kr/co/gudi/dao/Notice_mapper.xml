@@ -7,15 +7,34 @@
 
 	
 	<select id="list" resultType="kr.co.gudi.dto.NoticeDTO"> 
-		SELECT board_subject,id,reg_date,hit
-			FROM board
-			WHERE cls_code=4
+		SELECT *
+			FROM board WHERE cls_code=4 ORDER BY board_idx DESC limit 10 offset #{param1}
+			
 	</select>
-	
 	
 	<select id="totalCount" resultType="int">
-		SELECT COUNT(board_idx) FROM board
+		SELECT COUNT(board_idx) FROM board WHERE cls_code=4
 	</select>
+	
+	<select id="noticedetail" resultType="kr.co.gudi.dto.NoticeDTO" parameterType="String">
+		SELECT * FROM board WHERE board_idx=#{board_idx}
+	</select>
+	
+	<select id="fileList" parameterType="String" resultType="kr.co.gudi.dto.PhotoDTO">
+		SELECT * FROM photo WHERE photo_idx=#{photo_idx} ORDER BY photo_idx
+	</select>
+	
+	<insert id="noticeWrite">
+		insert into board(cls_code, id, board_subject, board_content)
+		values (4,#{param1},#{param2},#{param3})
+	</insert>
+	
+	<update id="hit" parameterType="String">
+		UPDATE board SET hit=hit+1 WHERE board_idx=#{board_idx}
+	</update>
+	
+	
+	
 	
 </mapper>
 

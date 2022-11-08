@@ -90,7 +90,7 @@
 						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
 						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">공지</a></li>
+						<li class="nav-item"><a href="notice" class="nav-link">공지</a></li>
 					</ul>
 				</div>
 			</div>
