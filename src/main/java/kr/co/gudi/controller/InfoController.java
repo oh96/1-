@@ -81,10 +81,20 @@ public class InfoController {
 		
 		ArrayList<BoardDTO> list = service.placeInfoList();
 		map.put("list", list);
+		logger.info("list: "+list);
 		
 		return map;
 	}
 	
+	
+	/*
+	 * 여행지 상세보기 
+	 */
+	@RequestMapping(value="/infoDetail")
+	public String infoDetail() {
+		
+		return null;
+	}
 	
 	
 	/*
