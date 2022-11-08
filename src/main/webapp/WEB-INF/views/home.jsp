@@ -24,7 +24,7 @@
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col">
-					<a class="navbar-brand" href="index.html"><img
+					<a class="navbar-brand" href="./"><img
 						src="<%=request.getContextPath()%>/resources/img/logo1.png"
 						width="200"></a>
 				</div>
@@ -71,9 +71,9 @@
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				<form action="#" class="searchform order-lg-last">
+				<form action="totalSearch" class="searchform order-lg-last">
 					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search">
+						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
 						<button type="submit" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>

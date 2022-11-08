@@ -16,37 +16,11 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
 <style>
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 5px 10px;
-}
-
-th {
-	width:150px;
-}
-	
-button {
-	margin: 5px;
-}
-	
-table {
-	width: 800px;
-}
-
-.btn_area {
-	text-align: center;
-}
-
-input[type='text'] {
-	width: 100%;
-}
-
-textarea {
-	resize: none;
-	width: 100%;
-	height: 150px;
-}
+	table, th, tr, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
 </style>
 </head>
 <body>
@@ -102,9 +76,9 @@ textarea {
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				<form action="#" class="searchform order-lg-last">
+				<form action="totalSearch" class="searchform order-lg-last">
 					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search">
+						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
 						<button type="submit" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
@@ -130,42 +104,19 @@ textarea {
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
-	<form action="reviewWrite" method="post" enctype="multipart/form-data">
-		<table>
+	<table>
+		<thead>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="subject"></td>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>좋아요</th>
 			</tr>
-			<tr>
-				<th>여행지 위치</th>
-				<td><input type="button" name="subject" value="여행지찾기"></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-					<textarea name="content"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<th>사진</th>
-				<td  id="file_loc">
-					<input type="button" value="파일 추가" onClick="addFile()"><br>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" class="btn_area">
-					<button type="button" onclick="location.href='review'">리스트</button>
-					<button>저장</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+		</thead>
+		<tbody id="totalList">
+		</tbody>
+	</table>
 </body>
-<script>
-	var cnt = 1;
-	function addFile(){
-	    $("#file_loc").append("<br>" + "<input type='file' name='file" + cnt + "' />");
-	    cnt++;
-	}
-</script>
+<script></script>
 </html>
