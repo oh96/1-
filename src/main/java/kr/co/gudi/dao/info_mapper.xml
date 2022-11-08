@@ -43,7 +43,7 @@
 	</update>
 	
 	<select id="placeInfoList" resultType="hashmap">
-		SELECT board_subject,id,reg_date,hit FROM board WHERE cls_code = '1' ORDER BY board_idx
+		SELECT board_idx,board_subject,id,reg_date,hit FROM board WHERE cls_code = '1' ORDER BY board_idx
 	</select>
 
 </mapper>
