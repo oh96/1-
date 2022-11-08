@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +15,16 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
-<style></style>
+<style>
+	table, th, tr, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
+</style>
 </head>
 <body>
-	<section class="ftco-section">
+<section class="ftco-section">
 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -64,29 +70,27 @@
 			class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 			id="ftco-navbar">
 			<div class="container">
-			
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#ftco-nav" aria-controls="ftco-nav"
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				
-				<form action="#" class="searchform order-lg-last">
+				<form action="totalSearch" class="searchform order-lg-last">
 					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search">
+						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
 						<button type="submit" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
 					</div>
 				</form>
-				
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
 						</li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
 						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
-						<li class="nav-item"><a href="notice" class="nav-link">공지</a></li>
+						<li class="nav-item"><a href="#" class="nav-link">공지</a></li>
 					</ul>
 				</div>
 			</div>
@@ -100,6 +104,19 @@
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
+	<table>
+		<thead>
+			<tr>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>좋아요</th>
+			</tr>
+		</thead>
+		<tbody id="totalList">
+		</tbody>
+	</table>
 </body>
 <script></script>
 </html>
