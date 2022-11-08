@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import kr.co.gudi.dto.ReviewDTO;
 import kr.co.gudi.service.ReviewService;
 
@@ -43,7 +44,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/reviewWriteForm")
 	public String reviewWriteForm() {
-		
+		logger.info("글쓰기폼 이동");
 		return "reviewWriteForm";
 	}
 	
@@ -58,17 +59,39 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/reviewDetail")
-	public String detail(Model model,
-			@RequestParam String idx) {
-		logger.info("board_idx:{}",idx);
+	public String reviewDetail(Model model,
+			@RequestParam String board_idx) {
+		logger.info("board_idx:{}",board_idx);
 		String page = "redirect:/";
-		ReviewDTO dto = reviewService.reviewdetail(idx);
+		ReviewDTO dto = reviewService.reviewDetail(board_idx);
 		
 		if (dto != null) {
 			page = "reviewDetail";
 			model.addAttribute("board",dto);
 		}
 		return page;
+	}
+	
+	@RequestMapping(value = "/reviewUpdateForm")
+	public String reviewUpdateForm(Model model,
+			@RequestParam String board_idx) {
+		logger.info("board_idx:{}",board_idx);
+		String page = "redirect:/";
+		ReviewDTO dto = reviewService.reviewUpdateForm(board_idx);
+		
+		if (dto !=null) {
+			page = "reviewUpdateForm";
+			model.addAttribute("board",dto);
+		}
+		return page;	
+	}
+	
+	@RequestMapping(value = "/reviewUpdate")
+	public String reviewUpdate(@RequestParam HashMap<String, String>params) {
+	logger.info("param:{}",params);
+	reviewService.reviewUpdate(params);
+	return "redirect:/reviewDetail?board_idx="+params.get("board_idx");
+		
 	}
 }
 

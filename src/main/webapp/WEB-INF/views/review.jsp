@@ -54,7 +54,9 @@
 		for(var i=0;i<list.length;i++){
 			//console.log(list[i]);
 			content += "<tr>";
-			content += "<td>"+list[i].board_subject+"</td>";
+			content += "<td>";
+			content += "<a href='reviewDetail?board_idx="+list[i].board_idx+"'>"+list[i].board_subject+"</a>"
+			content += "</td>";
 			content += "<td>"+list[i].id+"</td>";
 			var date = new Date(list[i].reg_date);
 			content += "<td>"+date.toLocaleDateString('ko-KR')+"</td>";

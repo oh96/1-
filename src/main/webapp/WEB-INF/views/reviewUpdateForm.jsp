@@ -10,26 +10,32 @@
 <style></style>
 </head>
 <body>
+<form action="reviewUpdate" method="POST">
+<input type="hidden" name="board_idx" value="${board.board_idx}">
 	<table>
 		<tr>
 			<th>제목</th>
-			<td>${board.board_subject}</td>
+			<td>
+				<input type="text" name="board_subject" value="${board.board_subject}"/></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${board.id}</td>
+			<td>
+				<input type="text" name="id" value="${board.id}"/></td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td>${board.board_content}</td>
+			<td>
+				<textarea name="board_content">${board.board_content}</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="btn_area">
-				<button type="button" onclick="location.href='./review'">리스트</button>
-				<button type="button" onclick="location.href='./reviewUpdateForm?board_idx=${board.board_idx}'">수정하기</button>
+				<button type="button" onclick="location.href='./reviewDetail'">리스트</button>
+				<button>저장</button>
 			</td>
 		</tr>
 	</table>
+</form>
 </body>
 <script></script>
 </html>

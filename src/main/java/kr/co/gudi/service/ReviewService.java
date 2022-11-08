@@ -30,12 +30,26 @@ public class ReviewService {
 		String content = params.get("content");
 		
 		reviewDAO.reviewWrite(id, subject, content);
-		
 	}
 
-	public ReviewDTO reviewdetail(String idx) {
+	public ReviewDTO reviewDetail(String idx) {
 		logger.info("상세보기 요청");
 		ReviewDTO dto = reviewDAO.reviewdetail(idx);
 		return dto;
 	}
+
+	public ReviewDTO reviewUpdateForm(String board_idx) {
+		logger.info("수정 상세 보기 요청");
+		return reviewDAO.reviewdetail(board_idx);
+	}
+
+	public  void reviewUpdate(HashMap<String, String> params) {
+		int row = reviewDAO.reviewUpdate(params);
+		logger.info("수정된 행의 갯수:"+row);
+	}
+	
+	
+	
+	
+	
 }
