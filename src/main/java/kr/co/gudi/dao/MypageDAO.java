@@ -1,8 +1,12 @@
 package kr.co.gudi.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import kr.co.gudi.dto.MypageDTO;
+import kr.co.gudi.dto.ReviewDTO;
 
 public interface MypageDAO {
 
@@ -12,8 +16,13 @@ public interface MypageDAO {
 
 	void withdraw(String id);
 
-	void myreview(String id);
+	ArrayList<HashMap<String, Object>> myreview(String id);
 
+	int MyreviewDeleteList(String board_idx);
+
+	
+
+	
 
 
 }
