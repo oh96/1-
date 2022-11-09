@@ -104,6 +104,19 @@
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
+	<select id="sl1" name="category" onchange="chageLangSelect()">
+		<option value="total" selected>통합</option>
+		<option value="info">여행지 정보</option>
+		<option value="review">여행지 후기</option>
+		<option value="route">여행지 경로</option>
+	</select>
+	<select id="sl2" name="searchKind" onchange="chageLangSelect()">
+		<option value="all">전체</option>
+		<option value="sub">제목</option>
+		<option value="user">작성자</option>
+		<option value="tag">해시태그</option>
+	</select>
+	<hr>
 	<table>
 		<thead>
 			<tr>
@@ -114,9 +127,58 @@
 				<th>좋아요</th>
 			</tr>
 		</thead>
-		<tbody id="totalList">
+		<tbody id="searchList">
 		</tbody>
 	</table>
 </body>
-<script></script>
+<script>
+var searchContent = "${searchContent}";
+searchListCall();
+
+function searchListCall(){
+	$.ajax({
+		type:'get',
+		url:'searchListCall',
+		data:{
+			'searchContent':searchContent
+		},
+		dataType:"JSON",
+		success:function(data){
+			console.log(data);
+			drawList(data.searchList);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
+
+function drawList(list){
+	var content="";
+	for(var i=0;i<list.length;i++){
+		//console.log(list[i]);
+		content += "<tr>";
+		content += "<td>"+list[i].board_subject+"</td>";
+		content += "<td>"+list[i].id+"</td>";
+		var date = new Date(list[i].reg_date);
+		content += "<td>"+date.toLocaleDateString('ko-KR')+"</td>";
+		content += "<td>"+list[i].hit+"</td>";
+		content += "<td>0</td>";
+		content += "</tr>";
+	}
+	$("#searchList").empty();
+	$("#searchList").append(content);
+}
+
+function chageLangSelect(){
+	var sl1_el = document.getElementById("sl1");
+	var sl2_el = document.getElementById("sl2");
+    
+    // 선택한 option의 value, 텍스트
+    var optionVal1 = sl1_el.options[sl1_el.selectedIndex].value;
+    var optionVal2 = sl2_el.options[sl2_el.selectedIndex].value;
+    console.log(optionVal1);
+    console.log(optionVal2);
+}
+</script>
 </html>

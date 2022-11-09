@@ -7,5 +7,5 @@ import kr.co.gudi.dto.BoardDTO;
 public interface SearchDAO {
 
 	ArrayList<BoardDTO> searchList(String searchContent);
-
+	
 }
