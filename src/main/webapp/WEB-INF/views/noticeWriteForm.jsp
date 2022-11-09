@@ -112,7 +112,7 @@ textarea {
 				</form>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
-						</li>
+						
 						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
 						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
