@@ -25,6 +25,10 @@ public interface InfoDAO {
 
 	int infoUpdate(HashMap<String, String> params);
 
-	ArrayList<BoardDTO> placeInfoList();
+	ArrayList<BoardDTO> infoList();
+
+	BoardDTO infoDetail(String board_idx);
+
+	LocateDTO call_xy(String board_idx);
 	
 }

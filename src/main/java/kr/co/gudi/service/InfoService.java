@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dao.InfoDAO;
@@ -21,7 +22,7 @@ public class InfoService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired InfoDAO dao;
+	@Autowired InfoDAO infodao;
 
 	/*
 	 * 글쓰기 
@@ -29,16 +30,16 @@ public class InfoService {
 	public void infoWrite(String id, HashMap<String, String> params) {
 
 		logger.info("infoWrite 호출"); // 파일 업로드가 없어도 null 이 아니다.
-		InfoDTO dto = new InfoDTO();
+		InfoDTO infodto = new InfoDTO();
 
-		dto.setId(id);
-		dto.setBoard_subject(params.get("title"));
-		dto.setBoard_content(params.get("content"));
+		infodto.setId(id);
+		infodto.setBoard_subject(params.get("title"));
+		infodto.setBoard_content(params.get("content"));
 		
 		String loc_idx=params.get("loc_idx");
 		
-		dao.infoWrite(dto);
-		int board_idx = dto.getBoard_idx();
+		infodao.infoWrite(infodto);
+		int board_idx = infodto.getBoard_idx();
 		logger.info("write success: {}",board_idx);
 		
 		trip_info(board_idx,loc_idx);
@@ -46,7 +47,7 @@ public class InfoService {
 	}
 
 	private void trip_info(int board_idx,String loc_idx) {
-		dao.trip_info(board_idx,loc_idx);
+		infodao.trip_info(board_idx,loc_idx);
 	}
 
 	private void fileUpload(MultipartFile photo, int idx) {
@@ -62,7 +63,7 @@ public class InfoService {
 			 * logger.info(newFileName+" UPLOAD OK");
 			 */
 
-			dao.fileWrite(idx,oriFileName,newFileName);
+			infodao.fileWrite(idx,oriFileName,newFileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,7 +81,7 @@ public class InfoService {
 		int offset = (page-1)*10;
 		pageParam.put("offset", offset);
 		
-		int totalCount = dao.totalCount();
+		int totalCount = infodao.totalCount();
 		logger.info("totalcount: "+totalCount);
 		
 		int totalPages = totalCount%10 > 0 ? (totalCount/10)+1 : (totalCount/10);
@@ -89,7 +90,7 @@ public class InfoService {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("total",totalPages);
-		result.put("list", dao.infoListPop(pageParam));
+		result.put("list", infodao.infoListPop(pageParam));
 
 		return result;
 
@@ -103,7 +104,7 @@ public class InfoService {
 		//Map<String, Object> map = new HashMap<String, Object>();
 		//map.put("list", dao.searchPlace(keyword));
 		
-		return dao.searchPlace(keyword);
+		return infodao.searchPlace(keyword);
 	}
 
 	
@@ -111,22 +112,43 @@ public class InfoService {
 	 * 글 수정 
 	 */
 	public String infoUpdate(MultipartFile photo, HashMap<String, String> params) {
-		logger.info("photo 이름: {}",photo.getOriginalFilename());
+		logger.info("수정 서비스");
 		
-		int success = dao.infoUpdate(params);
+		infodao.infoUpdate(params);
 		String idx = params.get("idx");
 
-		if(success > 0 && !photo.getOriginalFilename().equals("")) {
-			fileUpload(photo,Integer.parseInt(idx));
-		}
-		return "redirect:/detail?idx="+idx;
+		return "redirect:/infoDetail?idx="+idx;
 	}
 
 	
-	public ArrayList<BoardDTO> placeInfoList() {
+	/*
+	 * 여행지 정보 리스트 
+	 */
+	public ArrayList<BoardDTO> infoList() {
 		logger.info("여행지 정보 리스트 서비스");
-		return dao.placeInfoList();
+		return infodao.infoList();
 	}
+
+	
+	/*
+	 * 여행지 정보 상세보기
+	 */
+	public BoardDTO infoDetail(String board_idx, Model model) {
+		logger.info("여행지 상세보기 서비스");
+		
+		return infodao.infoDetail(board_idx);
+	}
+
+	
+	/*
+	 * 좌표 불러오기
+	 */
+	public LocateDTO call_xy(String board_idx) {
+		logger.info("좌표 불러오기 서비스");
+		
+		return infodao.call_xy(board_idx);
+	}
+
 
 
 }

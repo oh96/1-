@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dto.BoardDTO;
+import kr.co.gudi.dto.LocateDTO;
 import kr.co.gudi.service.InfoService;
 
 @Controller
@@ -26,7 +28,7 @@ public class InfoController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired InfoService service;
+	@Autowired InfoService infoservice;
 
 	
 	/*
@@ -48,7 +50,7 @@ public class InfoController {
 		String title=params.get("title");
 		String content=params.get("content");
 		*/
-		service.infoWrite(id, params);
+		infoservice.infoWrite(id, params);
 		
 		/*
 		if(session.getAttribute("loginId") != null) {
@@ -68,18 +70,18 @@ public class InfoController {
 	/*
 	 * 여행지 리스트 
 	 */
-	@RequestMapping(value="/placeInfo")
-	public String placeInfo() {
-		return "placeInfo";
+	@RequestMapping(value="/infoListCall")
+	public String infoListCall() {
+		return "infoList";
 	}
 	
-	@RequestMapping(value="/placeInfoList")
+	@RequestMapping(value="/infoList")
 	@ResponseBody
 	public HashMap<String, Object> placeInfoList() {
 		logger.info("여행지 정보 리스트 컨트롤러");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		ArrayList<BoardDTO> list = service.placeInfoList();
+		ArrayList<BoardDTO> list = infoservice.infoList();
 		map.put("list", list);
 		logger.info("list: "+list);
 		
@@ -91,18 +93,24 @@ public class InfoController {
 	 * 여행지 상세보기 
 	 */
 	@RequestMapping(value="/infoDetail")
-	public String infoDetail() {
+	public String infoDetail(Model model, @RequestParam String board_idx) {
+		logger.info("상세보기 컨트롤러");
+		BoardDTO boarddto = infoservice.infoDetail(board_idx,model);
+		LocateDTO locatedto = infoservice.call_xy(board_idx);
 		
-		return null;
+		model.addAttribute("boarddto", boarddto);
+		model.addAttribute("locatedto", locatedto);
+		
+		return "infoDetail";
 	}
 	
 	
 	/*
 	 * 팝업 리스트
 	 */
-	@RequestMapping(value="/infoList")
-	public String infoList() {
-		return "infoList";
+	@RequestMapping(value="/infoListPopup")
+	public String infoListPopup() {
+		return "infoListPopup";
 	}
 	
 	@RequestMapping(value = "/infoListPop")
@@ -110,7 +118,7 @@ public class InfoController {
 	public Map<String, Object> infoListPop(@RequestParam int page){
 		logger.info("리스트 요청: "+page);
 
-		return service.infoListPop(page);
+		return infoservice.infoListPop(page);
 	}
 
 	
@@ -125,7 +133,7 @@ public class InfoController {
 		String keyword = req.getParameter("keyword");
 		logger.info(keyword);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", service.searchPlace(keyword));
+		map.put("list", infoservice.searchPlace(keyword));
 		
 		return map;
 	}
@@ -135,20 +143,21 @@ public class InfoController {
 	/*
 	 * 글 수정 
 	 */
-	/*
+	
 	@RequestMapping(value="/infoUpdateForm")
 	public String infoUpdateForm(Model model, @RequestParam String idx) {
-		service.detail(idx,model,"infoUpdateForm");
+		logger.info("수정 요청");
+		infoservice.infoDetail(idx,model,"infoUpdateForm");
 		return "infoUpdateForm";
 	}
 	
 	
 	@RequestMapping(value="/infoUpdate")
 	public String infoUpdate(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
-		
-		return service.infoUpdate(photo,params);
+		logger.info("update params: "+params);
+		return infoservice.infoUpdate(photo,params);
 	}
-	*/
+	
 	
 }
 
