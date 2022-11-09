@@ -18,23 +18,34 @@ public class ReviewService {
 	
 	@Autowired ReviewDAO reviewDAO;
 
-	public ArrayList<ReviewDTO> list() {
-		logger.info("후기 리스트 호출");
+	public HashMap<String, Object> list(int page) {
+		logger.info("후기 리스트 호출"+page);
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		
-		return reviewDAO.list();
+		int offset = (page-1)*10;
+		int totalCount = reviewDAO.totalCount();
+		logger.info("totalCount:"+totalCount);
+		int totalPages = totalCount%10 >0 ? (totalCount/10)+1 : (totalCount/10); //총 페이지 수
+		//Math.ceil(totalCount/10);
+		logger.info(totalPages+"");
+		//reviewDAO.list();
+		result.put("total", totalPages);
+		result.put("list", reviewDAO.list(offset));
+		
+		return result;
 	}
 
-	public void reviewWrite(String id, HashMap<String, String> params) {
+	public void reviewWrite(String id, HashMap<Object, Object> params) {
 		logger.info("후기 쓰기 서비스");
-		String subject = params.get("subject");
-		String content = params.get("content");
+		String subject = (String) params.get("subject");
+		String content = (String) params.get("content");
 		
 		reviewDAO.reviewWrite(id, subject, content);
 	}
 
-	public ReviewDTO reviewDetail(String idx) {
+	public ReviewDTO reviewDetail(String board_idx) {
 		logger.info("상세보기 요청");
-		ReviewDTO dto = reviewDAO.reviewdetail(idx);
+		ReviewDTO dto = reviewDAO.reviewdetail(board_idx);
 		return dto;
 	}
 
@@ -46,6 +57,11 @@ public class ReviewService {
 	public  void reviewUpdate(HashMap<String, String> params) {
 		int row = reviewDAO.reviewUpdate(params);
 		logger.info("수정된 행의 갯수:"+row);
+	}
+
+	public void reviewDelete(String board_idx) {
+		int row = reviewDAO.reviewDelete(board_idx);
+		
 	}
 	
 	

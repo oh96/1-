@@ -15,6 +15,11 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
+	
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+<!-- 해시태그 -->
 <style>
 table, th, td {
 	border: 1px solid black;
@@ -130,11 +135,10 @@ textarea {
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
-	<form action="reviewWrite" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="subject"></td>
+				<td><input type="text" name="subject" id="board_subject"></td>
 			</tr>
 			<tr>
 				<th>여행지 위치</th>
@@ -143,7 +147,7 @@ textarea {
 			<tr>
 				<th>내용</th>
 				<td>
-					<textarea name="content"></textarea>
+					<textarea name="content"  id="board_content"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -153,13 +157,16 @@ textarea {
 				</td>
 			</tr>
 			<tr>
+				<th>해시태그</th>
+				<td><input name='basic'></td>
+			</tr>
+			<tr>
 				<td colspan="2" class="btn_area">
 					<button type="button" onclick="location.href='review'">리스트</button>
-					<button>저장</button>
+					<button id="reviewWrite">저장</button>
 				</td>
 			</tr>
 		</table>
-	</form>
 </body>
 <script>
 	var cnt = 1;
@@ -167,5 +174,56 @@ textarea {
 	    $("#file_loc").append("<br>" + "<input type='file' name='file" + cnt + "' />");
 	    cnt++;
 	}
+	//파일업로드 관련
+	
+	 const input = document.querySelector('input[name=basic]');
+	    let tagify = new Tagify(input); // initialize Tagify
+	    
+	    // 태그가 추가되면 이벤트 발생
+	    tagify.on('add', function() {
+	      console.log(tagify.value); // 입력된 태그 정보 객체
+	  });
+	  //해시태그 관련 
+
+	    
+$('#reviewWrite').click(function(){
+	
+		$subject = $("#board_subject");
+		$content = $("#board_content");
+		
+		console.log($subject.val());
+		console.log($content.val());
+		
+		if ($subject.val()=='') {
+			alert('제목을 입력해주세요');
+			$subject.focus();
+		}else if ($content.val()==''){
+			alert('내용을 입력해주세요');
+			$content.focus();
+		}else{
+			console.log('서버로 전송');
+			var param={};
+			param.subject = $subject.val();
+			param.content = $content.val();
+			console.log(param);
+			
+			$.ajax({
+				type:'post',
+				url:'reviewWrite',
+				data:{param:param},
+				dataType:'json',
+				success:function(data){
+					console.log(data);
+					location.href="./review";
+					alert("저장");
+				},
+				error:function(e){
+					console.log(e);
+				}
+				
+			});
+		
+	}
+});
 </script>
 </html>

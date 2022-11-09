@@ -5,8 +5,12 @@
 <!-- 이 xml을 어떤 interface를 통해서 연결할 것인가? -->
 <mapper namespace="kr.co.gudi.dao.ReviewDAO">
 
-	<select id="list" resultType="kr.co.gudi.dto.ReviewDTO">
-		select board_idx, board_subject, id, reg_date, hit from board where cls_code=2
+	<select id="list" resultType="hashmap">
+		select 
+			board_idx, board_subject, id, reg_date, hit 
+		from board where cls_code=2 
+		ORDER BY board_idx DESC 
+		limit 10 offset #{param1}
 	</select>
 	
 	<insert id="reviewWrite">
@@ -26,4 +30,10 @@
 			,board_content = #{board_content}
 		WHERE board_idx = #{board_idx}
 	</update>
+	<delete id="reviewDelete" parameterType="String">
+		DELETE FROM board WHERE board_idx = #{board_idx} 
+	</delete>
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(board_idx) FROM board where cls_code=2
+	</select>
 </mapper>

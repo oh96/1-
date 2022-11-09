@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="resources/js/jquery.twbsPagination.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link
@@ -76,9 +79,9 @@
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				<form action="#" class="searchform order-lg-last">
+				<form action="totalSearch" class="searchform order-lg-last">
 					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search">
+						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
 						<button type="submit" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
@@ -98,12 +101,8 @@
 		<!-- END nav -->
 
 	</section>
-
-	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
-
+	
+	
 <button onclick="location.href='./reviewWriteForm'">글쓰기</button>
 	<table>
 		<thead>
@@ -116,21 +115,42 @@
 			</tr>
 		</thead>
 		<tbody id="reviewList">
+		
 		</tbody>
+		<tr>
+			<td colspan="5" id="paging">
+				<div>
+					<nav aria-label="Page navigation" style="text-align:center">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+				</div>
+			</td>
+		</tr>
 	</table>
 </body>
 <script>
-	reviewListCall();
+var showPage = 1;
+	reviewListCall(showPage);
 
-	function reviewListCall(){
+	function reviewListCall(page){
 		$.ajax({
 			type:'get',
 			url:'reviewListCall',
-			data:{},
+			data:{page:page},
 			dataType:"JSON",
 			success:function(data){
-				//console.log(data);
+				console.log(data.total);
 				drawList(data.list);
+				$("#pagination").twbsPagination({
+					startPage:1,
+					totalPages:data.total,
+					visiblePages:5,
+					onPageClick:function(e, page){
+						console.log(e);
+						console.log(page);
+						reviewListCall(page);
+					}
+				});
 			},
 			error:function(e){
 				console.log(e);
@@ -157,4 +177,7 @@
 		$("#reviewList").append(content);
 	}
 </script>
+	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 </html>

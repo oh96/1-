@@ -7,7 +7,7 @@ import kr.co.gudi.dto.ReviewDTO;
 
 public interface ReviewDAO {
 
-	ArrayList<ReviewDTO> list();
+	ArrayList<HashMap<String, Object>> list(int offset);
 
 	void reviewWrite(String id, String subject, String content);
 
@@ -18,5 +18,9 @@ public interface ReviewDAO {
 	ReviewDTO reviewUpdateForm(String idx);
 
 	int reviewUpdate(HashMap<String, String> params);
+
+	int reviewDelete(String board_idx);
+
+	int totalCount();
 
 }
