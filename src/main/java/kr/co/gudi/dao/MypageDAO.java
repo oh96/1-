@@ -18,5 +18,11 @@ public interface MypageDAO {
 
 	ArrayList<HashMap<String, Object>> myreview(String id);
 
+	int MyreviewDeleteList(String board_idx);
+
+	
+
+	
+
 
 }
