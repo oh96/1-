@@ -28,9 +28,9 @@ public class SearchController {
 	public String totalSearch(Model model, @RequestParam String searchContent) {
 		logger.info("전체 검색 페이지 요청");
 		logger.info(searchContent);
-		model.addAttribute("searchContent", searchContent);
-		
-		return "search";
+		//model.addAttribute("searchContent", searchContent);
+		String page = "검색";
+		return "redirect:/whatPage?page="+page;
 	}
 	
 	@RequestMapping(value="/searchListCall")
