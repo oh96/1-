@@ -91,7 +91,7 @@ public class MyPageController {
 		if(user_name.equals("")) {
 			logger.info("이름을 입력하세요");
 			model.addAttribute("msg","이름을 입력하세요");
-			model.addAttribute("info",params);
+			model.addAttribute("info",params);//model은 동시에 날라감
 		}else if(gender.equals("")) {
 			//logger.info("성별을 입력하세요");
 			model.addAttribute("msg","성별을 입력하세요");

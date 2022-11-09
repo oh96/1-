@@ -152,11 +152,13 @@ function listCall(){
 
 function drawList(list){
 	var content = '';
+
 	
 	for(var i=0;i<list.length;i++){
 		content += '<tr>';
 		content +='<td><input type="checkbox" value="'+list[i].board_idx+'"/></td>';
-		content += '<td>'+list[i].board_subject+'</td>';
+		//content += '<td>'+list[i].board_subject+'</td>';
+		content += '<td><a href="review">'+list[i].board_subject+'</a></td>';
 		
 		var date = new Date(list[i].reg_date);
 		content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';

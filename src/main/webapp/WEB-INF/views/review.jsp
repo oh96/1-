@@ -129,13 +129,12 @@
 	</table>
 </body>
 <script>
-<<<<<<< HEAD
+
 var showPage = 1;
 	reviewListCall(showPage);
-=======
 
 	reviewListCall();
->>>>>>> origin/master
+
 
 	function reviewListCall(page){
 		$.ajax({
