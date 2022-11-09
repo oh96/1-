@@ -5,10 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
-<script src="resources/js/jquery.twbsPagination.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link
@@ -19,15 +16,41 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
 <style>
-	table, th, tr, td{
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px 10px;
-	}
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px 10px;
+}
+
+th {
+	width:150px;
+}
+	
+button {
+	margin: 5px;
+}
+	
+table {
+	width: 800px;
+}
+
+.btn_area {
+	text-align: center;
+}
+
+input[type='text'] {
+	width: 100%;
+}
+
+textarea {
+	resize: none;
+	width: 100%;
+	height: 150px;
+}
 </style>
 </head>
 <body>
-	<section class="ftco-section">
+<section class="ftco-section">
 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -79,9 +102,9 @@
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				<form action="totalSearch" class="searchform order-lg-last">
+				<form action="#" class="searchform order-lg-last">
 					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
+						<input type="text" class="form-control pl-3" placeholder="Search">
 						<button type="submit" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
@@ -101,88 +124,46 @@
 		<!-- END nav -->
 
 	</section>
-	
-	
-<button onclick="location.href='./reviewWriteForm'">글쓰기</button>
-	<table>
-		<thead>
-			<tr>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>좋아요</th>
-			</tr>
-		</thead>
-		<tbody id="reviewList">
-		
-		</tbody>
-		<tr>
-			<td colspan="5" id="paging">
-				<div>
-					<nav aria-label="Page navigation" style="text-align:center">
-						<ul class="pagination" id="pagination"></ul>
-					</nav>
-				</div>
-			</td>
-		</tr>
-	</table>
-</body>
-<script>
-<<<<<<< HEAD
-var showPage = 1;
-	reviewListCall(showPage);
-=======
 
-	reviewListCall();
->>>>>>> origin/master
-
-	function reviewListCall(page){
-		$.ajax({
-			type:'get',
-			url:'reviewListCall',
-			data:{page:page},
-			dataType:"JSON",
-			success:function(data){
-				console.log(data.total);
-				drawList(data.list);
-				$("#pagination").twbsPagination({
-					startPage:1,
-					totalPages:data.total,
-					visiblePages:5,
-					onPageClick:function(e, page){
-						console.log(e);
-						console.log(page);
-						reviewListCall(page);
-					}
-				});
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
-	}
-	
-	function drawList(list){
-		var content="";
-		for(var i=0;i<list.length;i++){
-			//console.log(list[i]);
-			content += "<tr>";
-			content += "<td>";
-			content += "<a href='reviewDetail?board_idx="+list[i].board_idx+"'>"+list[i].board_subject+"</a>"
-			content += "</td>";
-			content += "<td>"+list[i].id+"</td>";
-			var date = new Date(list[i].reg_date);
-			content += "<td>"+date.toLocaleDateString('ko-KR')+"</td>";
-			content += "<td>"+list[i].hit+"</td>";
-			content += "<td>0</td>";
-			content += "</tr>";
-		}
-		$("#reviewList").empty();
-		$("#reviewList").append(content);
-	}
-</script>
+	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
+
+	<form action="noticeWrite" method="post" enctype="multipart/form-data">
+		<table>
+			
+			
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="subject"></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<textarea name="content"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>사진</th>
+				<td  id="file_loc">
+					<input type="button" value="파일 추가" onClick="addFile()"><br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="btn_area">
+					<button type="button" onclick="location.href='admin_notice'">리스트</button>
+					<button>저장</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+<script>
+	var cnt = 1;
+	function addFile(){
+	    $("#file_loc").append("<br>" + "<input type='file' name='file" + cnt + "' />");
+	    cnt++;
+	}
+</script>
 </html>

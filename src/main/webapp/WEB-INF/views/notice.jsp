@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script src="resources/js/jquery.twbsPagination.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link
@@ -27,7 +28,7 @@
 </style>
 </head>
 <body>
-	<section class="ftco-section">
+<section class="ftco-section">
 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -79,9 +80,9 @@
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				<form action="totalSearch" class="searchform order-lg-last">
+				<form action="#" class="searchform order-lg-last">
 					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
+						<input type="text" class="form-control pl-3" placeholder="Search">
 						<button type="submit" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
@@ -102,25 +103,27 @@
 
 	</section>
 	
+	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 	
-<button onclick="location.href='./reviewWriteForm'">글쓰기</button>
 	<table>
 		<thead>
 			<tr>
+				<th>글번호</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
-				<th>좋아요</th>
 			</tr>
 		</thead>
-		<tbody id="reviewList">
-		
+		<tbody id="list">
 		</tbody>
 		<tr>
-			<td colspan="5" id="paging">
-				<div>
-					<nav aria-label="Page navigation" style="text-align:center">
+			<td colspan="5" id="paging">	
+				<div class="container">
+					<nav aria-label="Page navigation" style="test-align:center">
 						<ul class="pagination" id="pagination"></ul>
 					</nav>
 				</div>
@@ -129,60 +132,55 @@
 	</table>
 </body>
 <script>
-<<<<<<< HEAD
 var showPage = 1;
-	reviewListCall(showPage);
-=======
+listCall(showPage);
 
-	reviewListCall();
->>>>>>> origin/master
+function listCall(page){
+	$.ajax({
+		type:'GET',
+		url:'listCall',
+		data:{page:page}, //페이지란 이름으로 현재 받은 페이지를 넣기-->홈컨트롤러로 requestparam으로 page받기
+		dataType:'JSON',
+		success:function(data){
+			console.log(data);
+			drawList(data.list);	
+			//플러그인 적용하기
+			$('#pagination').twbsPagination({
+				startPage:1, //시작페이지
+				totalPages:data.total, //총 페이지 수 
+				visiblePages:5, //기본으로 보여줄 페이지 수
+				onPageClick:function(e, page){ //클릭했을때 실행 내용
+					//console.log(e);
+					listCall(page);
+				}
+			});
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
 
-	function reviewListCall(page){
-		$.ajax({
-			type:'get',
-			url:'reviewListCall',
-			data:{page:page},
-			dataType:"JSON",
-			success:function(data){
-				console.log(data.total);
-				drawList(data.list);
-				$("#pagination").twbsPagination({
-					startPage:1,
-					totalPages:data.total,
-					visiblePages:5,
-					onPageClick:function(e, page){
-						console.log(e);
-						console.log(page);
-						reviewListCall(page);
-					}
-				});
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
+function drawList(list){  
+	var content='';
+	
+	for(var i=0; i<list.length; i++){
+		content +='<tr>';
+		content +='<td>'+list[i].board_idx+'</td>';
+		content +='<td><a href="notice_detail?num='+list[i].board_idx+'">'+list[i].board_subject+'</td>';
+		content +='<td>'+list[i].id+'</td>';
+		
+		var date = new Date(list[i].reg_date);
+		content +='<td>'+date.toLocaleDateString('ko-kr')+'</td>';
+		
+		content +='<td>'+list[i].hit+'</td>';
+		
+		content +='</tr>';
 	}
 	
-	function drawList(list){
-		var content="";
-		for(var i=0;i<list.length;i++){
-			//console.log(list[i]);
-			content += "<tr>";
-			content += "<td>";
-			content += "<a href='reviewDetail?board_idx="+list[i].board_idx+"'>"+list[i].board_subject+"</a>"
-			content += "</td>";
-			content += "<td>"+list[i].id+"</td>";
-			var date = new Date(list[i].reg_date);
-			content += "<td>"+date.toLocaleDateString('ko-KR')+"</td>";
-			content += "<td>"+list[i].hit+"</td>";
-			content += "<td>0</td>";
-			content += "</tr>";
-		}
-		$("#reviewList").empty();
-		$("#reviewList").append(content);
-	}
+	$("#list").empty(); 
+	$("#list").append(content);
+}
+
 </script>
-	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 </html>
