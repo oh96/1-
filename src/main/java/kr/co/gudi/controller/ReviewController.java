@@ -21,6 +21,8 @@ import kr.co.gudi.service.ReviewService;
 @Controller
 public class ReviewController {
 
+	private static final String String = null;
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ReviewService reviewService;
@@ -62,6 +64,7 @@ public class ReviewController {
 				@RequestParam HashMap<Object, Object> params) {
 		HashMap<String, Object> map 
 			= new HashMap<String, Object>();
+		int row = reviewService.reviewWrite(id, params, sbject, );
 		logger.info("후기 쓰기 요청");
 		logger.info(params+"");
 		//logger.info(params.get("basic").getClass().getName());
