@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +15,16 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
-<style></style>
+<style>
+	table, th, tr, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
+</style>
 </head>
 <body>
-	<section class="ftco-section">
+<section class="ftco-section">
 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -99,6 +104,19 @@
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
+	<table>
+		<thead>
+			<tr>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>좋아요</th>
+			</tr>
+		</thead>
+		<tbody id="totalList">
+		</tbody>
+	</table>
 </body>
 <script></script>
 </html>
