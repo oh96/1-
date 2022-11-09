@@ -25,14 +25,14 @@
 			<td>${board.board_content}</td>
 		</tr>
 		<c:if test="${fileList.size()>0}">
-		<tr>
+		<%-- <tr>
 			<th>이미지</th>
 			<td>
 			<c:forEach items="${fileList}" var="file">
 				<img src="/photo/${file.newFileName}"/><br/><br/>
 			</c:forEach>
 			</td>
-		</tr>
+		</tr> --%>
 		</c:if>
 		<tr>
 			<td colspan="2" class="btn_area">

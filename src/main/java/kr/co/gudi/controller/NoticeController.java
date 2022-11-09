@@ -3,6 +3,9 @@ package kr.co.gudi.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +47,7 @@ public class NoticeController {
 	  @RequestMapping(value = "/noticedetail")
 		public String noticedetail(Model model,@RequestParam(value="idx", required=false) String idx) {
 		  
-			logger.info("board_idx = ",idx);
+			logger.info("board_idx = "+idx);
 			service.noticedetail(idx,model,"noticedetail");
 			/*String page = "redirect:/";
 			idx = service.noticedetail(idx);
@@ -60,8 +63,9 @@ public class NoticeController {
 	  @RequestMapping(value = "/admin_notice") 
 	    public String admin_notice() { 
 	       return "admin_notice"; 
-	    }
-	
+	  }
+	  
+	  
 	  @RequestMapping(value="/noticeWriteForm")
 		public String noticeWriteForm() {
 			
@@ -69,17 +73,35 @@ public class NoticeController {
 		}
 	  
 	  @RequestMapping(value="/noticeWrite")
-		public String reviewWrite(Model model, HttpServletRequest req, @RequestParam HashMap<String, String> params) {
+		public String reviewWrite(Model model, HttpServletRequest req, @RequestParam(value="id", required=false) String id,@RequestParam HashMap<String, String> params) {
 			logger.info("공지 쓰기 요청");
 			HttpSession session = req.getSession();
-			String id = (String) session.getAttribute("loginId");
+			id = (String) session.getAttribute("loginId");
+			logger.info(id);
+			
 			service.noticeWrite(id, params);
 			
-			return "notice";
-		}
-	
+			return "admin_notice";
+	  }
 	  
-	
+	  @RequestMapping(value="/noticeUpdateForm")
+	  public String noticeUpdateForm(Model model, @RequestParam String idx) {
+		  logger.info("idx = "+idx);
+		  service.noticedetail(idx,model,"noticeUpdateForm");
+		  return "noticeUpdateForm";
+	  }
+	  
+	  @RequestMapping(value="/noticeupdate")
+	  public String noticeupdate(Model model, @RequestParam HashMap<String, String> params,MultipartFile photo) {
+		  logger.info("params : {}",params);
+		  
+		  return service.noticeupdate(photo,params);
+	  }
+	  
+	  
+	  
+	  
+	  
 }
 
 

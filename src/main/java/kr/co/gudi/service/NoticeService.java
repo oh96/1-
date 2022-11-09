@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +65,28 @@ public class NoticeService {
 
 	public void noticeWrite(String id, HashMap<String, String> params) {
 		logger.info("공지 쓰기 서비스");
-		String subject = params.get("subject");
-		String content = params.get("content");
+		NoticeDTO dto = new NoticeDTO();
 		
-		dao.noticeWrite(id, subject, content);
+		dto.setId(id);
+		dto.setBoard_subject(params.get("subject"));
+		dto.setBoard_content(params.get("content"));
+		
+		String fixed=params.get("fixed");
+		
+		dao.noticeWrite(dto);
+		int board_idx = dto.getBoard_idx();
+		logger.info("write success : {}",board_idx);
+		
+		notice(board_idx,fixed);
+		
+		
 	}
 	
+	private void notice(int board_idx, String fixed) {
+		dao.notice(board_idx,fixed);
+		
+	}
+
 	public void fileUpload(MultipartFile photo, int idx) {
 		String oriFileName = photo.getOriginalFilename();
 		String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
@@ -98,6 +115,17 @@ public class NoticeService {
 			dao.hit(idx);
 		}
 		
+	}
+
+	public String noticeupdate(MultipartFile photo, HashMap<String, String> params) {
+		logger.info("photo 이름 : {}",photo.getOriginalFilename());
+		int success = dao.noticeupdate(params);
+		String idx = params.get("idx");
+		if(success>0 && !photo.getOriginalFilename().equals("")) {
+			fileUpload(photo,Integer.parseInt(idx));
+		}
+		
+		return "redirect:/noticedetail?idx="+idx;
 	}
 	
 }

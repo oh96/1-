@@ -133,10 +133,7 @@ textarea {
 	<form action="noticeWrite" method="post" enctype="multipart/form-data">
 		<table>
 			
-			<tr>
-				<th>작성자 ID</th>
-				<td><input type="text" name="id"/></td>
-			</tr>
+			
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="subject"></td>

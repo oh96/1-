@@ -111,7 +111,7 @@ table, th, tr, td{
 				
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
-						
+						<li class="nav-item"><a href="#" class="nav-link">관리자정보</a></li>
 						<li class="nav-item"><a href="admin_notice" class="nav-link">공지등록</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">블라인드</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">유저</a></li>

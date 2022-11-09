@@ -23,6 +23,12 @@ public interface NoticeDAO {
 
 	void fileWrite(int fileidx, String oriFileName, String newFileName);
 
+	void noticeWrite(NoticeDTO dto);
+
+	void notice(int board_idx, String fixed);
+
+	int noticeupdate(HashMap<String, String> params);
+
 	
 	
 	
