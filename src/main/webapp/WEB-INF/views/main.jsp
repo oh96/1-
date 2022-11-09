@@ -27,7 +27,7 @@
 			</c:when>
 			<c:when test="${page eq '여행지후기'}">
 				<div id="main">
-            		<jsp:include page="review.jsp" />
+            		<jsp:include page="reviewList.jsp" />
         		</div>
 			</c:when>
 			<c:when test="${page eq '여행지경로'}">

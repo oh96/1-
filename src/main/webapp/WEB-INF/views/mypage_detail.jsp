@@ -87,7 +87,7 @@ table, th, td {
 				</form>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
-						</li>
+						
 						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
 						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
@@ -97,7 +97,7 @@ table, th, td {
 			</div>
 		</nav>
 		<!-- END nav -->
-
+		</section>
 <table>
 		<a href="mypage_review?id=${detail.id}">나의 후기글 리스트</a>
 		<tr>
@@ -124,7 +124,7 @@ table, th, td {
 			<th colspan="2"><a href="MypageUpdateForm?id=${detail.id}">회원정보 수정</a></th>
 		</tr>
 		<tr>
-			<th colspan="2"><a href="withdraw?id=${detail.id}">회원 탈퇴</th>
+			<th colspan="2"><a href="withdraw?id=${detail.id}">회원 탈퇴</a></th>
 		</tr>
 
 	</table>
