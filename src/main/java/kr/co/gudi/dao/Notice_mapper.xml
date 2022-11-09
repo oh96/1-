@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+<!--이 XML을 어떤 interface를 통해서 연결할 건가?-->
+<mapper namespace="kr.co.gudi.dao.NoticeDAO">
+
+	
+	<select id="list" resultType="kr.co.gudi.dto.NoticeDTO"> 
+		SELECT *
+			FROM board WHERE cls_code=4 ORDER BY board_idx DESC limit 10 offset #{param1}
+			
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(board_idx) FROM board WHERE cls_code=4
+	</select>
+	
+	<select id="noticedetail" resultType="kr.co.gudi.dto.NoticeDTO" parameterType="String">
+		SELECT * FROM board WHERE board_idx=#{board_idx}
+	</select>
+	
+	<select id="fileList" parameterType="String" resultType="kr.co.gudi.dto.PhotoDTO">
+		SELECT * FROM photo WHERE photo_idx=#{photo_idx} ORDER BY photo_idx
+	</select>
+	
+	<insert id="noticeWrite"
+			useGeneratedKeys="true"
+			keyColumn="board_idx"
+			keyProperty="board_idx"
+			parameterType="kr.co.gudi.dto.NoticeDTO">
+		INSERT INTO board(cls_code, id, board_subject, board_content)
+		values (4,#{id},#{board_subject},#{board_content})
+	</insert>
+	
+	<insert id="notice">
+		INSERT INTO notice(board_idx,fixed) VALUES (#{param1},0)
+	</insert>
+	
+	<update id="hit" parameterType="String">
+		UPDATE board SET hit=hit+1 WHERE board_idx=#{board_idx}
+	</update>
+	
+	<update id="noticeupdate" parameterType="hashmap">
+		UPDATE board SET
+			subject = #{subject}
+			,id=#{id}
+			,content=#{content}
+		WHERE idx=#{idx}
+	
+	</update>
+	
+	
+	
+</mapper>
+
+

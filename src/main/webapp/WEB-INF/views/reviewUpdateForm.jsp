@@ -1,20 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
-<style></style>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/style.css">
+<style>
+	table, th, tr, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
+</style>
 </head>
 <body>
-<<<<<<< HEAD
-	메인화면
-=======
-	<section class="ftco-section">
+<section class="ftco-section">
 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -76,11 +86,10 @@
 				</form>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
-						</li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
 						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
-						<li class="nav-item"><a href="notice" class="nav-link">공지</a></li>
+						<li class="nav-item"><a href="#" class="nav-link">공지</a></li>
 					</ul>
 				</div>
 			</div>
@@ -88,15 +97,33 @@
 		<!-- END nav -->
 
 	</section>
-
-	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
->>>>>>> origin/master
-
+<body>
+<form action="reviewUpdate" method="POST">
+<input type="hidden" name="board_idx" value="${board.board_idx}">
+	<table>
+		<tr>
+			<th>제목</th>
+			<td>
+				<input type="text" name="board_subject" value="${board.board_subject}"/></td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td>
+				<input type="text" name="id" value="${board.id}"/></td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+				<textarea name="board_content">${board.board_content}</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="btn_area">
+				<button type="button" onclick="location.href='./reviewDetail'">리스트</button>
+				<button>저장</button>
+			</td>
+		</tr>
+	</table>
+</form>
 </body>
-<script>
-	
-</script>
+<script></script>
 </html>

@@ -15,7 +15,14 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
-<style></style>
+<style>
+table, th, tr, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
+
+</style>
 </head>
 <body>
 	<section class="ftco-section">
@@ -104,7 +111,7 @@
 				
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
-						
+						<li class="nav-item"><a href="#" class="nav-link">관리자정보</a></li>
 						<li class="nav-item"><a href="admin_notice" class="nav-link">공지등록</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">블라인드</a></li>
 						<li class="nav-item"><a href="#" class="nav-link">유저</a></li>
@@ -123,6 +130,80 @@
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
+<button onclick="location.href='./noticeWriteForm'">글쓰기</button>
+<table>
+		<thead>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody id="list">
+		</tbody>
+		<tr>
+			<td colspan="5" id="paging">	
+				<div class="container">
+					<nav aria-label="Page navigation" style="test-align:center">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+				</div>
+			</td>
+		</tr>
+	</table>
 </body>
-<script></script>
+<script>
+var showPage = 1;
+listCall(showPage);
+
+function listCall(page){
+	$.ajax({
+		type:'GET',
+		url:'listCall',
+		data:{page:page}, //페이지란 이름으로 현재 받은 페이지를 넣기-->홈컨트롤러로 requestparam으로 page받기
+		dataType:'JSON',
+		success:function(data){
+			console.log(data);
+			drawList(data.list);	
+			//플러그인 적용하기
+			$('#pagination').twbsPagination({
+				startPage:1, //시작페이지
+				totalPages:data.total, //총 페이지 수 
+				visiblePages:5, //기본으로 보여줄 페이지 수
+				onPageClick:function(e, page){ //클릭했을때 실행 내용
+					//console.log(e);
+					listCall(page);
+				}
+			});
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
+
+function drawList(list){  
+	var content='';
+	for(var i=0; i<list.length; i++){
+
+		content +='<tr>';
+		content +='<td>'+list[i].board_idx+'</td>';
+		content +='<td><a href="noticedetail?board_idx='+list[i].board_idx+'">'+list[i].board_subject+'</td>';
+		content +='<td>'+list[i].id+'</td>';
+		
+		var date = new Date(list[i].reg_date);
+		content +='<td>'+date.toLocaleDateString('ko-kr')+'</td>';
+		
+		content +='<td>'+list[i].hit+'</td>';
+		
+		content +='</tr>';
+	}
+	
+	$("#list").empty(); 
+	$("#list").append(content);
+}
+
+</script>
 </html>

@@ -21,6 +21,8 @@ import kr.co.gudi.service.ReviewService;
 @Controller
 public class ReviewController {
 
+	private static final String String = null;
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ReviewService reviewService;
@@ -32,43 +34,88 @@ public class ReviewController {
 	
 	@RequestMapping(value="/reviewListCall")
 	@ResponseBody
-	public HashMap<String, Object> reviewListCall() {
-		logger.info("후기 리스트 호출");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		ArrayList<ReviewDTO> list = reviewService.list();
-		map.put("list", list);
+	public HashMap<String, Object> reviewListCall(@RequestParam int page) {
+		logger.info("후기 리스트 호출"+page);
+		HashMap<String, Object> map 
+			= new HashMap<String, Object>();
 		
-		return map;
+		//ArrayList<ReviewDTO> list = reviewService.list();
+		//map.put("list", list);
+		
+		return reviewService.list(page);
 	}
 	
 	@RequestMapping(value="/reviewWriteForm")
-	public String reviewWriteForm() {
-		
-		return "reviewWriteForm";
+	public String reviewWriteForm(Model model, HttpSession session) {
+		String page = "reviewWriteForm";
+		if (session.getAttribute("loginId") != null) {
+			logger.info("글쓰기폼 이동");
+		}else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다");
+			page="loginForm";
+		}
+		return page;
 	}
 	
 	@RequestMapping(value="/reviewWrite")
-	public String reviewWrite(Model model, HttpServletRequest req, @RequestParam HashMap<String, String> params) {
+	@ResponseBody
+	public HashMap<String, Object> reviewWrite(Model model, 
+				HttpServletRequest req, 
+				@RequestParam HashMap<Object, Object> params) {
+		HashMap<String, Object> map 
+			= new HashMap<String, Object>();
+		int row = reviewService.reviewWrite(id, params, sbject, );
 		logger.info("후기 쓰기 요청");
+		logger.info(params+"");
+		//logger.info(params.get("basic").getClass().getName());
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("loginId");
 		reviewService.reviewWrite(id, params);
 		
-		return "review";
+		return map;
 	}
 	
 	@RequestMapping(value = "/reviewDetail")
-	public String detail(Model model,
-			@RequestParam String idx) {
-		logger.info("board_idx:{}",idx);
+	public String reviewDetail(Model model,
+			@RequestParam String board_idx) {
+		logger.info("board_idx:{}",board_idx);
 		String page = "redirect:/";
-		ReviewDTO dto = reviewService.reviewdetail(idx);
+		ReviewDTO dto = reviewService.reviewDetail(board_idx);
 		
 		if (dto != null) {
 			page = "reviewDetail";
 			model.addAttribute("board",dto);
 		}
 		return page;
+	}
+	
+	@RequestMapping(value = "/reviewUpdateForm")
+	public String reviewUpdateForm(Model model,
+			@RequestParam String board_idx) {
+		logger.info("board_idx:{}",board_idx);
+		String page = "redirect:/";
+		ReviewDTO dto = reviewService.reviewUpdateForm(board_idx);
+		
+		if (dto !=null) {
+			page = "reviewUpdateForm";
+			model.addAttribute("board",dto);
+		}
+		return page;	
+	}
+	
+	@RequestMapping(value = "/reviewUpdate")
+	public String reviewUpdate(@RequestParam HashMap<String, String>params) {
+	logger.info("param:{}",params);
+	reviewService.reviewUpdate(params);
+	return "redirect:/reviewDetail?board_idx="+params.get("board_idx");
+		
+	}
+	
+	@RequestMapping(value = "/reviewDelete")
+	public String reviewDelete(@RequestParam String board_idx) {
+		logger.info("삭제 요청"+board_idx);
+		reviewService.reviewDelete(board_idx);
+		return "redirect:/review";
 	}
 }
 
