@@ -122,6 +122,7 @@ public class InfoService {
 		return "redirect:/detail?idx="+idx;
 	}
 
+	
 	public ArrayList<BoardDTO> placeInfoList() {
 		logger.info("여행지 정보 리스트 서비스");
 		return dao.placeInfoList();

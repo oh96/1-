@@ -83,7 +83,7 @@ function drawList(list){
 		for(var i=0; i<list.length; i++){
 			content += '<tr>';
 			//content += '<td>'+list[i].board_subject+'</td>';
-			content += '<td><a href="detail" class="subject">'+list[i].board_subject+'</a></td>';
+			content += '<td><a href="/infoDetail?board_idx='+list[i].board_idx+'">'+list[i].board_subject+'</a></td>';
 			content += '<td>'+list[i].id+'</td>';
 			
 			var date = new Date(list[i].reg_date);
