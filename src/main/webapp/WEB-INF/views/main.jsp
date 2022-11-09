@@ -10,11 +10,46 @@
 <style></style>
 </head>
 <body>
-	
-	<div>
-		안녕하세요 ${sessionScope.loginId} 님 <a href="logout">로그아웃</a>
-	</div>
-	<a href="review">후기리스트</a>
+	<div id="wrap">
+        <div id="header">
+            <jsp:include page="header.jsp" />
+        </div>
+        
+		<c:choose>
+			<c:when test="${page eq '여행지정보'}">
+				<div id="main">
+            		<jsp:include page="locInfoList.jsp" />
+        		</div>
+			</c:when>
+			<c:when test="${page eq '여행지후기'}">
+				<div id="main">
+            		<jsp:include page="review.jsp" />
+        		</div>
+			</c:when>
+			<c:when test="${page eq '여행지경로'}">
+				<div id="main">
+            		<jsp:include page="routeList.jsp" />
+        		</div>
+			</c:when>
+			<c:when test="${page eq '공지'}">
+				<div id="main">
+            		<jsp:include page="noticeList.jsp" />
+        		</div>
+			</c:when>
+			<c:when test="${page eq '후기글쓰기'}">
+				<div id="main">
+            		<jsp:include page="reviewWriteForm.jsp" />
+        		</div>
+			</c:when>
+			<c:otherwise>
+				<div id="main">
+            		<jsp:include page="home.jsp" />
+        		</div>
+			</c:otherwise>
+		</c:choose>
+		        
+        
+    </div>
 </body>
 <script></script>
 </html>
