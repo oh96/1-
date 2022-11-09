@@ -64,7 +64,7 @@ public class ReviewController {
 				@RequestParam HashMap<Object, Object> params) {
 		HashMap<String, Object> map 
 			= new HashMap<String, Object>();
-		int row = reviewService.reviewWrite(id, params, sbject, );
+		//int row = reviewService.reviewWrite(id, params, sbject, );
 		logger.info("후기 쓰기 요청");
 		logger.info(params+"");
 		//logger.info(params.get("basic").getClass().getName());
