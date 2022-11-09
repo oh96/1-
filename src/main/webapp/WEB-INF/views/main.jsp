@@ -22,7 +22,7 @@
 		<c:choose>
 			<c:when test="${page eq '여행지정보'}">
 				<div id="main">
-            		<jsp:include page="locInfoList.jsp" />
+            		<jsp:include page="infoList.jsp" />
         		</div>
 			</c:when>
 			<c:when test="${page eq '여행지후기'}">
