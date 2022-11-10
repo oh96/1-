@@ -42,6 +42,10 @@
 		WHERE board_idx = #{param1}	
 	</update>
 	
+	<update id="trip_infoUpdate">
+		update trip_info set loc_idx=#{param2} where board_idx=#{param1}
+	</update>
+	
 	<select id="infoList" resultType="hashmap">
 		SELECT board_idx,board_subject,id,reg_date,hit FROM board WHERE cls_code = '1' ORDER BY board_idx
 	</select>
@@ -51,7 +55,7 @@
 	</select>
 	
 	<select id="call_xy" resultType="kr.co.gudi.dto.LocateDTO">
-		select l.loc_lat as loc_lat, l.loc_lon as loc_lon from location l , trip_info t where l.loc_idx = t.loc_idx and 
+		select l.loc_idx as loc_idx, l.loc_lat as loc_lat, l.loc_lon as loc_lon from location l , trip_info t where l.loc_idx = t.loc_idx and 
 		t.board_idx = #{param1}
 	</select>
 

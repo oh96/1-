@@ -62,8 +62,9 @@ public class InfoController {
 			// model.addAttribute("msg","로그인이 필요한 서비스입니다."); -> 이렇게 직접 문구를 주는 코드는 잘 사용하지 않는다.(바꿀 때 마다 서버를 건드려야 하기 때문)
 		}
 		*/
+		model.addAttribute("page", "여행지정보");
 		
-		return "redirect:/";
+		return "main";
 	}
 
 	
@@ -72,10 +73,12 @@ public class InfoController {
 	 */
 	
 	@RequestMapping(value="/infoUpdateForm")
-	public String infoUpdateForm(Model model, @RequestParam String board_idx) {
+	public String infoUpdateForm(Model model, @RequestParam String board_idx, @RequestParam String loc_idx) {
 		logger.info("수정 요청");
 		BoardDTO boarddto = infoservice.infoDetail(board_idx,model);
 		model.addAttribute("boarddto",boarddto);
+		logger.info(loc_idx);
+		model.addAttribute("loc_idx",loc_idx);
 		return "infoUpdateForm";
 	}
 
@@ -88,7 +91,11 @@ public class InfoController {
 		id = (String) session.getAttribute("loginId");
 		logger.info("id: "+id);
 		infoservice.infoUpdate(photo,params,id);
-		return "infoDetail?board_idx="+params.get("board_idx");
+		
+		model.addAttribute("page","여행지정보상세보기");
+		model.addAttribute("board_idx",params.get("board_idx"));
+		
+		return "main";
 	}
 	
 	
@@ -103,14 +110,14 @@ public class InfoController {
 	
 	@RequestMapping(value="/infoList")
 	@ResponseBody
-	public HashMap<String, Object> placeInfoList() {
+	public HashMap<String, Object> infoList(Model model,@RequestParam int page) {
 		logger.info("여행지 정보 리스트 컨트롤러");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		ArrayList<BoardDTO> list = infoservice.infoList();
 		map.put("list", list);
 		logger.info("list: "+list);
-		
+		logger.info("page: "+page);
 		return map;
 	}
 	
@@ -124,10 +131,11 @@ public class InfoController {
 		BoardDTO boarddto = infoservice.infoDetail(board_idx, model);
 		LocateDTO locatedto = infoservice.call_xy(board_idx);
 		
+		model.addAttribute("page","여행지정보상세보기");
 		model.addAttribute("boarddto", boarddto);
 		model.addAttribute("locatedto", locatedto);
 		
-		return "infoDetail";
+		return "main";
 	}
 	
 	
@@ -164,30 +172,10 @@ public class InfoController {
 		return map;
 	}
 	
-	
-<<<<<<< HEAD
-=======
-	
 	/*
 	 * 글 수정 
 	 */
 	
-	@RequestMapping(value="/infoUpdateForm")
-	public String infoUpdateForm(Model model, @RequestParam String idx) {
-		logger.info("수정 요청");
-		//infoservice.infoDetail(idx,model,"infoUpdateForm");
-		return "infoUpdateForm";
-	}
-	
-	
-	@RequestMapping(value="/infoUpdate")
-	public String infoUpdate(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
-		logger.info("update params: "+params);
-		return infoservice.infoUpdate(photo,params);
-	}
-	
-	
->>>>>>> origin/master
 }
 
 

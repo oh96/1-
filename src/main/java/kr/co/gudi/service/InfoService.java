@@ -79,13 +79,21 @@ public class InfoService {
 		String board_idx = params.get("board_idx");
 		String board_subject = params.get("title");
 		String board_content = params.get("content");
+		String loc_idx = params.get("loc_idx");
 		logger.info(board_idx+'/'+board_subject+'/'+board_content);
 		logger.info("service id: "+id);
 		infodao.infoUpdate(board_idx,board_subject,board_content,id);
+		
+		trip_infoUpdate(board_idx,loc_idx);
 
 	}
 
 	
+	private void trip_infoUpdate(String board_idx, String loc_idx) {
+		infodao.trip_infoUpdate(board_idx,loc_idx);
+		
+	}
+
 	/*
 	 * 팝업 리스트
 	 */

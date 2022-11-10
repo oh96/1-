@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-	<form action="infoUpdate" method="post"> 
+	<form action="infoUpdate" method="post">
 	<input type="hidden" name="board_idx" value="${boarddto.board_idx}"/>
 	<table>
 		<tr>
@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td><input id="location_input" placeholder="여행지를 선택하세요" value="${boarddto.board_subject}" readonly/>
-			<!-- <input id="locationIdx_input" name="loc_idx" readonly="readonly" value="${location.loc_idx}" type="hidden" /> -->
+			<input id="locationIdx_input" name="loc_idx" readonly="readonly" value="${loc_idx}" type="hidden" />
 			<button type="button" onclick="location_popup();">위치 찾기</button></td>
 		</tr>
 		<tr>

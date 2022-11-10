@@ -11,14 +11,14 @@
 	}
 </style>
 </head>
-<body>
+<body id="detail">
 	<div id="infoDate">
 		<span>작성일 : ${boarddto.reg_date}</span>
 		<span>조회수 : ${boarddto.hit}</span>
 	</div>
 	<div id="infoSubject">
 		<h3>${boarddto.board_subject}</h3>
-		<button type="button" onclick="location.href='infoUpdateForm?board_idx=${boarddto.board_idx}'">수정</button>
+		<button type="button" onclick="location.href='infoUpdateForm?board_idx=${boarddto.board_idx}&loc_idx=${locatedto.loc_idx}'">수정</button>
 		<span>작성자 : ${boarddto.id}</span>
 	</div>
 	<hr>
@@ -28,7 +28,7 @@
 	<div>
 		${boarddto.board_content}
 	</div>
-	<button type="button" onclick="location.href='infoList'">목록</button>
+	<button type="button" onclick="location.href='./whatPage?page=여행지정보'">목록</button>
 </body>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -52,6 +52,33 @@ marker.setMap(map);
 
 //아래 코드는 지도 위의 마커를 제거하는 코드입니다
 //marker.setMap(null); 
+
+
+function detailCall(){
+	$.ajax({
+		type:'get',
+		url:'',
+		data:{
+			'page':page
+			,'boarddto':boarddto
+			,'locatedto':locatedto
+		},
+		dataType:'JSON',
+		success:function(data){
+			drawDetail(data);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
+
+function drawDetail(detail){
+	var content = '';
+	
+}
+
+
 
 </script>
 </html>

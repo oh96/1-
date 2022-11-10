@@ -17,7 +17,7 @@ public interface InfoDAO {
 	
 	void fileWrite(int idx, String oriFileName, String newFileName);
 
-	List<Map<String, Object>> infoListPop(Map pageParam);
+	List<Map<String, Object>> infoListPop();
 
 	int totalCount();
 
@@ -30,5 +30,7 @@ public interface InfoDAO {
 	LocateDTO call_xy(String board_idx);
 
 	void infoUpdate(String board_idx, String board_subject, String board_content, String id);
+
+	void trip_infoUpdate(String board_idx, String loc_idx);
 	
 }

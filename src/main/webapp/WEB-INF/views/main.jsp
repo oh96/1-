@@ -48,13 +48,22 @@
                     <jsp:include page="search.jsp" />
                 </div>
             </c:when>
+            <c:when test="${page eq '여행지정보글쓰기'}">
+                <div id="main">
+                    <jsp:include page="infoWriteForm.jsp" />
+                </div>
+            </c:when>
+            <c:when test="${page eq '여행지정보상세보기'}">
+                <div id="main">
+                    <jsp:include page="infoDetail.jsp" />
+                </div>
+            </c:when>
             <c:otherwise>
                 <div id="main">
                     <jsp:include page="home.jsp" />
                 </div>
             </c:otherwise>
         </c:choose>
->>>>>>> origin/master
     </div>
 </body>
 <script>
