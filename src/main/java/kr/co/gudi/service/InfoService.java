@@ -72,6 +72,29 @@ public class InfoService {
 
 	
 	/*
+	 * 글 수정 
+	 */
+	public void infoUpdate(MultipartFile photo, HashMap<String, String> params, String id) {
+		logger.info("수정 서비스");
+		String board_idx = params.get("board_idx");
+		String board_subject = params.get("title");
+		String board_content = params.get("content");
+		String loc_idx = params.get("loc_idx");
+		logger.info(board_idx+'/'+board_subject+'/'+board_content);
+		logger.info("service id: "+id);
+		infodao.infoUpdate(board_idx,board_subject,board_content,id);
+		
+		trip_infoUpdate(board_idx,loc_idx);
+
+	}
+
+	
+	private void trip_infoUpdate(String board_idx, String loc_idx) {
+		infodao.trip_infoUpdate(board_idx,loc_idx);
+		
+	}
+
+	/*
 	 * 팝업 리스트
 	 */
 	public Map<String, Object> infoListPop(int page) {
@@ -105,19 +128,6 @@ public class InfoService {
 		//map.put("list", dao.searchPlace(keyword));
 		
 		return infodao.searchPlace(keyword);
-	}
-
-	
-	/*
-	 * 글 수정 
-	 */
-	public String infoUpdate(MultipartFile photo, HashMap<String, String> params) {
-		logger.info("수정 서비스");
-		
-		infodao.infoUpdate(params);
-		String idx = params.get("idx");
-
-		return "redirect:/infoDetail?idx="+idx;
 	}
 
 	

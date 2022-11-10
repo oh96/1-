@@ -1,6 +1,5 @@
 package kr.co.gudi.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -35,18 +34,23 @@ public class ReviewService {
 		return result;
 	}
 
-	public void reviewWrite(String id, HashMap<Object, Object> params) {
+	public int reviewWrite(String id, HashMap<Object, Object> params ) {
 		logger.info("후기 쓰기 서비스");
-		String subject = (String) params.get("subject");
-		String content = (String) params.get("content");
 		
-		reviewDAO.reviewWrite(id, subject, content);
+		
+		return reviewDAO.reviewWrite(id, board_subject ,id);
 	}
 
 	public ReviewDTO reviewDetail(String board_idx) {
 		logger.info("상세보기 요청");
 		ReviewDTO dto = reviewDAO.reviewdetail(board_idx);
 		
+<<<<<<< HEAD
+=======
+		if (dto != null) {
+			reviewDAO.hit(board_idx);
+		}
+>>>>>>> origin/master
 		return dto;
 	}
 

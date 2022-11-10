@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script src="resources/js/jquery.twbsPagination.js"></script>
 <style>
@@ -20,7 +19,8 @@
 </head>
 <body>
 <!-- <button onclick="location.href='./reviewWriteForm'">글쓰기</button> -->
-<button onclick="location.href='./whatPage?page=후기글쓰기'">글쓰기</button>
+
+<button onclick="reviewWriteCheck();">글쓰기</button>
 
 	<table>
 		<thead>
@@ -45,12 +45,26 @@
 			</td>
 		</tr>
 	</table>
+	
+	
+	
 </body>
 <script>
 
 var showPage = 1;
 	reviewListCall(showPage);
+	
+	var loginId = "${sessionScope.loginId}";
+	function reviewWriteCheck(){
+		if(loginId == ""){
+			alert("로그인이 필요한 서비스 입니다.");
+			location.href='./whatPage?page=로그인폼';
+		}else{
+			location.href='./whatPage?page=후기글쓰기';
+		}
+	}
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/review.jsp
 	reviewListCall();
 
 
@@ -58,6 +72,9 @@ var showPage = 1;
 	reviewListCall(showPage);
 
 
+=======
+ 	 
+>>>>>>> origin/master:src/main/webapp/WEB-INF/views/reviewList.jsp
 	function reviewListCall(page){
 		$.ajax({
 			type:'get',
@@ -102,5 +119,9 @@ var showPage = 1;
 		$("#reviewList").empty();
 		$("#reviewList").append(content);
 	}
+	
+
+	
+	
 </script>
 </html>

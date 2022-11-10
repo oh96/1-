@@ -4,10 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<script src="resources/js/jquery.twbsPagination.js"></script>
 <style>
 	table,th,td{
 		border: 1px solid black;
@@ -18,7 +17,10 @@
 </head>
 <body>
 	<div style="display:inline-block;">
-		<button onclick="location.href='infoWriteForm'">글쓰기</button>
+		<c:if test="${sessionScope.user_grade >= 1}">
+			<button onclick="location.href='./whatPage?page=여행지정보글쓰기'">글쓰기</button>
+		</c:if>
+		
 	</div>
 	<table>
 		<thead>

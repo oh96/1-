@@ -2,15 +2,13 @@ package kr.co.gudi.service;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.gudi.dao.LoginDAO;
+import kr.co.gudi.dto.UserDTO;
 
 @Service
 public class LoginService {
@@ -19,7 +17,7 @@ public class LoginService {
 	
 	@Autowired LoginDAO loginDAO;
 
-	public String login(HashMap<String, String> params) {
+	public UserDTO login(HashMap<String, String> params) {
 		logger.info("로그인 서비스");
 		String id = params.get("id");
 		String password = params.get("password");

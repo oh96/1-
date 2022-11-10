@@ -1,6 +1,5 @@
 package kr.co.gudi.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,26 +20,22 @@ import kr.co.gudi.service.ReviewService;
 @Controller
 public class ReviewController {
 
-	private static final String String = null;
+	
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ReviewService reviewService;
 	
-	@RequestMapping(value="/review")
-	public String reviewList() {
-		return "review";
-	}
+	/*
+	 * @RequestMapping(value="/review") public String reviewList() { return
+	 * "review"; }
+	 */
 	
 	@RequestMapping(value="/reviewListCall")
 	@ResponseBody
 	public HashMap<String, Object> reviewListCall(@RequestParam int page) {
 		logger.info("후기 리스트 호출"+page);
-		HashMap<String, Object> map 
-			= new HashMap<String, Object>();
 		
-		//ArrayList<ReviewDTO> list = reviewService.list();
-		//map.put("list", list);
 		
 		return reviewService.list(page);
 	}
@@ -62,8 +57,7 @@ public class ReviewController {
 	public HashMap<String, Object> reviewWrite(Model model, 
 				HttpServletRequest req, 
 				@RequestParam HashMap<Object, Object> params) {
-		HashMap<String, Object> map 
-			= new HashMap<String, Object>();
+		String page = ""
 		//int row = reviewService.reviewWrite(id, params, sbject, );
 		logger.info("후기 쓰기 요청");
 		logger.info(params+"");
@@ -115,7 +109,7 @@ public class ReviewController {
 	public String reviewDelete(@RequestParam String board_idx) {
 		logger.info("삭제 요청"+board_idx);
 		reviewService.reviewDelete(board_idx);
-		return "redirect:/review";
+		return "redirect:/reviewList";
 	}
 }
 

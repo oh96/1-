@@ -9,7 +9,7 @@ public interface ReviewDAO {
 
 	ArrayList<HashMap<String, Object>> list(int offset);
 
-	void reviewWrite(String id, String subject, String content);
+	int reviewWrite(String id, String board_subject, String board_content);
 
 	ReviewDTO reviewdetail(String idx);
 	
@@ -22,5 +22,7 @@ public interface ReviewDAO {
 	int reviewDelete(String board_idx);
 
 	int totalCount();
+
+	void hit(String board_idx);
 
 }
