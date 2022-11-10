@@ -9,5 +9,7 @@ public interface RouteDAO {
 
 	ArrayList<HashMap<String, Object>> routelist(int offset);
 
-	int totalCount1();
+	
+
+	int totalCount();
 }

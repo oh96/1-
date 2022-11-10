@@ -38,6 +38,15 @@ public class RouteController {
 		return "routeWrite";
 	}
 	
+	@RequestMapping(value="/routeListCall")
+	@ResponseBody
+	public HashMap<String, Object> routeListCall(@RequestParam int page) {
+		logger.info("후기 리스트 호출"+page);
+		
+		
+		return routeService.routelist(page);
+	}
+	
 	@RequestMapping(value="/routeSearchPopup1")
 	public String routeInfoList1() {
 		return "routeSearchPopup1";

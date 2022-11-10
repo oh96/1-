@@ -55,7 +55,7 @@ var showPage = 1;
 	reviewListCall(showPage);
 	
 	var loginId = "${sessionScope.loginId}";
-	function revieWriteCheck(){
+	function reviewWriteCheck(){
 		if(loginId == ""){
 			alert("로그인이 필요한 서비스 입니다.");
 			location.href='./whatPage?page=로그인폼';
@@ -64,15 +64,6 @@ var showPage = 1;
 		}
 	}
 
- 	 function reviewWriteCheck() {
-		 	//console.log(loginId);
-				if(loginId == ""){
-					alert("로그인이 필요한 서비스 입니다.");
-					location.href='./whatPage?page=여행지정보';
-				}else {
-					location.href='./whatPage?page=후기글쓰기';
-				}			
-		} 
  	 
 	function reviewListCall(page){
 		$.ajax({

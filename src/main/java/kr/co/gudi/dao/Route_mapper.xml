@@ -13,8 +13,7 @@
 		limit 10 offset #{param1}
 	</select>
 	
-	
-	<select id="totalCount1" resultType="int">
+	<select id="totalCount" resultType="int">
 		SELECT COUNT(board_idx) FROM board where cls_code=3
 	</select>
 </mapper>
