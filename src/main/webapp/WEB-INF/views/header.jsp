@@ -73,12 +73,12 @@
 					<span class="fa fa-bars"></span> Menu
 				</button>
 				<div class="searchform order-lg-last">
-					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search" id="searchInput">
+					<form action="SearchGo" class="form-group d-flex">
+						<input type="text" class="form-control pl-3" placeholder="Search" id="searchInput" name="searchContent">
 						<button id="searchBtn" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
-					</div>
+					</form>
 				</div>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
@@ -108,24 +108,7 @@
 
 </body>
 <script>
-	/*$("#searchBtn").click(function(){
-		console.log($("#searchInput").val());
-		$.ajax({
-			type:'get',
-			url:'searchListCall',
-			data:{
-				'searchContent':$("#searchInput").val()
-			},
-			dataType:'JSON',
-			success:function(data){
-				console.log(data);
-				location.href="./whatPage?page=검색";
-			},
-			error:function(e){
-				console.log(data);
-			}
-		});
-	});*/
+	/*
 	$("#searchBtn").click(function(){
 		console.log($("#searchInput").val());
 		$.ajax({
@@ -143,6 +126,26 @@
 				console.log(data);
 			}
 		});
+	});*/
+	/*
+	$("#searchBtn").click(function(){
+		//console.log($("#searchInput").val());
+		$.ajax({
+			type:'get',
+			url:'searchListCall',
+			data:{
+				'searchContent':$("#searchInput").val()
+			},
+			dataType:'JSON',
+			success:function(data){
+				console.log(data.searchList);
+				location.href="./whatPage?page=검색";
+			},
+			error:function(e){
+				console.log(data);
+			}
+		});
 	});
+	*/
 </script>
 </html>
