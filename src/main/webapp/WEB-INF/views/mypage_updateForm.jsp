@@ -6,15 +6,6 @@
 <title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/style.css">
 
 <style>
 table, th, td {
@@ -26,6 +17,8 @@ table, th, td {
 </head>
 <body>
 
+<<<<<<< HEAD
+=======
 	<section class="ftco-section">
 
 		<div class="container">
@@ -99,6 +92,7 @@ table, th, td {
 		</nav>
 		<!-- END nav -->
 		</section>
+>>>>>>> origin/master
 	<form action="MypageUpdate" method="POST">
 		<table>
 			<tr>

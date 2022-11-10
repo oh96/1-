@@ -5,16 +5,45 @@
 <!-- 이 xml을 어떤 interface를 통해서 연결할 것인가? -->
 <mapper namespace="kr.co.gudi.dao.RouteDAO">
 
+	<select id="getDoro" resultType="String">
+	        SELECT road_address FROM location
+				WHERE loc_name = #{param1}
+	</select>
+	
+	<insert id="routeWrite"
+			useGeneratedKeys="true" 
+			keyColumn="board_idx"
+			keyProperty="board_idx"
+			parameterType="kr.co.gudi.dto.RouteDTO">
+		INSERT INTO board(cls_code, id, board_subject, board_content) 
+			VALUES (3,#{id},#{board_subject},#{board_content})
+	</insert>
+            
+    <insert id="route">
+		INSERT INTO route(board_idx,loc_idx, route_seq) VALUES (#{param1},#{param2},#{param3})
+	</insert> 
+	
 	<select id="routelist" resultType="hashmap">
-		select 
-			board_idx, board_subject, id, reg_date, hit 
-		from board where cls_code=3 
-		ORDER BY board_idx DESC 
-		limit 10 offset #{param1}
+      select 
+         board_idx, board_subject, id, reg_date, hit 
+      from board where cls_code=3 
+      ORDER BY board_idx DESC 
+      limit 10 offset #{param1}
+   </select>
+   
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board where cls_code=3
+   </select>       
+   
+   	<update id="hit" parameterType="String">
+		UPDATE board SET hit = hit+1
+		WHERE board_idx = #{board_idx}
+	</update>
+	
+	<select id="routeDetail" resultType="kr.co.gudi.dto.RouteDTO"
+		parameterType="String">
+		SELECT*FROM board WHERE board_idx = #{board_idx}
 	</select>
 	
-	
-	<select id="totalCount1" resultType="int">
-		SELECT COUNT(board_idx) FROM board where cls_code=3
-	</select>
+
 </mapper>

@@ -5,15 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/style.css">
+
 	
 <style>
 table, th, td {
@@ -25,6 +17,8 @@ table, th, td {
 </head>
 <body>
 
+<<<<<<< HEAD
+=======
 <section class="ftco-section">
 
 		<div class="container">
@@ -98,8 +92,11 @@ table, th, td {
 		</nav>
 		<!-- END nav -->
 		</section>
+>>>>>>> origin/master
 <table>
-		<a href="mypage_review?id=${detail.id}">나의 후기글 리스트</a>
+		<a href="MyreviewBridge?id=${detail.id}">나의 후기글 리스트</a>
+		<br>
+		<a href="MyrouteBridge?id=${detail.id}">나의 경로글 리스트</a>
 		<tr>
 			<th>아이디</th>
 			<td>${detail.id}</td>

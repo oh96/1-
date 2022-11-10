@@ -34,20 +34,23 @@ public class ReviewService {
 		return result;
 	}
 
-	public int reviewWrite(String id, String board_subject, String board_content, HashMap<Object, Object> params) {
+	public int reviewWrite(String id, HashMap<Object, Object> params ) {
 		logger.info("후기 쓰기 서비스");
 		
 		
-		return reviewDAO.reviewWrite(id, board_subject ,board_content);
+		return reviewDAO.reviewWrite(id, board_subject ,id);
 	}
 
 	public ReviewDTO reviewDetail(String board_idx) {
 		logger.info("상세보기 요청");
 		ReviewDTO dto = reviewDAO.reviewdetail(board_idx);
 		
+<<<<<<< HEAD
+=======
 		if (dto != null) {
 			reviewDAO.hit(board_idx);
 		}
+>>>>>>> origin/master
 		return dto;
 	}
 

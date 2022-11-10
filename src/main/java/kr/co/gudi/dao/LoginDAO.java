@@ -1,8 +1,10 @@
 package kr.co.gudi.dao;
 
+import kr.co.gudi.dto.UserDTO;
+
 public interface LoginDAO {
 
-	String login(String id, String password);
+	UserDTO login(String id, String password);
 
 	String loginchk(String id);
 

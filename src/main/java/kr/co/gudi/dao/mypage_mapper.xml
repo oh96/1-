@@ -26,12 +26,27 @@
 		WHERE id=#{id}
 	</update>
 	
-	<select id="myreview" resultType="kr.co.gudi.dto.ReviewDTO">
-		SELECT board_idx,board_subject,reg_date,hit FROM board WHERE id=#{param1} AND cls_code='2'
+	<select id="Myreview" resultType="hashmap">
+		SELECT board_idx,board_subject,reg_date,hit 
+		FROM board WHERE id=#{param1} AND cls_code='2' 
+		ORDER BY board_idx DESC limit 10 offset #{param2}
 	</select>
 	
 	<delete id="MyreviewDeleteList" >
 		DELETE from board WHERE board_idx = #{param1}
 	</delete>
 	
+	<select id="Myroute" resultType="kr.co.gudi.dto.ReviewDTO">
+		SELECT board_idx,board_subject,reg_date,hit 
+		FROM board WHERE id=#{param1} AND cls_code='3'
+	</select>
+	
+	<delete id="MyrouteDeleteList">
+		DELETE from board WHERE board_idx = #{param1}
+	</delete>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(board_idx) FROM board where id=#{param1} and cls_code=2
+	</select>
+
 </mapper>

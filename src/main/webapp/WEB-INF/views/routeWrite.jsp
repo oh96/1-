@@ -89,9 +89,8 @@
 			<input type="file"  id="file_test" name="file_test" >				
 	</div>
 	<br>
-	<div><input id="makeRoute" type="button" value="경로 만들기"></div>
-	<div id="map" style="width:50%;height:400px;margin:auto;"></div>
-	<button location.href = "loc?list=${data.path} }"></button>
+	<div><input id="makeRoute" type="button" value="작성하기"></div>
+<!-- 	<div id="map" style="width:50%;height:400px;margin:auto;"></div> -->
 <!-- 	<tr> -->
 <!-- 		<td> -->
 <!-- 			<input type="text" id="sightName" value=""> -->
@@ -409,23 +408,39 @@ $(document).on('click','#makeRoute',function() {
 	// 경로순서
 	
 	$.ajax({
-		url: 'trans',
+		url: 'routeWrite1',
 		dataType: 'json',
 		type: 'post',
 		data : {
-			sight : sight1,
 			locIdx : locIdx1,
 			content : content1,
 			loginId : loginId1,
 			title : title1
 		},
 		success: function(data) {
-			alert("Success");
+			alert("글 작성을 완료하였습니다.");
 			console.log(data);
-			//location.href="/routeDetail?data="+data;
-		
-		},
+		}
 		});
+	location.href='./whatPage?page=여행지경로';
+// 	$.ajax({
+// 		url: 'trans',
+// 		dataType: 'json',
+// 		type: 'post',
+// 		data : {
+// 			sight : sight1,
+// 			locIdx : locIdx1,
+// 			content : content1,
+// 			loginId : loginId1,
+// 			title : title1
+// 		},
+// 		success: function(data) {
+// 			alert("Success");
+// 			console.log(data);
+// 			location.href="./routeList2";
+		
+// 		},
+// 		});
 
 });
 
@@ -435,48 +450,48 @@ $(document).on('click','#makeRoute',function() {
 
 
 
-function polyshit(polypath) {
+// function polyshit(polypath) {
 	
-	var map = new naver.maps.Map('map', {
-		center : new naver.maps.LatLng(37.3674001, 127.1181196),
-		zoom: 10
-	});
+// 	var map = new naver.maps.Map('map', {
+// 		center : new naver.maps.LatLng(37.3674001, 127.1181196),
+// 		zoom: 10
+// 	});
 	
-	 var polyline = new naver.maps.Polyline({
-		 map : map,
-		 path : polypath,
-		 strokeColor : '#5347AA',
-		 strokeWeight : 2
-	 });
-	 var marker = new naver.maps.Marker({
-		    position: polypath[0],
-		    map: map
-		});
-	 var marker = new naver.maps.Marker({
-		    position: polypath[polypath.length -1],
-		    map: map
-		});
-	 var marker = new naver.maps.Marker({
-		    position: new naver.maps.LatLng(data3.Y, data3.X),
-		    map: map
-		});
-	 var marker = new naver.maps.Marker({
-		    position: new naver.maps.LatLng(data4.Y, data4.X),
-		    map: map
-		});
-	 var marker = new naver.maps.Marker({
-		    position: new naver.maps.LatLng(data5.Y, data5.X),
-		    map: map
-		});
-	 var marker = new naver.maps.Marker({
-		    position: new naver.maps.LatLng(data6.Y, data6.X),
-		    map: map
-		});
-	 var marker = new naver.maps.Marker({
-		    position: new naver.maps.LatLng(data7.Y, data7.X),
-		    map: map
-		});	 
-}
+// 	 var polyline = new naver.maps.Polyline({
+// 		 map : map,
+// 		 path : polypath,
+// 		 strokeColor : '#5347AA',
+// 		 strokeWeight : 2
+// 	 });
+// 	 var marker = new naver.maps.Marker({
+// 		    position: polypath[0],
+// 		    map: map
+// 		});
+// 	 var marker = new naver.maps.Marker({
+// 		    position: polypath[polypath.length -1],
+// 		    map: map
+// 		});
+// 	 var marker = new naver.maps.Marker({
+// 		    position: new naver.maps.LatLng(data3.Y, data3.X),
+// 		    map: map
+// 		});
+// 	 var marker = new naver.maps.Marker({
+// 		    position: new naver.maps.LatLng(data4.Y, data4.X),
+// 		    map: map
+// 		});
+// 	 var marker = new naver.maps.Marker({
+// 		    position: new naver.maps.LatLng(data5.Y, data5.X),
+// 		    map: map
+// 		});
+// 	 var marker = new naver.maps.Marker({
+// 		    position: new naver.maps.LatLng(data6.Y, data6.X),
+// 		    map: map
+// 		});
+// 	 var marker = new naver.maps.Marker({
+// 		    position: new naver.maps.LatLng(data7.Y, data7.X),
+// 		    map: map
+// 		});	 
+// }
 
 </script>
 </html>

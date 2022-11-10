@@ -1,5 +1,10 @@
 package kr.co.gudi.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,12 +24,11 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/whatPage")
-	public String whatPage(Model model, @RequestParam String page) {
+	public String whatPage(Model model,HttpServletRequest req,@RequestParam String page,@RequestParam HashMap<String, Object> params) {
 		logger.info("어떤 페이지?");
 		logger.info(page);
 		
 		model.addAttribute("page", page);
-		
 		return "main";
 	}
 

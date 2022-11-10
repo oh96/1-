@@ -23,7 +23,7 @@ public class MyPageController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired MyPageService service;
+	@Autowired MyPageService mypageservice;
 		
 	@RequestMapping(value="/MypageDetail")
 	public String MypageDetail(Model model,HttpSession session, @RequestParam String id) {
@@ -33,7 +33,7 @@ public class MyPageController {
 		if(session.getAttribute("loginId") != null) {
 		
 			MypageDTO dto= new MypageDTO();
-			dto = service.detail(id);
+			dto = mypageservice.detail(id);
 			logger.info("확인1:"+dto);
 			
 			if(dto !=null) {
@@ -59,7 +59,7 @@ public class MyPageController {
 		
 		String page="mypage_updateForm";
 		
-		MypageDTO info = service.detail(id);
+		MypageDTO info = mypageservice.detail(id);
 		model.addAttribute("info",info);
 		
 		return page;
@@ -81,7 +81,7 @@ public class MyPageController {
 		if(user_name.equals("")) {
 			logger.info("이름을 입력하세요");
 			model.addAttribute("msg","이름을 입력하세요");
-			model.addAttribute("info",params);
+			model.addAttribute("info",params);//model은 동시에 날라감
 		}else if(gender.equals("")) {
 			//logger.info("성별을 입력하세요");
 			model.addAttribute("msg","성별을 입력하세요");
@@ -96,7 +96,7 @@ public class MyPageController {
 			model.addAttribute("info",params);
 		}else {
 			//logger.info("모두 완료");
-			service.MypageUpdate(params);
+			mypageservice.MypageUpdate(params);
 			model.addAttribute("msg","모두 완료");
 			page="redirect:/MypageDetail?id="+params.get("id");
 		}
@@ -112,7 +112,7 @@ public class MyPageController {
 		
 		logger.info(id);
 		
-		service.withdraw(id);
+		mypageservice.withdraw(id);
 		
 		session.removeAttribute("loginId");
 		/*if(session.getAttribute("loginId")!=null) {
@@ -125,22 +125,24 @@ public class MyPageController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/mypage_review")
-	public String myreviewlist(@RequestParam String id) {
-		logger.info("mypage_review");
-		//logger.info(id);
+	@RequestMapping(value="/MyreviewBridge")
+	public String MyreviewBridge(@RequestParam String id) {
+		//logger.info("MyreviewBridge");
+		
 		return "mypage_review";
 	}
-	
-	@RequestMapping(value="/myreview")
+
+	@RequestMapping(value="/Myreview")
 	@ResponseBody
-	public HashMap<String, Object> myreview(Model model, @RequestParam String id) {
-		logger.info("테스트");
+	public HashMap<String, Object> Myreview(@RequestParam String id, @RequestParam int page) {
+		//logger.info("테스트");
 		logger.info(id);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		ArrayList<HashMap<String, Object>> list = service.myreview(id);
-		map.put("list", list);
-		return map;
+		logger.info(page+"");
+		//HashMap<String, Object> map = new HashMap<String, Object>();
+		//ArrayList<HashMap<String, Object>> list = service.Myreview(id);
+		//map.put("list", list);
+		
+		return mypageservice.Myreview(id, page);
 	}
 
 	@RequestMapping(value="/MyreviewDelete")
@@ -149,7 +151,7 @@ public class MyPageController {
 		(@RequestParam(value="MyreviewDeleteList[]") ArrayList<String> MyreviewDeleteList){
 		logger.info("list{}",MyreviewDeleteList);
 		
-		int cnt =service.MyreviewDelete(MyreviewDeleteList);
+		int cnt =mypageservice.MyreviewDelete(MyreviewDeleteList);
 		String msg=MyreviewDeleteList.size()+"개 요청중";
 		msg +=cnt+"개 삭제 완료";
 		
@@ -158,6 +160,41 @@ public class MyPageController {
 		
 		return map;
 	}
-
+	
+	@RequestMapping(value="/MyrouteBridge")
+	public String MyrouteBridge(@RequestParam String id) {
+		//logger.info("나의 경로글 잘넘오왔어여");
+		logger.info(id);
+		return "mypage_route";
+	}
+	
+	@RequestMapping(value="/Myroute")
+	@ResponseBody
+	public HashMap<String, Object> Myroute(Model model,@RequestParam String id){
+		//logger.info("마이루트 체크요");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<HashMap<String, Object>> list = mypageservice.Myroute(id);
+		
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/MyrouteDelete")
+	@ResponseBody
+	public HashMap<String, Object> MyrouteDelete
+		(@RequestParam(value="MyrouteDeleteList[]") ArrayList<String> MyrouteDeleteList){
+		logger.info("list{}",MyrouteDeleteList);
+		
+		int cnt =mypageservice.MyrouteDeleteList(MyrouteDeleteList);
+		String msg=MyrouteDeleteList.size()+"개 요청중";
+		msg +=cnt+"개 삭제 완료";
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", msg);
+	
+	return map;
+}
+	
 
 }

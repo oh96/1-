@@ -5,17 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/style.css">
+<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"><!-- pagenation을 위해 -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script><!-- 위에 링크 추가후 변경3.6.1.min.js->3.2.1.min.js -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> <!-- 추가 -->
 
+<script src="resources/js/jquery.twbsPagination.js"></script><!-- js폴더 밑에js파일 경로 -->
+<!-- jquery-bootstrap-jquery 순서 중요 -->
 <style>
 	table, th, tr, td{
 		border: 1px solid black;
@@ -26,6 +22,8 @@
 </head>
 <body>
 
+<<<<<<< HEAD
+=======
 	<section class="ftco-section">
 
 		<div class="container">
@@ -99,6 +97,7 @@
 		</nav>
 		<!-- END nav -->
 		</section>
+>>>>>>> origin/master
 	<div><button onclick="MyreviewDelete()">삭제</button></div>
 	<table>
 		<thead>
@@ -110,40 +109,53 @@
 			</tr>
 		</thead>
 		<tbody id="list">
-		
-		<%-- <c:forEach items="${list}" var="board">
-			<tr>
-			<td>${board.board_subject}</td>
-			<td>${board.reg_date}</td>
-			<td>${board.hit}</td>
-			</tr>
-		</c:forEach> --%>
-		 
 		</tbody>
+		<!-- 페이징 -->
+		<tr>
+			<td colspan="5" id="paging">
+				<div class="container">
+					<nav aria-label="Page navigation"><!--  style="text-align: center" -->
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+				</div>
+			</td>
+		</tr>
+		<!-- 페이징 -->
 	</table>
 </body>
 <script>
 var url=window.location.search.split('?id=')[1];//script에서는 window.location.search 라는 함수를 사용하면 url뒤에 있는 값을
-
 console.log(url);								//가져올 수 있고 split을 이용하여 ?id까지 잘라주고 [1]로 뒤에값을불러온다
-listCall();
+var showPage=1;
+listCall(showPage);
 
-
-function listCall(){
+function listCall(page){
 	console.log("테스트");
 	$.ajax({
 		type:'get',
-		url:'myreview',
-		data:{"id":url},
+		url:'Myreview',
+		data:{"id":url, "page":page},
 		dataType:'json',
 		success:function(data){
-			console.log("성공");
+			//console.log("성공");
 			console.log(data);
 			drawList(data.list);//리스트를 그려줬고
 			//플러그인 적용
+			//console.log(data.total);
+			//페이징
+			$('#pagination').twbsPagination({
+					startPage:1,//시작페이지
+					totalPages:data.total,//총페이지수
+					visiblePages:10,//기본으로 보여줄 페이지수
+					onPageClick:function(e,page){//클릭했을떄 실행내용
+					//console.log(e);
+					listCall(page);	
+				}
+			});
+			//페이징
 		},
 		error:function(e){
-			console.log("실패");
+			//console.log("실패");
 			console.log(e);
 		}
 	});
@@ -152,11 +164,16 @@ function listCall(){
 
 function drawList(list){
 	var content = '';
-	
+
+		
 	for(var i=0;i<list.length;i++){
 		content += '<tr>';
 		content +='<td><input type="checkbox" value="'+list[i].board_idx+'"/></td>';
-		content += '<td>'+list[i].board_subject+'</td>';
+		//content += '<td>'+list[i].board_subject+'</td>';
+		
+		//String num = request.getParameter("board_idx");
+		
+		content += '<td><a href="reviewDetail?board_idx='+list[i].board_idx+'">'+list[i].board_subject+'</a></td>';
 		
 		var date = new Date(list[i].reg_date);
 		content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
@@ -207,7 +224,7 @@ function MyreviewDelete(){
 				alert(data.msg);
 				//삭제가 완료되면 ajax는 기본적으로 페이지를 새로고침 하지 않는다
 				//그래서 리스트를 다시 호출해 그려야 한다.
-				listCall();
+				listCall(page);
 			}
 		},
 		error:function(e){

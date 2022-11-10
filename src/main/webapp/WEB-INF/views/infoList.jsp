@@ -16,9 +16,12 @@
 </style>
 </head>
 <body>
-	
-	<button onclick="location.href='infoWriteForm'">글쓰기</button>
-	
+	<div style="display:inline-block;">
+		<c:if test="${sessionScope.user_grade >= 1}">
+			<button onclick="location.href='./whatPage?page=여행지정보글쓰기'">글쓰기</button>
+		</c:if>
+		
+	</div>
 	<table>
 		<thead>
 			<tr>

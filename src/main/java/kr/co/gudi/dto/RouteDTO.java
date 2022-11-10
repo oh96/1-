@@ -3,7 +3,7 @@ package kr.co.gudi.dto;
 import java.sql.Date;
 
 public class RouteDTO {
-	
+
 	private int board_idx;
 	private int cls_code;
 	private String id;
@@ -11,6 +11,7 @@ public class RouteDTO {
 	private String board_content;
 	private Date reg_date;
 	private int hit;
+	
 	public int getBoard_idx() {
 		return board_idx;
 	}
@@ -53,4 +54,7 @@ public class RouteDTO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+	
+	
+
 }

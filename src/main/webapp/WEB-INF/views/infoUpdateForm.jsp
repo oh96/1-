@@ -18,21 +18,22 @@
 </style>
 </head>
 <body>
-	<form action="infoWrite" method="post"> 
+	<form action="infoUpdate" method="post">
+	<input type="hidden" name="board_idx" value="${boarddto.board_idx}"/>
 	<table>
 		<tr>
-			<td><input id="board_subject" name="title" type="text" placeholder="제목을 입력하세요" value="${location.loc_name}" readonly/></td>
+			<td><input id="board_subject" name="title" type="text" placeholder="제목을 입력하세요" value="${boarddto.board_subject}" readonly/></td>
 		</tr>
 		<tr>
-			<td><input type="file" name="photo"/><button>작성</button></td>
+			<td><input type="file" name="photo"/><button>저장</button></td>
 		</tr>
 		<tr>
-			<td><input id="location_input" placeholder="여행지를 선택하세요" value="${location.loc_name}" readonly/>
-			<input id="locationIdx_input" name="loc_idx" readonly="readonly" value="${location.loc_idx}" type="hidden" />
+			<td><input id="location_input" placeholder="여행지를 선택하세요" value="${boarddto.board_subject}" readonly/>
+			<input id="locationIdx_input" name="loc_idx" readonly="readonly" value="${loc_idx}" type="hidden" />
 			<button type="button" onclick="location_popup();">위치 찾기</button></td>
 		</tr>
 		<tr>
-			<td><textarea name="content" placeholder="내용을 입력하세요">${board.content}</textarea></td>
+			<td><textarea name="content" placeholder="내용을 입력하세요">${boarddto.board_content}</textarea></td>
 		</tr>
 	</table>
 	</form>

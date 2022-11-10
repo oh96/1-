@@ -135,7 +135,7 @@ $('#reviewWrite').click(function(){
 				dataType:'json',
 				success:function(data){
 					console.log(data);
-					location.href="./review";
+					location.href='./whatPage?page=여행지후기';
 					alert("저장");
 				},
 				error:function(e){

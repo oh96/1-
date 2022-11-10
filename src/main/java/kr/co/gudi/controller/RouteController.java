@@ -1,12 +1,10 @@
 package kr.co.gudi.controller;
 
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,15 +13,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.simple.parser.JSONParser;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.gudi.dto.RouteDTO;
 import kr.co.gudi.service.RouteService;
 
 @Controller
@@ -67,6 +66,53 @@ public class RouteController {
 		return "routeSearchPopup7";
 	}
 	
+//	@RequestMapping(value="/routeList2")
+//	public String routeList2(Model model) {
+//		
+//		String page = "여행지경로";
+//		model.addAttribute("page", page);
+//		
+//		return "main";
+//	}
+	
+	
+	@RequestMapping(value="/routeWrite1")
+	@ResponseBody
+	public HashMap<String, Object> routeWrite1(@RequestParam(value="locIdx[]") List<Integer> locIdx, 
+			@RequestParam String content, @RequestParam String loginId, @RequestParam String title) {
+		
+		Object[] locationIdx = locIdx.toArray();
+		
+		routeService.routeWrite(locationIdx, loginId, title, content);	
+		return null;
+	}
+	
+	@RequestMapping(value="/routeListCall")
+	   @ResponseBody
+	   public HashMap<String, Object> routeListCall(@RequestParam int page) {
+	      logger.info("후기 리스트 호출"+page);
+	      
+	      
+	      return routeService.routelist(page);
+	   }
+	
+	@RequestMapping(value = "/routeDetail")
+	public String reviewDetail(Model model,
+			@RequestParam String board_idx) {
+		logger.info("board_idx:{}",board_idx);
+		String page = "redirect:/";
+		RouteDTO routeDTO = routeService.routeDetail(board_idx);
+		
+		if (routeDTO != null) {
+			page = "reviewDetail";
+			model.addAttribute("board",routeDTO);
+		}
+		return page;
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/trans")
 	@ResponseBody
 	public HashMap<String, Object> trans(@RequestParam(value="sight[]") List<String> sight, @RequestParam(value="locIdx[]") List<Integer> locIdx
@@ -77,7 +123,7 @@ public class RouteController {
 		logger.info(loginId);
 		logger.info(title);
 		
-		routeService.routeWrite(loginId, title, content);
+		//routeService.routeWrite(loginId, title, content);
 		
 		Object[] sightName = sight.toArray();
 		Object[] locationIdx = locIdx.toArray();
@@ -89,7 +135,7 @@ public class RouteController {
 		for(int i=0; i<sightName.length; i++) {
 			
 			Object sight1 = sightName[i];
-			String doro = routeService.getDoro(sight1);
+					String doro = routeService.getDoro(sight1);
 			logger.info(doro);
 			
 			String clientId = "i4kv2usz7y";
@@ -242,5 +288,6 @@ public class RouteController {
 		
 		return map;
 	}
+
 
 }
