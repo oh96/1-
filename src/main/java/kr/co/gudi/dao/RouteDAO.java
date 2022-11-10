@@ -1,13 +1,19 @@
-package kr.co.gudi.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+package kr.co.gudi.dao;
 
 public interface RouteDAO {
 
+	String getDoro(Object sight1);
+
+	void routeWrite(String loginId1, String title, String content);
+
+<<<<<<< HEAD
 	
 
-	ArrayList<HashMap<String, Object>> routelist(int offset);
-
-	int totalCount1();
+	int totalCount();
 }
+=======
+
+
+}
+>>>>>>> origin/master

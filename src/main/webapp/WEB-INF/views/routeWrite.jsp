@@ -89,9 +89,8 @@
 			<input type="file"  id="file_test" name="file_test" >				
 	</div>
 	<br>
-	<div><input id="makeRoute" type="button" value="경로 만들기"></div>
-	<div id="map" style="width:50%;height:400px;margin:auto;"></div>
-	<button location.href = "loc?list=${data.path} }"></button>
+	<div><input id="makeRoute" type="button" value="작성하기"></div>
+<!-- 	<div id="map" style="width:50%;height:400px;margin:auto;"></div> -->
 <!-- 	<tr> -->
 <!-- 		<td> -->
 <!-- 			<input type="text" id="sightName" value=""> -->

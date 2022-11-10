@@ -43,6 +43,11 @@
                     <jsp:include page="reviewWriteForm.jsp" />
                 </div>
             </c:when>
+            <c:when test="${page eq '로그인폼'}">
+                <div id="main">
+                    <jsp:include page="loginForm.jsp" />
+                </div>
+            </c:when>
             <c:when test="${page eq '검색'}">
                 <div id="main">
                     <jsp:include page="search.jsp" />

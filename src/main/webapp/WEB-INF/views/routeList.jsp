@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-<button onclick="location.href='./whatPage?page=여행지경로'">글쓰기</button>
+<button onclick="routeWriteCheck();">글쓰기</button>
 <table>
 		<thead>
 			<tr>
@@ -45,7 +45,17 @@
 <script>
 var showPage = 1;
 	routeListCall(showPage);
-
+	
+	var loginId = "${sessionScope.loginId}";
+	function routeWriteCheck(){
+		if(loginId == ""){
+			alert("로그인이 필요한 서비스 입니다.");
+			location.href='./whatPage?page=로그인폼';
+		}else{
+			location.href='./whatPage?page=경로글쓰기';
+		}
+	}
+	
 	function routeListCall(page){
 		$.ajax({
 			type:'get',
