@@ -44,13 +44,11 @@ public class ReviewService {
 	public ReviewDTO reviewDetail(String board_idx) {
 		logger.info("상세보기 요청");
 		ReviewDTO dto = reviewDAO.reviewdetail(board_idx);
-		
-<<<<<<< HEAD
-=======
+
 		if (dto != null) {
 			reviewDAO.hit(board_idx);
 		}
->>>>>>> origin/master
+
 		return dto;
 	}
 
