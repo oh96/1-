@@ -6,15 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/review.jsp
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/reviewList.jsp
-=======
-=======
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
->>>>>>> origin/master:src/main/webapp/WEB-INF/views/reviewList.jsp
-
->>>>>>> 3bb61dba130f1d6811b3b6c6e823fe2c7260acbd:src/main/webapp/WEB-INF/views/review.jsp
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script src="resources/js/jquery.twbsPagination.js"></script>
 <style>

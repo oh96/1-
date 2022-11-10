@@ -1,9 +1,5 @@
 package kr.co.gudi.dto;
 
-<<<<<<< HEAD
-public class RouteDTO {
-
-=======
 import java.sql.Date;
 
 public class RouteDTO {
@@ -57,7 +53,4 @@ public class RouteDTO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	
-	
->>>>>>> origin/master
 }

@@ -1,6 +1,6 @@
 package kr.co.gudi.controller;
 
-<<<<<<< HEAD
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -15,10 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.simple.parser.JSONParser;
-=======
-import java.util.HashMap;
 
->>>>>>> origin/master
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.gudi.service.RouteService;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 @Controller
 public class RouteController {
 	
@@ -40,7 +33,6 @@ public class RouteController {
 	
 	@Autowired RouteService routeService;
 	
-<<<<<<< HEAD
 	@RequestMapping(value="/routeWrite")
 	public String main() {
 		return "routeWrite";
@@ -75,18 +67,6 @@ public class RouteController {
 		return "routeSearchPopup7";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value="/trans")
 	@ResponseBody
 	public HashMap<String, Object> trans(@RequestParam(value="sight[]") List<String> sight, @RequestParam(value="locIdx[]") List<Integer> locIdx
@@ -109,7 +89,7 @@ public class RouteController {
 		for(int i=0; i<sightName.length; i++) {
 			
 			Object sight1 = sightName[i];
-					String doro = routeService.getDoro(sight1);
+			String doro = routeService.getDoro(sight1);
 			logger.info(doro);
 			
 			String clientId = "i4kv2usz7y";
@@ -263,19 +243,4 @@ public class RouteController {
 		return map;
 	}
 
-=======
-	
-	@RequestMapping(value = "/routeListCall")
-	@ResponseBody
-	public HashMap<String, Object> routeListCall(@RequestParam int page){
-		logger.info("경로 리스트 호출"+page);
-		
-		
-		return routeService.routelist(page);
-	}
-	
-	
-	
-	
->>>>>>> origin/master
 }

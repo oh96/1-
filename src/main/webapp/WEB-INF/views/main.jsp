@@ -54,43 +54,6 @@
                 </div>
             </c:otherwise>
         </c:choose>
-                
-        
-<<<<<<< HEAD
-=======
-		<c:choose>
-			<c:when test="${page eq '여행지정보'}">
-				<div id="main">
-            		<jsp:include page="infoList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '여행지후기'}">
-				<div id="main">
-            		<jsp:include page="reviewList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '여행지경로'}">
-				<div id="main">
-            		<jsp:include page="routeList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '공지'}">
-				<div id="main">
-            		<jsp:include page="noticeList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '후기글쓰기'}">
-				<div id="main">
-            		<jsp:include page="reviewWriteForm.jsp" />
-        		</div>
-			</c:when>
-			<c:otherwise>
-				<div id="main">
-            		<jsp:include page="home.jsp" />
-        		</div>
-			</c:otherwise>
-		</c:choose> 
->>>>>>> 3bb61dba130f1d6811b3b6c6e823fe2c7260acbd
     </div>
 </body>
 <script>
