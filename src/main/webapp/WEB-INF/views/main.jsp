@@ -16,47 +16,6 @@
         <div id="header">
             <jsp:include page="header.jsp" />
         </div>
-<<<<<<< HEAD
-        
-		<c:choose>
-			<c:when test="${page eq '여행지정보'}">
-				<div id="main">
-            		<jsp:include page="locInfoList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '여행지후기'}">
-				<div id="main">
-            		<jsp:include page="review.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '여행지경로'}">
-				<div id="main">
-            		<jsp:include page="routeList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '공지'}">
-				<div id="main">
-            		<jsp:include page="noticeList.jsp" />
-        		</div>
-			</c:when>
-			<c:when test="${page eq '후기글쓰기'}">
-				<div id="main">
-            		<jsp:include page="reviewWriteForm.jsp" />
-        		</div>
-			</c:when>
-			
-
-			
-			
-			
-			<c:otherwise>
-				<div id="main">
-            		<jsp:include page="home.jsp" />
-        		</div>
-			</c:otherwise>
-		</c:choose> 
-=======
-        <div></div>
         <c:choose>
             <c:when test="${page eq '여행지정보'}">
                 <div id="main">
@@ -83,6 +42,12 @@
                     <jsp:include page="reviewWriteForm.jsp" />
                 </div>
             </c:when>
+            <c:when test="${page eq '경로글쓰기'}">
+                <div id="main">
+                    <jsp:include page="routeWrite.jsp" />
+                </div>
+            </c:when>
+
             <c:when test="${page eq '로그인폼'}">
                 <div id="main">
                     <jsp:include page="loginForm.jsp" />
@@ -109,7 +74,6 @@
                 </div>
             </c:otherwise>
         </c:choose>
->>>>>>> origin/master
     </div>
 </body>
 <script>

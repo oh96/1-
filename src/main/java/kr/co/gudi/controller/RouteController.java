@@ -17,10 +17,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.gudi.dto.RouteDTO;
 import kr.co.gudi.service.RouteService;
 
 @Controller
@@ -33,15 +35,6 @@ public class RouteController {
 	@RequestMapping(value="/routeWrite")
 	public String main() {
 		return "routeWrite";
-	}
-	
-	@RequestMapping(value="/routeListCall")
-	@ResponseBody
-	public HashMap<String, Object> routeListCall(@RequestParam int page) {
-		logger.info("후기 리스트 호출"+page);
-		
-		
-		return routeService.routelist(page);
 	}
 	
 	@RequestMapping(value="/routeSearchPopup1")
@@ -73,14 +66,49 @@ public class RouteController {
 		return "routeSearchPopup7";
 	}
 	
+//	@RequestMapping(value="/routeList2")
+//	public String routeList2(Model model) {
+//		
+//		String page = "여행지경로";
+//		model.addAttribute("page", page);
+//		
+//		return "main";
+//	}
 	
 	
+	@RequestMapping(value="/routeWrite1")
+	@ResponseBody
+	public HashMap<String, Object> routeWrite1(@RequestParam(value="locIdx[]") List<Integer> locIdx, 
+			@RequestParam String content, @RequestParam String loginId, @RequestParam String title) {
+		
+		Object[] locationIdx = locIdx.toArray();
+		
+		routeService.routeWrite(locationIdx, loginId, title, content);	
+		return null;
+	}
 	
+	@RequestMapping(value="/routeListCall")
+	   @ResponseBody
+	   public HashMap<String, Object> routeListCall(@RequestParam int page) {
+	      logger.info("후기 리스트 호출"+page);
+	      
+	      
+	      return routeService.routelist(page);
+	   }
 	
-	
-	
-	
-	
+	@RequestMapping(value = "/routeDetail")
+	public String reviewDetail(Model model,
+			@RequestParam String board_idx) {
+		logger.info("board_idx:{}",board_idx);
+		String page = "redirect:/";
+		RouteDTO routeDTO = routeService.routeDetail(board_idx);
+		
+		if (routeDTO != null) {
+			page = "reviewDetail";
+			model.addAttribute("board",routeDTO);
+		}
+		return page;
+	}
 	
 	
 	
@@ -95,9 +123,7 @@ public class RouteController {
 		logger.info(loginId);
 		logger.info(title);
 		
-		String loginId1 = "aor131";
-		
-		routeService.routeWrite(loginId1, title, content);
+		//routeService.routeWrite(loginId, title, content);
 		
 		Object[] sightName = sight.toArray();
 		Object[] locationIdx = locIdx.toArray();

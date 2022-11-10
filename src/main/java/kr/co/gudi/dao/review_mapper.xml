@@ -36,12 +36,12 @@
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(board_idx) FROM board where cls_code=2
 	</select>
-<<<<<<< HEAD
+
 	
-=======
+
 	<update id="hit" parameterType="String">
 		UPDATE board SET hit = hit+1
 		WHERE board_idx = #{board_idx}
 	</update>
->>>>>>> origin/master
+
 </mapper>
