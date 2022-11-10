@@ -3,8 +3,6 @@ package kr.co.gudi.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +26,9 @@ public class SearchController {
 	public String totalSearch(Model model, @RequestParam String searchContent) {
 		logger.info("전체 검색 페이지 요청");
 		logger.info(searchContent);
-		model.addAttribute("searchContent", searchContent);
-		
-		return "search";
+		//model.addAttribute("searchContent", searchContent);
+		String page = "검색";
+		return "redirect:/whatPage?page="+page;
 	}
 	
 	@RequestMapping(value="/searchListCall")
@@ -40,9 +38,22 @@ public class SearchController {
 		logger.info(searchContent);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<BoardDTO> searchList = searchService.searchList(searchContent);
+		//logger.info(searchList+"");
 		map.put("searchList", searchList);
 		
 		return map;
+	}
+	
+	@RequestMapping(value="/SearchGo")
+	public String SearchGo(Model model, @RequestParam String searchContent) {
+		logger.info("전체 검색 페이지 요청");
+		logger.info(searchContent);
+		//model.addAttribute("searchContent", searchContent);
+		String page = "검색";
+		model.addAttribute("page", page);
+		model.addAttribute("searchContent", searchContent);
+		
+		return "main";
 	}
 	
 }

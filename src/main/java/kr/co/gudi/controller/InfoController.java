@@ -165,6 +165,29 @@ public class InfoController {
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	
+	/*
+	 * 글 수정 
+	 */
+	
+	@RequestMapping(value="/infoUpdateForm")
+	public String infoUpdateForm(Model model, @RequestParam String idx) {
+		logger.info("수정 요청");
+		//infoservice.infoDetail(idx,model,"infoUpdateForm");
+		return "infoUpdateForm";
+	}
+	
+	
+	@RequestMapping(value="/infoUpdate")
+	public String infoUpdate(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
+		logger.info("update params: "+params);
+		return infoservice.infoUpdate(photo,params);
+	}
+	
+	
+>>>>>>> origin/master
 }
 
 

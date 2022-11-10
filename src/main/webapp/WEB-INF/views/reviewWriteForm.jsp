@@ -83,7 +83,7 @@ textarea {
 			</tr>
 			<tr>
 				<td colspan="2" class="btn_area">
-					<button type="button" onclick="location.href='review'">리스트</button>
+					<button type="button" onclick="location.href='./whatPage?page=여행지후기'">리스트</button>
 					<button id="reviewWrite">저장</button>
 				</td>
 			</tr>
