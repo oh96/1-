@@ -23,4 +23,6 @@ public interface ReviewDAO {
 
 	int totalCount();
 
+	void hit(String board_idx);
+
 }

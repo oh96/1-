@@ -21,7 +21,7 @@ import kr.co.gudi.service.ReviewService;
 @Controller
 public class ReviewController {
 
-	private static final String String = null;
+	
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -36,11 +36,7 @@ public class ReviewController {
 	@ResponseBody
 	public HashMap<String, Object> reviewListCall(@RequestParam int page) {
 		logger.info("후기 리스트 호출"+page);
-		HashMap<String, Object> map 
-			= new HashMap<String, Object>();
 		
-		//ArrayList<ReviewDTO> list = reviewService.list();
-		//map.put("list", list);
 		
 		return reviewService.list(page);
 	}
@@ -115,7 +111,7 @@ public class ReviewController {
 	public String reviewDelete(@RequestParam String board_idx) {
 		logger.info("삭제 요청"+board_idx);
 		reviewService.reviewDelete(board_idx);
-		return "redirect:/review";
+		return "redirect:/reviewList";
 	}
 }
 
