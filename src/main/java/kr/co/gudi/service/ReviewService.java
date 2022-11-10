@@ -34,12 +34,12 @@ public class ReviewService {
 		return result;
 	}
 
-	public int reviewWrite(String id, HashMap<Object, Object> params ) {
-		logger.info("후기 쓰기 서비스");
-		
-		
-		return reviewDAO.reviewWrite(id, board_subject ,id);
-	}
+	public HashMap<String, Object> reviewWrite(String id, String subject, String content) {
+	      logger.info("후기쓰기");
+	      return reviewDAO.reviewWrite(id, subject, content);
+	      
+	      
+	   }
 
 	public ReviewDTO reviewDetail(String board_idx) {
 		logger.info("상세보기 요청");

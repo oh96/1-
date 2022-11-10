@@ -8,18 +8,18 @@ import kr.co.gudi.dto.RouteDTO;
 
 public interface RouteDAO {
 
-	String getDoro(Object sight1);
+   String getDoro(Object sight1);
 
-	void routeWrite(RouteDTO dto);
+   void routeWrite(RouteDTO dto);
 
-	void route(int board_idx, Object locationIdx, int routeSeq);
+   void route(int board_idx, Object locationIdx, int routeSeq);
 
-	int totalCount();
+   int totalCount();
 
-	ArrayList<HashMap<String, Object>> routelist(int offset);
-	
-	RouteDTO routeDetail(String idx);
-	
-	void hit(String board_idx);
+   ArrayList<HashMap<String, Object>> routelist(int offset);
+   
+   RouteDTO routeDetail(String idx);
+   
+   void hit(String board_idx);
 
 }
