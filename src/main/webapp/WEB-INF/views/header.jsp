@@ -16,6 +16,7 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css">
+	
 <style></style>
 </head>
 <body>
@@ -71,27 +72,33 @@
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="fa fa-bars"></span> Menu
 				</button>
-				<form action="totalSearch" class="searchform order-lg-last">
-					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
-						<button type="submit" placeholder="" class="form-control search">
+				<div class="searchform order-lg-last">
+					<form action="SearchGo" class="form-group d-flex">
+						<input type="text" class="form-control pl-3" placeholder="Search" id="searchInput" name="searchContent">
+						<button id="searchBtn" placeholder="" class="form-control search">
 							<span class="fa fa-search"></span>
 						</button>
-					</div>
-				</form>
+					</form>
+				</div>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav mr-auto">
 						
-						<li class="nav-item"><a href="./whatPage?page=여행지정보" class="nav-link">여행지 정보</a></li>
-						<li class="nav-item"><a href="./whatPage?page=여행지후기" class="nav-link">여행지 후기</a></li>
-						<li class="nav-item"><a href="./whatPage?page=여행지경로" class="nav-link">여행지 경로</a></li>
-						<li class="nav-item"><a href="./whatPage?page=공지" class="nav-link">공지</a></li>
+						<li class="nav-item <c:if test="${page eq '여행지정보'}">active</c:if>">
+							<a href="./whatPage?page=여행지정보" class="nav-link">여행지 정보</a>
+						</li>
+						<li class="nav-item <c:if test="${page eq '여행지후기'}">active</c:if>">
+							<a href="./whatPage?page=여행지후기" class="nav-link">여행지 후기</a></li>
+						<li class="nav-item <c:if test="${page eq '여행지경로'}">active</c:if>">
+							<a href="./whatPage?page=여행지경로" class="nav-link">여행지 경로</a>
+						</li>
+						<li class="nav-item <c:if test="${page eq '공지'}">active</c:if>">
+							<a href="./whatPage?page=공지" class="nav-link">공지</a>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<!-- END nav -->
-
 	</section>
 
 	<script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
@@ -101,5 +108,44 @@
 
 </body>
 <script>
+	/*
+	$("#searchBtn").click(function(){
+		console.log($("#searchInput").val());
+		$.ajax({
+			type:'get',
+			url:'searchListCall',
+			data:{
+				'searchContent':$("#searchInput").val()
+			},
+			dataType:'JSON',
+			success:function(data){
+				console.log(data);
+				location.href="./whatPage?page=검색";
+			},
+			error:function(e){
+				console.log(data);
+			}
+		});
+	});*/
+	/*
+	$("#searchBtn").click(function(){
+		//console.log($("#searchInput").val());
+		$.ajax({
+			type:'get',
+			url:'searchListCall',
+			data:{
+				'searchContent':$("#searchInput").val()
+			},
+			dataType:'JSON',
+			success:function(data){
+				console.log(data.searchList);
+				location.href="./whatPage?page=검색";
+			},
+			error:function(e){
+				console.log(data);
+			}
+		});
+	});
+	*/
 </script>
 </html>

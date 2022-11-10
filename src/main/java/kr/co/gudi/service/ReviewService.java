@@ -44,6 +44,10 @@ public class ReviewService {
 	public ReviewDTO reviewDetail(String board_idx) {
 		logger.info("상세보기 요청");
 		ReviewDTO dto = reviewDAO.reviewdetail(board_idx);
+		
+		if (dto != null) {
+			reviewDAO.hit(board_idx);
+		}
 		return dto;
 	}
 

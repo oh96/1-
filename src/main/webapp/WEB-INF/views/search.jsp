@@ -6,15 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/style.css">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<script src="resources/js/jquery.twbsPagination.js"></script>
 <style>
 	table, th, tr, td{
 		border: 1px solid black;
@@ -24,6 +17,8 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
+=======
 <section class="ftco-section">
 
 		<div class="container">
@@ -104,6 +99,7 @@
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
+>>>>>>> 3bb61dba130f1d6811b3b6c6e823fe2c7260acbd
 	<select id="sl1" name="category" onchange="chageLangSelect()">
 		<option value="total" selected>통합</option>
 		<option value="info">여행지 정보</option>

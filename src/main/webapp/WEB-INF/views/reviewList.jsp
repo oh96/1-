@@ -6,12 +6,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<<<<<<< HEAD
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+=======
 <<<<<<< HEAD:src/main/webapp/WEB-INF/views/review.jsp
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/reviewList.jsp
+=======
 =======
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 >>>>>>> origin/master:src/main/webapp/WEB-INF/views/reviewList.jsp
 
+>>>>>>> 3bb61dba130f1d6811b3b6c6e823fe2c7260acbd:src/main/webapp/WEB-INF/views/review.jsp
+>>>>>>> origin/master
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script src="resources/js/jquery.twbsPagination.js"></script>
 <style>
@@ -23,10 +30,15 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
+
+<button onclick="revieWriteCheck();">글쓰기</button>
+=======
 <!-- <button onclick="location.href='./reviewWriteForm'">글쓰기</button> -->
 
 <button onclick="reviewWriteCheck();">글쓰기</button>
 
+>>>>>>> origin/master
 
 	<table>
 		<thead>
@@ -57,10 +69,25 @@
 </body>
 <script>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
 var showPage = 1;
 	reviewListCall(showPage);
 	
 	var loginId = "${sessionScope.loginId}";
+<<<<<<< HEAD
+	function revieWriteCheck(){
+		if(loginId == ""){
+			alert("로그인이 필요한 서비스 입니다.");
+			location.href='./whatPage?page=로그인폼';
+		}else{
+			location.href='./whatPage?page=후기글쓰기';
+		}
+	}
+	
+=======
 	
  	 function reviewWriteCheck() {
 		 	//console.log(loginId);
@@ -72,6 +99,7 @@ var showPage = 1;
 				}			
 		} 
  	 
+>>>>>>> origin/master
 	function reviewListCall(page){
 		$.ajax({
 			type:'get',
