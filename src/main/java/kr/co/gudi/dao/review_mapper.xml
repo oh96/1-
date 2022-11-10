@@ -41,5 +41,5 @@
 		UPDATE board SET hit = hit+1
 		WHERE board_idx = #{board_idx}
 	</update>
->>>>>>> origin/master
+
 </mapper>

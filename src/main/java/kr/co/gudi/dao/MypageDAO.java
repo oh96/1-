@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.co.gudi.dto.MypageDTO;
+import kr.co.gudi.dto.ReviewDTO;
 
 public interface MypageDAO {
 

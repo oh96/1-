@@ -10,14 +10,15 @@
 				WHERE loc_name = #{param1}
 	</select>
 	
-<<<<<<< HEAD
+
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(board_idx) FROM board where cls_code=3
-=======
+	</select>
+
 	<select id="routeWrite">
 		    INSERT INTO board(cls_code, id, board_subject, board_content) 
 				VALUES(3,#{param1},#{param2},#{param3})  
->>>>>>> origin/master
+
 	</select>
             
 

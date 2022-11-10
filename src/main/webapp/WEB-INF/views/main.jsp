@@ -16,17 +16,16 @@
         <div id="header">
             <jsp:include page="header.jsp" />
         </div>
-<<<<<<< HEAD
         
 		<c:choose>
 			<c:when test="${page eq '여행지정보'}">
 				<div id="main">
-            		<jsp:include page="locInfoList.jsp" />
+            		<jsp:include page="infoList.jsp" />
         		</div>
 			</c:when>
 			<c:when test="${page eq '여행지후기'}">
 				<div id="main">
-            		<jsp:include page="review.jsp" />
+            		<jsp:include page="reviewList.jsp" />
         		</div>
 			</c:when>
 			<c:when test="${page eq '여행지경로'}">
@@ -44,10 +43,7 @@
             		<jsp:include page="reviewWriteForm.jsp" />
         		</div>
 			</c:when>
-			
 
-			
-			
 			
 			<c:otherwise>
 				<div id="main">
@@ -55,7 +51,7 @@
         		</div>
 			</c:otherwise>
 		</c:choose> 
-=======
+
         <div></div>
         <c:choose>
             <c:when test="${page eq '여행지정보'}">
@@ -109,7 +105,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
->>>>>>> origin/master
+
     </div>
 </body>
 <script>

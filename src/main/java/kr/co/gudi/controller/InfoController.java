@@ -176,7 +176,7 @@ public class InfoController {
 	 * 글 수정 
 	 */
 	
-<<<<<<< HEAD
+
 	@RequestMapping(value="/infoUpdateForm")
 	public String infoUpdateForm(Model model, @RequestParam String idx) {
 		logger.info("수정 요청");
@@ -192,8 +192,6 @@ public class InfoController {
 	}
 	
 	
-=======
->>>>>>> origin/master
 }
 
 
