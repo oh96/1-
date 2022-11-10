@@ -16,9 +16,16 @@ public interface MypageDAO {
 
 	void withdraw(String id);
 
-	ArrayList<HashMap<String, Object>> myreview(String id);
+	ArrayList<ReviewDTO> Myreview(String id, int offset);
+
+	int totalCount(String id);
 
 	int MyreviewDeleteList(String board_idx);
+
+	ArrayList<HashMap<String, Object>> Myroute(String id);
+
+	int MyrouteDeleteList(String board_idx);
+
 
 	
 

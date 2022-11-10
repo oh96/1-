@@ -133,7 +133,7 @@ public class InfoService {
 	/*
 	 * 여행지 정보 상세보기
 	 */
-	public BoardDTO infoDetail(String board_idx, Model model) {
+	public BoardDTO infoDetail(String board_idx) {
 		logger.info("여행지 상세보기 서비스");
 		
 		return infodao.infoDetail(board_idx);

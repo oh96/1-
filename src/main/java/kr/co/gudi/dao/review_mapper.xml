@@ -36,4 +36,5 @@
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(board_idx) FROM board where cls_code=2
 	</select>
+	
 </mapper>

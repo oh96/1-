@@ -45,6 +45,11 @@
             		<jsp:include page="reviewWriteForm.jsp" />
         		</div>
 			</c:when>
+			
+
+			
+			
+			
 			<c:otherwise>
 				<div id="main">
             		<jsp:include page="home.jsp" />

@@ -147,7 +147,7 @@ public class InfoController {
 	@RequestMapping(value="/infoUpdateForm")
 	public String infoUpdateForm(Model model, @RequestParam String idx) {
 		logger.info("수정 요청");
-		infoservice.infoDetail(idx,model,"infoUpdateForm");
+		infoservice.infoDetail(idx);
 		return "infoUpdateForm";
 	}
 	
