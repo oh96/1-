@@ -1,6 +1,5 @@
 package kr.co.gudi.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +26,10 @@ public class ReviewController {
 	
 	@Autowired ReviewService reviewService;
 	
-	@RequestMapping(value="/review")
-	public String reviewList() {
-		return "review";
-	}
+	/*
+	 * @RequestMapping(value="/review") public String reviewList() { return
+	 * "review"; }
+	 */
 	
 	@RequestMapping(value="/reviewListCall")
 	@ResponseBody
@@ -66,7 +65,7 @@ public class ReviewController {
 		//logger.info(params.get("basic").getClass().getName());
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("loginId");
-		reviewService.reviewWrite(id, params);
+		//reviewService.reviewWrite(id, params);
 		
 		return map;
 	}

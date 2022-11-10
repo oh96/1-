@@ -2,11 +2,8 @@ package kr.co.gudi.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import kr.co.gudi.dto.MypageDTO;
-import kr.co.gudi.dto.ReviewDTO;
 
 public interface MypageDAO {
 
