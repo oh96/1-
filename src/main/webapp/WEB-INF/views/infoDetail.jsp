@@ -18,7 +18,7 @@
 	</div>
 	<div id="infoSubject">
 		<h3>${boarddto.board_subject}</h3>
-		<button type="button" onclick="location.href='infoUpdateForm'">수정</button>
+		<button type="button" onclick="location.href='infoUpdateForm?board_idx=${boarddto.board_idx}'">수정</button>
 		<span>작성자 : ${boarddto.id}</span>
 	</div>
 	<hr>
@@ -28,7 +28,7 @@
 	<div>
 		${boarddto.board_content}
 	</div>
-	<button type="button" onclick="location.href='placeInfo'">목록</button>
+	<button type="button" onclick="location.href='infoList'">목록</button>
 </body>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

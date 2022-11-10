@@ -68,6 +68,32 @@ public class InfoController {
 
 	
 	/*
+	 * 글 수정 
+	 */
+	
+	@RequestMapping(value="/infoUpdateForm")
+	public String infoUpdateForm(Model model, @RequestParam String board_idx) {
+		logger.info("수정 요청");
+		BoardDTO boarddto = infoservice.infoDetail(board_idx,model);
+		model.addAttribute("boarddto",boarddto);
+		return "infoUpdateForm";
+	}
+
+	
+	@RequestMapping(value="/infoUpdate")
+	public String infoUpdate(Model model, MultipartFile photo,@RequestParam HashMap<String, String> params, 
+			HttpServletRequest req, @RequestParam(value="id", required=false) String id) {
+		logger.info("update params: "+params);
+		HttpSession session = req.getSession();
+		id = (String) session.getAttribute("loginId");
+		logger.info("id: "+id);
+		infoservice.infoUpdate(photo,params,id);
+		return "infoDetail?board_idx="+params.get("board_idx");
+	}
+	
+	
+	
+	/*
 	 * 여행지 리스트 
 	 */
 	@RequestMapping(value="/infoListCall")
@@ -95,7 +121,7 @@ public class InfoController {
 	@RequestMapping(value="/infoDetail")
 	public String infoDetail(Model model, @RequestParam String board_idx) {
 		logger.info("상세보기 컨트롤러");
-		BoardDTO boarddto = infoservice.infoDetail(board_idx,model);
+		BoardDTO boarddto = infoservice.infoDetail(board_idx, model);
 		LocateDTO locatedto = infoservice.call_xy(board_idx);
 		
 		model.addAttribute("boarddto", boarddto);
@@ -136,26 +162,6 @@ public class InfoController {
 		map.put("list", infoservice.searchPlace(keyword));
 		
 		return map;
-	}
-	
-	
-	
-	/*
-	 * 글 수정 
-	 */
-	
-	@RequestMapping(value="/infoUpdateForm")
-	public String infoUpdateForm(Model model, @RequestParam String idx) {
-		logger.info("수정 요청");
-		infoservice.infoDetail(idx,model,"infoUpdateForm");
-		return "infoUpdateForm";
-	}
-	
-	
-	@RequestMapping(value="/infoUpdate")
-	public String infoUpdate(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
-		logger.info("update params: "+params);
-		return infoservice.infoUpdate(photo,params);
 	}
 	
 	

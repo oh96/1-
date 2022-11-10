@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div style="display:inline-block;">
-		<button onclick="location.href='infoWriteForm'">글쓰기</button>
+		<button onclick="location.href='./whatPage?page=여행지정보글쓰기'">글쓰기</button>
 	</div>
 	<table>
 		<thead>
