@@ -170,7 +170,11 @@ public class MyPageController {
 	
 	@RequestMapping(value="/Myroute")
 	@ResponseBody
+<<<<<<< HEAD
 	public HashMap<String, Object> Myroute(@RequestParam String id){
+=======
+	public HashMap<String, Object> Myroute(Model model,@RequestParam String id){
+>>>>>>> origin/master
 		//logger.info("마이루트 체크요");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<HashMap<String, Object>> list = mypageservice.Myroute(id);

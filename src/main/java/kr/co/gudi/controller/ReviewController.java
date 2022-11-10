@@ -57,7 +57,11 @@ public class ReviewController {
 	public HashMap<String, Object> reviewWrite(Model model, 
 				HttpServletRequest req, 
 				@RequestParam HashMap<Object, Object> params) {
+<<<<<<< HEAD
 		//String page = ""
+=======
+		String page = "";
+>>>>>>> origin/master
 		//int row = reviewService.reviewWrite(id, params, sbject, );
 		logger.info("후기 쓰기 요청");
 		logger.info(params+"");
@@ -66,7 +70,7 @@ public class ReviewController {
 		String id = (String) session.getAttribute("loginId");
 		reviewService.reviewWrite(id, params);
 		
-		return map;
+		return null;
 	}
 	
 	@RequestMapping(value = "/reviewDetail")

@@ -37,6 +37,11 @@
 		SELECT COUNT(board_idx) FROM board where cls_code=2
 	</select>
 
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> origin/master
 	<update id="hit" parameterType="String">
 		UPDATE board SET hit = hit+1
 		WHERE board_idx = #{board_idx}
