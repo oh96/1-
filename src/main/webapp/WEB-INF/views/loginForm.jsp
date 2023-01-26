@@ -19,11 +19,11 @@
 		<table>
 			<tr>
 				<th>ID</th>
-				<td><input type="text" name="id"></td>
+				<td><input type="text" name="id" value="${id}"></td>
 			</tr>
 			<tr>
 				<th>PW</th>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password" value="${password}"></td>
 			</tr>
 			<tr>
 				<th colspan="2">

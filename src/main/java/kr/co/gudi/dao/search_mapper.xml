@@ -6,5 +6,94 @@
 <mapper namespace="kr.co.gudi.dao.SearchDAO">
 	<select id="searchList" resultType="kr.co.gudi.dto.BoardDTO">
 		select * from board where board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="totalCount" resultType="int">
+      select count(board_idx) from board where board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%')
+   </select>
+   
+   <select id="detailSearch11" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total11" resultType="int">
+		select count(board_idx) from board where board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch12" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where board_subject like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total12" resultType="int">
+		select count(board_idx) from board where board_subject like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch13" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where id like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total13" resultType="int">
+		select count(board_idx) from board where id like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch21" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 1 and (board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%'))
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total21" resultType="int">
+		select count(board_idx) from board where cls_code = 1 and (board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%'))
+	</select>
+	<select id="detailSearch22" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 1 and board_subject like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total22" resultType="int">
+		select count(board_idx) from board where cls_code = 1 and board_subject like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch23" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 1 and id like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total23" resultType="int">
+		select count(board_idx) from board where cls_code = 1 and id like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch31" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 2 and (board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%'))
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total31" resultType="int">
+		select count(board_idx) from board where cls_code = 2 and (board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%'))
+	</select>
+	<select id="detailSearch32" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 2 and board_subject like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total32" resultType="int">
+		select count(board_idx) from board where cls_code = 2 and board_subject like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch33" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 2 and id like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total33" resultType="int">
+		select count(board_idx) from board where cls_code = 2 and id like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch41" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 3 and (board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%'))
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total41" resultType="int">
+		select count(board_idx) from board where cls_code = 3 and (board_subject like CONCAT('%',#{param1},'%') or board_content like CONCAT('%',#{param1},'%'))
+	</select>
+	<select id="detailSearch42" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 3 and board_subject like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total42" resultType="int">
+		select count(board_idx) from board where cls_code = 3 and board_subject like CONCAT('%',#{param1},'%')
+	</select>
+	<select id="detailSearch43" resultType="kr.co.gudi.dto.BoardDTO">
+		select * from board where cls_code = 3 and id like CONCAT('%',#{param1},'%')
+		ORDER BY board_idx DESC limit 10 offset #{param2}
+	</select>
+	<select id="total43" resultType="int">
+		select count(board_idx) from board where cls_code = 3 and id like CONCAT('%',#{param1},'%')
 	</select>
 </mapper>

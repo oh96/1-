@@ -20,9 +20,10 @@ public class JoinController {
 	@Autowired JoinService joinService;
 	
 	@RequestMapping(value="joinForm")
-	public String joinForm() {
+	public String joinForm(Model model) {
 		
-		return "joinForm";
+		model.addAttribute("page","회원가입");
+		return "main";
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)

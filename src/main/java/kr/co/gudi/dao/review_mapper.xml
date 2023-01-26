@@ -5,41 +5,75 @@
 <!-- 이 xml을 어떤 interface를 통해서 연결할 것인가? -->
 <mapper namespace="kr.co.gudi.dao.ReviewDAO">
 
-	<select id="list" resultType="hashmap">
-		select 
-			board_idx, board_subject, id, reg_date, hit 
-		from board where cls_code=2 
-		ORDER BY board_idx DESC 
-		limit 10 offset #{param1}
-	</select>
-	
-	<insert id="reviewWrite">
-		insert into board(cls_code, id, board_subject, board_content)
-		values (2,#{param1},#{param2},#{param3})
-	</insert>
-	
-	<select id="reviewdetail" resultType="kr.co.gudi.dto.ReviewDTO"
-		parameterType="String">
-		SELECT*FROM board WHERE board_idx = #{board_idx}
-	</select>
-	
-	<update id="reviewUpdate" parameterType="hashmap">
-		UPDATE board SET
-			board_subject = #{board_subject}
-			,id =#{id}
-			,board_content = #{board_content}
-		WHERE board_idx = #{board_idx}
-	</update>
-	<delete id="reviewDelete" parameterType="String">
-		DELETE FROM board WHERE board_idx = #{board_idx} 
-	</delete>
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(board_idx) FROM board where cls_code=2
-	</select>
+   <select id="list" resultType="hashmap">
+      select 
+         board_idx, board_subject, id, reg_date, hit 
+      from board where cls_code=2 
+      ORDER BY board_idx DESC 
+      limit 10 offset #{param1}
+   </select>
+   
+   <insert id="reviewWrite" 
+      useGeneratedKeys="true" 
+         keyColumn="board_idx"
+         keyProperty="board_idx"
+         parameterType="kr.co.gudi.dto.ReviewDTO">
+      insert into board(cls_code, id, board_subject, board_content)
+      values (2,#{id},#{board_subject},#{board_content})
+   </insert>
+   
+   <insert id="review_info">
+      INSERT INTO trip_review(board_idx,loc_idx) VALUES (#{param1},#{param2})
+   </insert>
+   
+   <select id="reviewDetail" resultType="kr.co.gudi.dto.BoardDTO"
+      parameterType="String">
+      SELECT*FROM board WHERE board_idx = #{board_idx}
+   </select>
+   <select id = "getLoc" resultType="String">
+      SELECT loc_idx FROM trip_review where board_idx = #{param1}
+   </select>
+   
+   <update id="reviewUpdate" parameterType="String">
+      UPDATE board SET
+         board_subject = #{param2}
+         ,board_content = #{param3}
+      WHERE board_idx = #{param1}
+   </update>
+   
+   <update id="reviewLocUpdate">
+      UPDATE trip_review SET
+         loc_idx = #{param2}
+          WHERE  board_idx = #{param1}
+   </update>
+   
+   <delete id="reviewDelete" parameterType="String">
+      DELETE FROM board WHERE board_idx = #{param1} 
+   </delete>
+   <delete id="reviewLocDelete">
+      DELETE FROM trip_review WHere board_idx = #{param1}
+   </delete>
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board where cls_code=2
+   </select>
 
-	<update id="hit" parameterType="String">
-		UPDATE board SET hit = hit+1
-		WHERE board_idx = #{board_idx}
-	</update>
+   <update id="hit" parameterType="String">
+      UPDATE board SET hit = hit+1
+      WHERE board_idx = #{board_idx}
+   </update>
+   
+   <select id="reviewListPop" parameterType="map" resultType="kr.co.gudi.dto.LocateDTO">
+      SELECT loc_idx,loc_name,road_address FROM location order by loc_idx limit 10 offset ${offset}
+   </select>
+   
+    <select id="reviewsearchPlace" parameterType="String" resultType="kr.co.gudi.dto.LocateDTO">
+      SELECT loc_idx,loc_name,road_address FROM location 
+         WHERE loc_name LIKE CONCAT('%', #{keyword}, '%')
+   </select>
+   
+   <select id="getLocName" resultType="String">
+      SELECT loc_name FROM location 
+         WHERE loc_idx = #{param1}
+   </select>
 
 </mapper>

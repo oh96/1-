@@ -5,58 +5,96 @@
 
 <mapper namespace="kr.co.gudi.dao.InfoDAO">
 
-	<select id="infoListPop" parameterType="map" resultType="kr.co.gudi.dto.LocateDTO">
-		SELECT loc_idx,loc_name,road_address FROM location order by loc_idx limit 10 offset ${offset}
-	</select>
-	
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(loc_idx) FROM location
-	</select>
-	
-	<insert id="infoWrite"
-			useGeneratedKeys="true" 
-			keyColumn="board_idx"
-			keyProperty="board_idx"
-			parameterType="kr.co.gudi.dto.InfoDTO">
-		INSERT INTO board(cls_code, id, board_subject, board_content) VALUES (1,#{id},#{board_subject},#{board_content})
-	</insert>
-	
-	<insert id="trip_info">
-		INSERT INTO trip_info(board_idx,loc_idx) VALUES (#{param1},#{param2})
-	</insert>
-	
-	<insert id="fileWrite">
-		INSERT INTO photo(photo_idx,oriFileName,newFileName) VALUES(#{param1},#{param2},#{param3})
-	</insert>
-	
-	<select id="searchPlace" parameterType="String" resultType="kr.co.gudi.dto.LocateDTO">
-		SELECT loc_idx,loc_name,road_address FROM location 
-			WHERE loc_name LIKE CONCAT('%', #{keyword}, '%')
-	</select>
-	
-	<update id="infoUpdate">
-		UPDATE board b SET 
-			id = #{param4}
-			,board_subject = #{param2}
-			,board_content = #{param3}
-		WHERE board_idx = #{param1}	
-	</update>
-	
-	<update id="trip_infoUpdate">
-		update trip_info set loc_idx=#{param2} where board_idx=#{param1}
-	</update>
-	
-	<select id="infoList" resultType="hashmap">
-		SELECT board_idx,board_subject,id,reg_date,hit FROM board WHERE cls_code = '1' ORDER BY board_idx
-	</select>
-	
-	<select id="infoDetail" parameterType="String" resultType="kr.co.gudi.dto.BoardDTO">
-		SELECT * from board WHERE board_idx=#{board_idx}
-	</select>
-	
-	<select id="call_xy" resultType="kr.co.gudi.dto.LocateDTO">
-		select l.loc_idx as loc_idx, l.loc_lat as loc_lat, l.loc_lon as loc_lon from location l , trip_info t where l.loc_idx = t.loc_idx and 
-		t.board_idx = #{param1}
-	</select>
+   <select id="infoListPop" parameterType="map" resultType="kr.co.gudi.dto.LocateDTO">
+      SELECT loc_idx,loc_name,road_address FROM location order by loc_idx limit 10 offset ${offset}
+   </select>
+   
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(loc_idx) FROM location
+   </select>
+   
+   <select id="detailTotalCount" resultType="int">
+      SELECT COUNT(loc_idx) FROM location where loc_name like CONCAT('%',#{param1},'%')
+   </select>
+   
+   <select id="detailPopUpSearch" resultType="kr.co.gudi.dto.LocateDTO">
+      SELECT loc_idx,loc_name,road_address FROM location where loc_name like CONCAT('%',#{param1},'%') limit 10 offset #{param2}
+   </select>
+   
+   <insert id="infoWrite"
+         useGeneratedKeys="true" 
+         keyColumn="board_idx"
+         keyProperty="board_idx"
+         parameterType="kr.co.gudi.dto.InfoDTO">
+      INSERT INTO board(cls_code, id, board_subject, board_content) VALUES (1,#{id},#{board_subject},#{board_content})
+   </insert>
+   
+   <insert id="trip_info">
+      INSERT INTO trip_info(board_idx,loc_idx) VALUES (#{param1},#{param2})
+   </insert>
+   
+   <insert id="fileWrite">
+      INSERT INTO photo(photo_idx,oriFileName,newFileName) VALUES(#{param1},#{param2},#{param3})
+   </insert>
+   
+   <select id="searchPlace" parameterType="String" resultType="kr.co.gudi.dto.LocateDTO">
+      SELECT loc_idx,loc_name,road_address FROM location 
+         WHERE loc_name LIKE CONCAT('%', #{keyword}, '%')
+   </select>
+   
+   <update id="infoUpdate">
+      UPDATE board b SET 
+         id = #{param4}
+         ,board_subject = #{param2}
+         ,board_content = #{param3}
+      WHERE board_idx = #{param1}   
+   </update>
+   
+   <update id="trip_infoUpdate">
+      UPDATE trip_info set loc_idx=#{param2} WHERE board_idx=#{param1}
+   </update>
+   
+   <update id="infoPhotoUpdate">
+      UPDATE photo SET 
+         oriFileName = #{param2}
+         ,newFileName = #{param3}
+      WHERE board_idx = #{param1}
+   </update>
+   
+   <select id="infoList" parameterType="map" resultType="kr.co.gudi.dto.BoardDTO">
+      SELECT board_idx,board_subject,id,reg_date,hit FROM board WHERE cls_code = '1' ORDER BY board_idx desc limit 10 offset ${offset}
+   </select>
+   
+   <select id="infototalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board WHERE cls_code = 1
+   </select>
+   
+   <select id="infoDetail" parameterType="String" resultType="kr.co.gudi.dto.BoardDTO">
+      SELECT * from board WHERE board_idx=#{board_idx}
+   </select>
+   
+   <update id="infoUpHit">
+      UPDATE board SET hit = hit+1 WHERE board_idx=#{param1}
+   </update>
+   
+   <select id="call_xy" resultType="kr.co.gudi.dto.LocateDTO">
+      select l.loc_idx as loc_idx, l.loc_lat as loc_lat, l.loc_lon as loc_lon from location l , trip_info t where l.loc_idx = t.loc_idx and 
+      t.board_idx = #{param1}
+   </select>
+   
+   <insert id="addPhoto">
+      INSERT INTO photo (board_idx,oriFileName,newFileName) VALUES (#{param1},#{param2},#{param3})
+   </insert>
 
+   <select id="getPhoto" resultType="kr.co.gudi.dto.PhotoDTO">
+      SELECT * FROM photo WHERE board_idx=#{param1}
+   </select>
+   
+   <delete id="deletePhoto">
+      DELETE FROM photo where board_idx=#{param1} and oriFileName=#{param2}
+   </delete>
+   
+   <delete id="deleteAllPhotos">
+      DELETE FROM photo where board_idx=#{param1}
+   </delete>
 </mapper>

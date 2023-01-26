@@ -5,29 +5,51 @@ import java.util.HashMap;
 
 import kr.co.gudi.dto.MypageDTO;
 import kr.co.gudi.dto.ReviewDTO;
+import kr.co.gudi.dto.RouteDTO;
 
 public interface MypageDAO {
 
-	MypageDTO detail(String id);
+   MypageDTO detail(String id);
 
-	int MypageUpdate(HashMap<String, String> params);
+   //int MypageUpdate(HashMap<String, String> params);
 
-	void withdraw(String id);
+   void MypageQuit(String id);
 
-	ArrayList<ReviewDTO> Myreview(String id, int offset);
+   ArrayList<ReviewDTO> MypageReviewList(String id, int offset);
 
-	int totalCount(String id);
+   int totalCount(String id);
 
-	int MyreviewDeleteList(String board_idx);
+   int MypageReviewDeleteTripReviewTable(String board_idx);
+   
+   void MypageReviewDeleteBoardTable(String board_idx);
 
-	ArrayList<HashMap<String, Object>> Myroute(String id);
+   ArrayList<RouteDTO> MypageRouteList(String id, int offset);
+   
+   int RouteListtotalCount(String id);
 
-	int MyrouteDeleteList(String board_idx);
+   int MypageRouteDeleteRouteTable(String board_idx);
+
+   void MypageRouteDeleteBoardTable(String board_idx);
+
+   void MypageUpdate(String id, String user_name, String gender, String age, String email);
+
+   int MypageCommentListtotalCount(String id);
+
+   ArrayList<HashMap<String, Object>> MypageCommentList(String id, int offset);
+
+   int MypageCommentDeleteCommentTable(String comment_idx);
+   
+   //void MypageCommentDeleteBoardTable(String board_idx);
+
+   
 
 
-	
+   
 
-	
+
+   
+
+   
 
 
 }

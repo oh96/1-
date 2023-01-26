@@ -4,12 +4,16 @@
 >
 <!-- 이 xml을 어떤 interface를 통해서 연결할 것인가? -->
 <mapper namespace="kr.co.gudi.dao.LoginDAO">
-	<select id="login" resultType="kr.co.gudi.dto.UserDTO">
-		select id, user_grade from user where id = #{param1} and password = #{param2}
-	</select>
-	
-	<select id="loginchk" resultType="String">
-		select id from user where id=#{param1} and user_state='탈퇴'
-	</select>
-	
+   <select id="login" resultType="kr.co.gudi.dto.UserDTO">
+      select id, user_grade from user where id = #{param1} and password = #{param2}
+   </select>
+   
+   <select id="loginchk" resultType="String">
+      select id from user where id=#{param1} and user_state='탈퇴'
+   </select>
+   
+   <select id="loginStop" resultType="String">
+      select id from user where id=#{param1} and user_state='정지'
+   </select>
+   
 </mapper>

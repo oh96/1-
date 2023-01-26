@@ -5,53 +5,107 @@
 <!--이 XML을 어떤 interface를 통해서 연결할 건가?-->
 <mapper namespace="kr.co.gudi.dao.NoticeDAO">
 
-	
-	<select id="list" resultType="kr.co.gudi.dto.NoticeDTO"> 
-		SELECT *
-			FROM board WHERE cls_code=4 ORDER BY board_idx DESC limit 10 offset #{param1}
-			
-	</select>
-	
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(board_idx) FROM board WHERE cls_code=4
-	</select>
-	
-	<select id="noticedetail" resultType="kr.co.gudi.dto.NoticeDTO" parameterType="String">
-		SELECT * FROM board WHERE board_idx=#{board_idx}
-	</select>
-	
-	<select id="fileList" parameterType="String" resultType="kr.co.gudi.dto.PhotoDTO">
-		SELECT * FROM photo WHERE photo_idx=#{photo_idx} ORDER BY photo_idx
-	</select>
-	
-	<insert id="noticeWrite"
-			useGeneratedKeys="true"
-			keyColumn="board_idx"
-			keyProperty="board_idx"
-			parameterType="kr.co.gudi.dto.NoticeDTO">
-		INSERT INTO board(cls_code, id, board_subject, board_content)
-		values (4,#{id},#{board_subject},#{board_content})
-	</insert>
-	
-	<insert id="notice">
-		INSERT INTO notice(board_idx,fixed) VALUES (#{param1},0)
-	</insert>
-	
-	<update id="hit" parameterType="String">
-		UPDATE board SET hit=hit+1 WHERE board_idx=#{board_idx}
-	</update>
-	
-	<update id="noticeupdate" parameterType="hashmap">
-		UPDATE board SET
-			subject = #{subject}
-			,id=#{id}
-			,content=#{content}
-		WHERE idx=#{idx}
-	
-	</update>
-	
-	
-	
+   
+   <select id="noticeList" resultType="kr.co.gudi.dto.NoticeDTO"> 
+      SELECT *
+         FROM board WHERE cls_code=4 ORDER BY board_idx DESC limit 10 offset #{param1}      
+   </select>
+   
+   <select id="userlist" resultType="kr.co.gudi.dto.UserDTO">
+      SELECT id,user_name,age,gender,email,user_state 
+         FROM user ORDER BY user_state DESC limit 10 offset #{param1}
+   </select>
+   
+   
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board WHERE cls_code=4
+   </select>
+   
+   <select id="userTotalCount" resultType="int">
+      SELECT COUNT(id) FROM user
+   </select>
+   
+   <select id="noticedetail" resultType="kr.co.gudi.dto.BoardDTO" parameterType="String">
+      SELECT * FROM board WHERE board_idx=#{board_idx}
+   </select>
+   
+   <select id="fileList" parameterType="String" resultType="kr.co.gudi.dto.PhotoDTO">
+      SELECT * FROM photo WHERE photo_idx=#{photo_idx} ORDER BY photo_idx
+   </select>
+   
+   
+   <insert id="noticeWrite"
+         useGeneratedKeys="true"
+         keyColumn="board_idx"
+         keyProperty="board_idx"
+         parameterType="kr.co.gudi.dto.NoticeDTO">
+      INSERT INTO board(cls_code, id, board_subject, board_content)
+      values (4,#{id},#{board_subject},#{board_content})
+   </insert>
+   
+   <insert id="notice">
+      INSERT INTO notice(board_idx,fixed) VALUES (#{param1},0)
+   </insert>
+   
+   
+   <update id="hit" parameterType="String">
+      UPDATE board SET hit=hit+1 WHERE board_idx=#{board_idx}
+   </update>
+   
+   <update id="infoUpdate">
+      UPDATE board b SET 
+         id = #{param4}
+         ,board_subject = #{param2}
+         ,board_content = #{param3}
+      WHERE board_idx = #{param1}   
+   </update>
+   
+   <delete id="AdminInfoPhotoDelete">
+      DELETE from photo WHERE board_idx=#{param1} 
+   </delete>
+      
+   <delete id="AdminTripInfoDelete">
+      DELETE from trip_info WHERE board_idx=#{param1}
+   </delete>
+   
+   
+   <delete id="AdminInfoDelete">
+      DELETE from board WHERE board_idx=#{param1} 
+   </delete>
+
+   <!-- <delete id="adminReviewDeleteBoardTable">
+      DELETE from board WHERE board_idx=#{param1} 
+   </delete> -->
+
+   <select resultType="kr.co.gudi.dto.BoardDTO" id="AdminInfoList">
+      SELECT board_idx,board_subject,id,reg_date,hit FROM board WHERE cls_code = '1' ORDER BY board_idx limit 10 offset #{param1} 
+   </select>
+
+   <select resultType="int" id="AdminInfototalCount">
+      SELECT COUNT(board_idx) FROM board WHERE cls_code = 1 
+   </select>
+   
+   <select id="allList" resultType="kr.co.gudi.dto.BoardDTO">
+      SELECT *
+         FROM board ORDER BY board_idx DESC limit 10 offset #{param1}
+   </select>
+   
+   <select id="allTotalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board
+   </select>
+   
+   <select id="blindInfo" resultType="hashmap">
+      select bl.blind_idx, bl.block_id, bl.manager, bl.reason, bl.blind_date, bo.board_subject from blind as bl, board as bo where bl.board_idx = bo.board_idx;
+   </select>
+   
+   <select id="blindList" resultType="kr.co.gudi.dto.BlindDTO">
+      SELECT blind_idx=5,reason,board_subject,manager,blind_date,blind_id
+         FROM blind limit 10 offset #{param1} 
+   </select>
+   
+   <delete id="AdminBlindDelete">
+      DELETE from blind WHERE blind_idx=#{param1} 
+   </delete>
+   
+   
 </mapper>
-
-

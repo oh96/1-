@@ -28,12 +28,12 @@
 			<tr>
 				<td colspan="3"><input type="text" id="search_place"
 					placeholder="여행지를 검색하세요" />
-					<button onclick="search_place();">검색</button></td>
+					<button onclick="flags(); search_place(1);">검색</button></td>
 			</tr>
 		</thead>
 		<tbody id="list">
 		</tbody>
-		<tr id="tr">
+		<tr id="page">
 			<td colspan="3" id="paging">
 				<div class="container">
 					<nav aria-label="Page navigation" style="text-align: center">
@@ -79,40 +79,6 @@ function listCall(page){
 	});
 }
 
-/*
-var flag = true;	//이거 완전 중요함. 
-
-function redraw(page){
-	
-	if(flag){
-		flag = false;
-		$.ajax({
-			url : "searchPlace",
-			data: {
-				"page" : page
-			},
-			dataType:"JSON",
-			contextType : "application/json",
-			success: function(json){
-				
-				console.log(json);
-				$("#pagination-div").twbsPagination("changeTotalPages", json[0].TOTALPAGECNT , page);
-				
-                // 여기 아래에 컨텐츠를 만드는 로직 추가
-                // ex) $("content").html(html);
-				search_place();
-		
-			},
-			complete: function(){	// 이부분 중요
-				flag = true;	//호출 완료되면 flag 값을 사용가능하게 변경
-			}
-			
-		});
-	}
-	
-}
-*/
-
 function drawList(list){
 	var content = '';
 	if(list.length>0){
@@ -128,34 +94,56 @@ function drawList(list){
 	$('#list').append(content);
 }
 
+var flag = true;
 
+function flags(){
+	if(!flag){
+		flag = true;
+	}
+}
 
+function drawPage(){
+	var paging = "";
+	$("#page").empty();
+	paging += "<td colspan='3' id='paging'>";
+	paging += "<div>";
+	paging += "<nav aria-label='Page navigation' style='text-align:center'>";
+	paging += "<ul class='pagination' id='pagination'></ul>"
+	paging += "</nav></div></td>";
+	$("#page").append(paging);
+}
 
-function search_place(){
+function search_place(page){
+	if(flag){
+		drawPage();
+	}
 	var keyword = document.getElementById('search_place').value;
 	console.log("검색어: "+keyword);
 	$.ajax({
 		url:"searchPlace",
 		type:"get",
 		dataType:"JSON",
-		data:{"keyword":keyword},
+		data:{
+			"keyword":keyword,
+			'page':page
+			},
 		success:function(data){
-			console.log(data);
-			if(data.list.length>0){
-				var content = '';
-				for(var i=0; i<data.list.length; i++){
-					content += '<tr>';
-					content += '<td>'+data.list[i].loc_idx+'</td>';
-					content += '<td><span id="title" onclick="move(\''+data.list[i].loc_name+','+data.list[i].loc_idx+'\')" style="cursor:pointer;">'+data.list[i].loc_name+'</span></td>';
-					content += '<td>'+data.list[i].road_address+'</td>';
-					content += '</tr>';
-				}
-			}
+			console.log(data.list);
 			
-			console.log(data.total);
-			$('#list').empty();
-			$('#list').append(content);	
-			$('#tr').empty();
+			//draw
+			drawList(data.list);
+			
+			if(data.total >= 1){
+				$("#pagination").twbsPagination({
+					startPage:1,
+					totalPages:data.total,
+					visiblePages:5,
+					onPageClick:function(e, page){
+						search_place(page);
+						flag = false;
+					}
+				});
+			}
 		}
 			
 	})

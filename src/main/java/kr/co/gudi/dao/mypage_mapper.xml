@@ -5,48 +5,92 @@
 
 <mapper namespace="kr.co.gudi.dao.MypageDAO">
 
-	<select id="detail" resultType="kr.co.gudi.dto.MypageDTO">
-		SELECT *from user WHERE id=#{param1}
-		<!-- id,user_name,age,gender,email -->
-	</select>
-	
-	<!-- resulteType="hashmap" -->
-	<update id="MypageUpdate" parameterType="String">
-		UPDATE user SET
-			user_name=#{user_name}
-			,age=#{age}
-			,gender=#{gender}
-			,email=#{email}
-		WHERE id=#{id}
-	</update>
-	 
-	<update id="withdraw" parameterType="String">
-		UPDATE user SET 
-			user_state = '탈퇴'
-		WHERE id=#{id}
-	</update>
-	
-	<select id="Myreview" resultType="hashmap">
-		SELECT board_idx,board_subject,reg_date,hit 
-		FROM board WHERE id=#{param1} AND cls_code='2' 
-		ORDER BY board_idx DESC limit 10 offset #{param2}
-	</select>
-	
-	<delete id="MyreviewDeleteList" >
-		DELETE from board WHERE board_idx = #{param1}
-	</delete>
-	
-	<select id="Myroute" resultType="kr.co.gudi.dto.ReviewDTO">
-		SELECT board_idx,board_subject,reg_date,hit 
-		FROM board WHERE id=#{param1} AND cls_code='3'
-	</select>
-	
-	<delete id="MyrouteDeleteList">
-		DELETE from board WHERE board_idx = #{param1}
-	</delete>
-	
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(board_idx) FROM board where id=#{param1} and cls_code=2
-	</select>
+   <select id="detail" resultType="kr.co.gudi.dto.MypageDTO">
+      SELECT *from user WHERE id=#{param1}
+      <!-- id,user_name,age,gender,email -->
+   </select>
+   
+   <!-- resulteType="hashmap" -->
+   <!-- 
+   <update id="MypageUpdate" parameterType="String">
+      UPDATE user SET
+         user_name=#{user_name}
+         ,age=#{age}
+         ,gender=#{gender}
+         ,email=#{email}
+      WHERE id=#{id}
+   </update>
+    -->
+    
+   <update id="MypageUpdate">
+      UPDATE user SET
+         user_name=#{param2}
+         ,age=#{param4}
+         ,gender=#{param3}
+         ,email=#{param5}
+      WHERE id=#{param1}
+   </update>
+   
+    
+   <update id="MypageQuit" parameterType="String">
+      UPDATE user SET 
+         user_state = '탈퇴'
+      WHERE id=#{id}
+   </update>
+   
+   <select id="MypageReviewList" resultType="hashmap">
+      SELECT board_idx,board_subject,reg_date,hit 
+      FROM board WHERE id=#{param1} AND cls_code='2' 
+      ORDER BY board_idx DESC limit 10 offset #{param2}
+   </select>
+   
+   <delete id="MypageReviewDeleteTripReviewTable">
+      DELETE from trip_review WHERE board_idx=#{param1}
+   </delete>
+   
+   <delete id="MypageReviewDeleteBoardTable" >
+      DELETE from board WHERE board_idx = #{param1}
+   </delete>
+   
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board where id=#{param1} and cls_code=2
+   </select>
+   
+   <select id="MypageRouteList" resultType="hashmap">
+      SELECT board_idx,board_subject,reg_date,hit 
+      FROM board WHERE id=#{param1} AND cls_code='3'
+      ORDER BY board_idx DESC limit 10 offset #{param2}
+   </select>
+   
+   <delete id="MypageRouteDeleteRouteTable">
+      DELETE from route WHERE board_idx = #{param1}
+   </delete>
+   
+   <delete id="MypageRouteDeleteBoardTable">
+      DELETE from board WHERE board_idx = #{param1}
+   </delete>
+
+   <select id="RouteListtotalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board where id=#{param1} and cls_code=3
+   </select>
+   
+   <select id="MypageCommentList" resultType="hashmap">
+      SELECT board_idx, comment_idx,star,comment_content,comment_date
+      FROM comment WHERE id=#{param1} AND cls_code='5'
+      ORDER BY comment_idx DESC limit 10 offset #{param2}
+   </select>
+   
+   <select id="MypageCommentListtotalCount" resultType="int">
+      SELECT COUNT(comment_idx) FROM comment where id=#{param1} and cls_code=5
+   </select>
+   
+   <delete id="MypageCommentDeleteCommentTable">
+      DELETE from comment WHERE comment_idx = #{param1}
+   </delete>
+   
+<!--    <delete id="MypageCommentDeleteBoardTable"> -->
+<!--       DELETE from board WHERE board_idx=#{param1} -->
+<!--    </delete> -->
+   
 
 </mapper>

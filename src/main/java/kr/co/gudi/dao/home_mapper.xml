@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.HomeDAO">
+
+   <select id="locationtotalCount" resultType="int">
+         SELECT COUNT(board_idx) FROM board where cls_code=1
+    </select>
+    
+   <select id="locationTop" resultType="kr.co.gudi.dto.HomeDTO">
+      SELECT *from board WHERE cls_code=1 ORDER BY hit DESC limit 5;
+   </select>
+   
+   <select id="reviewtotalCount" resultType="int">
+         SELECT COUNT(board_idx) FROM board where cls_code=2
+    </select>
+   
+   <select id="reviewTop" resultType="kr.co.gudi.dto.HomeDTO">
+      SELECT *from board WHERE cls_code=2 ORDER BY hit DESC limit 5;
+   </select>
+   
+   <select id="routetotalCount" resultType="int">
+         SELECT COUNT(board_idx) FROM board where cls_code=3
+    </select>
+    
+    <select id="routeTop" resultType="kr.co.gudi.dto.HomeDTO">
+      SELECT *from board WHERE cls_code=3 ORDER BY hit DESC limit 5;
+   </select>   
+   
+
+</mapper>

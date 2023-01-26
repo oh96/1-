@@ -7,123 +7,63 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
+   href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
+   rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/style.css">
+   href="<%=request.getContextPath()%>/resources/css/style.css">
 <style>
-	table, th, tr, td{
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px 10px;
-	}
+   table, th, tr, td{
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px 10px;
+   }
 </style>
 </head>
 <body>
-<section class="ftco-section">
 
-		<div class="container">
-			<div class="row justify-content-between">
-				<div class="col">
-					<a class="navbar-brand" href="./"><img
-						src="<%=request.getContextPath()%>/resources/img/logo1.png"
-						width="200"></a>
-				</div>
-				<div class="col d-flex justify-content-end">
-					<div class="login">
-                  <p class="mb-0 d-flex">
-                     <c:if test ="${sessionScope.loginId == null}">
-                     <a href="loginForm" class="login"><span>로그인</span></a>
-                     <a href="joinForm" class="login"><span>회원가입</span></a>
-                     </c:if>
-                     <c:if test ="${sessionScope.loginId != null}">
-                     안녕하세요 ${sessionScope.loginId} 님
-                     <a href="logout">로그아웃</a>
-                     &nbsp;&nbsp;/&nbsp;&nbsp; 
-                     </c:if>
-                     
-                  </p>
-               </div>
-					<div class="social-media">
-						<p class="mb-0 d-flex"><!-- MypageDetail -->
-							<a href="MypageDetail?id=${sessionScope.loginId}"
-								class="d-flex align-items-center justify-content-center"><span>
-									<img
-									src="<%=request.getContextPath()%>/resources/img/mypage.png"
-									width="30">
-							</span></a> 
-							<a href="map"
-								class="d-flex align-items-center justify-content-center"><span>
-									<img src="<%=request.getContextPath()%>/resources/img/map.png"
-									width="30">
-							</span></a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<nav
-			class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-			id="ftco-navbar">
-			<div class="container">
-
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#ftco-nav" aria-controls="ftco-nav"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="fa fa-bars"></span> Menu
-				</button>
-				<form action="totalSearch" class="searchform order-lg-last">
-					<div class="form-group d-flex">
-						<input type="text" class="form-control pl-3" placeholder="Search" name="searchContent">
-						<button type="submit" placeholder="" class="form-control search">
-							<span class="fa fa-search"></span>
-						</button>
-					</div>
-				</form>
-				<div class="collapse navbar-collapse" id="ftco-nav">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a href="#" class="nav-link">여행지 정보</a></li>
-						<li class="nav-item"><a href="review" class="nav-link">여행지 후기</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">여행지 경로</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">공지</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<!-- END nav -->
-
-	</section>
 <body>
 <form action="reviewUpdate" method="POST">
 <input type="hidden" name="board_idx" value="${board.board_idx}">
-	<table>
-		<tr>
-			<th>제목</th>
-			<td>
-				<input type="text" name="board_subject" value="${board.board_subject}"/></td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>
-				<input type="text" name="id" value="${board.id}"/></td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td>
-				<textarea name="board_content">${board.board_content}</textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="btn_area">
-				<button type="button" onclick="location.href='./reviewDetail'">리스트</button>
-				<button>저장</button>
-			</td>
-		</tr>
-	</table>
+   <table>
+      <tr>
+         <th>제목</th>
+         <td>
+            <input type="text" name="board_subject" value="${board.board_subject}"/></td>
+      </tr>
+      <tr>
+         <th>여행지 위치</th>
+         <td><input id="location_input" placeholder="여행지를 선택하세요" value="${loc_Name}" readonly/>
+         <input id="locationIdx_input" name="loc_idx" readonly="readonly" value="${loc_idx}" type="hidden" />
+         <button type="button" onclick="location_popup();">위치 찾기</button>
+         </td>
+      </tr>
+      
+      <tr>
+         <th>내용</th>
+         <td>
+            <textarea name="board_content">${board.board_content}</textarea></td>
+      </tr>
+      <tr>
+         <td colspan="2" class="btn_area">
+            <button type="button" onclick="location.href='./whatPage?page=여행지후기'">리스트</button>
+            <button>저장</button>
+         </td>
+      </tr>
+   </table>
 </form>
 </body>
-<script></script>
+<script type="text/javascript">
+   function location_popup(){
+      var url="infoListPopup";
+      var name="위치 찾기";
+      var option="width=400,height=500,left=50,top=50";
+      
+      window.open(url,name,option);
+   }
+   
+</script>
 </html>

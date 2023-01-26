@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.UserPageDAO">
+
+   <select id="userPageReviewListTotalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board WHERE id=#{param1} AND cls_code=2
+   </select>
+
+   <select id="userPageReviewList" resultType="hashmap">
+      SELECT board_idx,board_subject,reg_date,hit FROM board WHERE id=#{param1} AND cls_code='2' 
+            ORDER BY board_idx DESC limit 10 offset #{param2}
+   </select>
+   
+   <select id="userPageRouteListTotalCount" resultType="int">
+      SELECT COUNT(board_idx) FROM board where id=#{param1} and cls_code=3
+   </select>
+   
+   <select id="userPageRouteList" resultType="hashmap">
+      SELECT board_idx,board_subject,reg_date,hit FROM board WHERE id=#{param1} AND cls_code='3'
+         ORDER BY board_idx DESC limit 10 offset #{param2}
+   </select>
+   
+   <select id="userPageCommentListTotalCount" resultType="int">
+      SELECT COUNT(comment_idx) FROM comment WHERE id=#{param1} AND cls_code=5
+   </select>
+   
+   <select id="userPageCommentList" resultType="hashmap">
+      SELECT board_idx, comment_idx,star,comment_content,comment_date FROM comment WHERE id=#{param1} AND cls_code='5'
+         ORDER BY comment_idx DESC limit 10 offset #{param2}
+   </select>
+   
+</mapper>

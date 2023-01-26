@@ -18,32 +18,113 @@
       INSERT INTO board(cls_code, id, board_subject, board_content) 
          VALUES (3,#{id},#{board_subject},#{board_content})
    </insert>
+   
+   <update id="routeUpdate">
+      UPDATE board SET board_subject = #{param2}, board_content = #{param3} WHERE board_idx = #{param1}            
+   </update>
             
     <insert id="route">
       INSERT INTO route(board_idx,loc_idx, route_seq) VALUES (#{param1},#{param2},#{param3})
    </insert> 
    
+    <insert id="route1">
+      INSERT INTO route(board_idx,loc_idx, route_seq) VALUES (#{param1},#{param2},#{param3})
+   </insert> 
+   
    <select id="routelist" resultType="hashmap">
       select 
-         board_idx, board_subject, id, reg_date, hit 
-      from board where cls_code=3 
+         b.board_idx, b.board_subject, b.id, b.reg_date, b.hit 
+      from board b where cls_code=3 and b.board_idx NOT IN (SELECT board_idx FROM blind WHERE cls_code = 3)
       ORDER BY board_idx DESC 
       limit 10 offset #{param1}
    </select>
    
+   <select id="commentlist" resultType="hashmap">
+      SELECT comment_idx, id, comment_date, comment_content, star
+         FROM comment c where c.board_idx = #{param1} 
+         ORDER BY comment_idx DESC 
+         limit 5 offset #{param2}
+   </select>
+   
    <select id="totalCount" resultType="int">
       SELECT COUNT(board_idx) FROM board where cls_code=3
-   </select>       
+   </select>
+   
+   <select id="totalCount1" resultType="int">
+      SELECT COUNT(comment_idx) FROM comment where board_idx = #{param1}
+   </select>             
    
       <update id="hit" parameterType="String">
       UPDATE board SET hit = hit+1
       WHERE board_idx = #{board_idx}
    </update>
    
-   <select id="routeDetail" resultType="kr.co.gudi.dto.RouteDTO"
+   <select id="routeDetail" resultType="hashmap"
       parameterType="String">
-      SELECT*FROM board WHERE board_idx = #{board_idx}
+      SELECT A.board_idx, A.board_subject, A.board_content, A.id, A.reg_date, A.hit, B.loc_idx, C.road_address, C.land_address
+        FROM board AS A 
+           JOIN route AS B ON A.board_idx = B.board_idx
+           JOIN location AS C  ON B.loc_idx = C.loc_idx
+      WHERE A.board_idx = #{board_idx}
+         ORDER BY B.route_seq;
    </select>
    
+   <select id="routeInfo" resultType="hashmap" parameterType="String">
+   SELECT A.board_subject, A.board_content, B.loc_idx, C.loc_name 
+   FROM board AS A 
+      JOIN route AS B ON A.board_idx = B.board_idx
+      JOIN location AS C  ON B.loc_idx = C.loc_idx 
+   WHERE A.board_idx = #{board_idx} ORDER BY B.route_seq
+   </select>
+   
+   <delete id="routeDelete">
+      DELETE FROM route
+         WHERE board_idx = #{param1} 
+   </delete>
+   
+   <delete id="routeEraseChild1">
+      DELETE FROM route 
+         WHERE board_idx = #{param1}
+   </delete>
+   
+   <delete id="routeEraseChild2">
+      DELETE FROM comment 
+         WHERE board_idx = #{param1}
+   </delete>
+   
+   <delete id="routeEraseParent">
+      DELETE FROM board 
+         WHERE board_idx = #{param1}
+   </delete>
 
+   <insert id="commentWrite">
+      INSERT INTO comment(board_idx, id, cls_code, comment_content, star)
+         VALUES(#{param1},#{param2},5,#{param3},#{param4})
+   </insert>
+   
+   <select id="starAvg" resultType="float">
+      select round(avg(star),1) from comment c where c.board_idx = #{param1};
+   </select>
+   
+   <select id="routeBlindInfo" resultType="String">
+      SELECT id FROM board WHERE board_idx = #{param1}
+   </select>
+   
+   <insert id="routeBlind">
+      INSERT INTO blind(board_idx, cls_code, manager, block_id, modify_manager, reason)
+         VALUES(#{param1},3,#{param2},#{param3},#{param2},#{param4}) 
+   </insert>
+   
+   <select id="getBoard" resultType="int">
+      SELECT board_idx FROM comment WHERE comment_idx = #{param1}
+   </select>
+   
+   <delete id="commentDelete">
+      DELETE FROM comment WHERE comment_idx = #{param1}
+   </delete>
+   
+   <select id="reWrite" resultType="int">
+      select count(*) from comment where id = #{param1} and board_idx = #{param2}
+   </select>
+   
 </mapper>

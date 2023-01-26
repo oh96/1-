@@ -6,29 +6,41 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <style>
-	#infoDate{
-		font-size: small;
-	}
+   #infoDate{
+      font-size: small;
+   }
 </style>
 </head>
 <body id="detail">
-	<div id="infoDate">
-		<span>작성일 : ${boarddto.reg_date}</span>
-		<span>조회수 : ${boarddto.hit}</span>
-	</div>
-	<div id="infoSubject">
-		<h3>${boarddto.board_subject}</h3>
-		<button type="button" onclick="location.href='infoUpdateForm?board_idx=${boarddto.board_idx}&loc_idx=${locatedto.loc_idx}'">수정</button>
-		<span>작성자 : ${boarddto.id}</span>
-	</div>
-	<hr>
-	<div id="map" style="width:500px;height:300px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=812465dab319d921e8f09747798528a1"></script>
 
-	<div>
-		${boarddto.board_content}
-	</div>
-	<button type="button" onclick="location.href='./whatPage?page=여행지정보'">목록</button>
+   <div id="infoDate">
+      <span>작성일 : ${boarddto.reg_date}</span>
+      <span>조회수 : ${boarddto.hit}</span>
+   </div>
+   <div id="infoSubject">
+      <h3>${boarddto.board_subject}</h3>
+      <c:if test="${sessionScope.user_grade >= 1}">
+         <button type="button" onclick="location.href='infoUpdateForm?board_idx=${boarddto.board_idx}&loc_idx=${locatedto.loc_idx}'">수정</button>
+      </c:if>
+      <span>작성자 : ${boarddto.id}</span>
+   </div>
+   <hr>
+   <div id="map" style="width:500px;height:300px;"></div>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=812465dab319d921e8f09747798528a1"></script>
+   
+   <div>
+      <c:if test = "${photolist.size()>0}">
+         <c:forEach items="${photolist}" var="file">
+            <img src="/photo/${file.newFileName}" width=400/><br/><br/>
+         </c:forEach>
+      </c:if>
+   </div>
+   
+   <div>
+      ${boarddto.board_content}
+   </div>
+   <button type="button" onclick="location.href='./whatPage?page=여행지정보'">목록</button>
+
 </body>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -54,30 +66,53 @@ marker.setMap(map);
 //marker.setMap(null); 
 
 
-function detailCall(){
-	$.ajax({
-		type:'get',
-		url:'',
-		data:{
-			'page':page
-			,'boarddto':boarddto
-			,'locatedto':locatedto
-		},
-		dataType:'JSON',
-		success:function(data){
-			drawDetail(data);
-		},
-		error:function(e){
-			console.log(e);
-		}
-	});
+<%-- function detailCall(){
+   $.ajax({
+      type:'get',
+      url:'',
+      data:{
+         'page':page
+         ,'boarddto':boarddto
+         ,'locatedto':locatedto
+         ,'infoPhotoList':infoPhotoList
+      },
+      dataType:'JSON',
+      success:function(data){
+         drawDetail(data);
+      },
+      error:function(e){
+         console.log(e);
+      }
+   });
 }
 
 function drawDetail(detail){
-	var content = '';
-	
-}
-
+   content = '';
+   content += '<div id="infoDate">';
+   content += '<span>작성일 : '+${boarddto.reg_date}+'</span>';
+   content += '<span>조회수 : '+${boarddto.hit}+'</span>';
+   content += '</div>';
+   
+   content += '<div id="infoSubject">';
+   content += '<h3>'+${boarddto.board_subject}+'</h3>';
+   content += '<c:if test="${sessionScope.user_grade >= 1}">';
+   content += '<button type="button" onclick="location.href='infoUpdateForm?board_idx=${boarddto.board_idx}&loc_idx=${locatedto.loc_idx}'">수정</button>';
+   content += '</c:if>';
+   content += '<span>작성자 : ${boarddto.id}</span>';
+   content += '</div>';
+   content += '<hr>';
+   content += '<div id="map" style="width:500px;height:300px;"></div>';
+   content += '<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=812465dab319d921e8f09747798528a1"></script>';
+   content += '<div>'
+            <c:forEach items="${fileList}" var="file">
+               <img src="/photo/${file.newFileName}" width=400/><br/><br/>
+            </c:forEach>
+         </td>
+   content += '<div>'+${boarddto.board_content}+'</div>'
+   
+   content += '<button type="button" onclick="location.href='./whatPage?page=여행지정보'">'+목록+'</button>'
+   
+} --%>
 
 
 </script>

@@ -33,15 +33,15 @@ public class SearchController {
 	
 	@RequestMapping(value="/searchListCall")
 	@ResponseBody
-	public HashMap<String, Object> searchListCall(@RequestParam String searchContent) {
+	public HashMap<String, Object> searchListCall(@RequestParam String searchContent, @RequestParam int page) {
 		logger.info("전체 검색 요청");
 		logger.info(searchContent);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		ArrayList<BoardDTO> searchList = searchService.searchList(searchContent);
+		//HashMap<String, Object> map = new HashMap<String, Object>();
+		//ArrayList<BoardDTO> searchList = searchService.searchList(searchContent, page);
 		//logger.info(searchList+"");
-		map.put("searchList", searchList);
+		//map.put("searchList", searchList);
 		
-		return map;
+		return searchService.searchList(searchContent, page);
 	}
 	
 	@RequestMapping(value="/SearchGo")
@@ -54,6 +54,19 @@ public class SearchController {
 		model.addAttribute("searchContent", searchContent);
 		
 		return "main";
+	}
+	
+	@RequestMapping(value="/detailSearch")
+	@ResponseBody
+	public HashMap<String, Object> detailSearch(@RequestParam String detailContent, @RequestParam String sl1, 
+			@RequestParam String sl2, @RequestParam int page) {
+		logger.info("상세 검색 요청");
+		//logger.info(detailContent);
+		//logger.info(sl1);
+		//logger.info(sl2);
+		//logger.info(page+"");
+		
+		return searchService.detailSearch(detailContent,sl1,sl2,page);
 	}
 	
 }
